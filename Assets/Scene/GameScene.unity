@@ -204,7 +204,7 @@ RectTransform:
   - {fileID: 297087132}
   - {fileID: 984738246}
   m_Father: {fileID: 860961914}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -701,9 +701,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 135506027}
-  - {fileID: 576928326}
   - {fileID: 872021816}
+  - {fileID: 576928326}
+  - {fileID: 135506027}
   m_Father: {fileID: 310889913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -739,7 +739,7 @@ RectTransform:
   m_Children:
   - {fileID: 2074681944}
   m_Father: {fileID: 860961914}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -788,6 +788,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d39be163b51f0ee499c89aca0a226588, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &973975806 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1553325112036550, guid: b86cf9a91177922478757683ee9298e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 476043821}
 --- !u!4 &984738246 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4746748766535576, guid: b86cf9a91177922478757683ee9298e1,
@@ -833,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 0, y: -403}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281549039
@@ -1092,6 +1097,11 @@ MonoBehaviour:
   turn: 1
   rect: {fileID: 860961914}
   move: 0
+  cat:
+    cat_leader: {fileID: 2001289424}
+    cat_teammate_0: {fileID: 1937959752}
+    cat_teammate_1: {fileID: 973975806}
+  turnState: 0
 --- !u!1 &1605039650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,6 +1291,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1937959752 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1278359173362756, guid: d39be163b51f0ee499c89aca0a226588,
+    type: 2}
+  m_PrefabInternal: {fileID: 955173722}
+--- !u!1 &2001289424 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1171138037570680, guid: 565165e9a804fb346adddd5f64d2161e,
+    type: 2}
+  m_PrefabInternal: {fileID: 583967665}
 --- !u!1 &2074681943
 GameObject:
   m_ObjectHideFlags: 0

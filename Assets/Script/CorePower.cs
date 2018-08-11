@@ -16,8 +16,12 @@ public class CorePower : MonoBehaviour {
 
 	}
 	public void OnTriggerEnter2D(Collider2D n){
-        n.GetComponent<CatControll>().CreatHeart();
-        Destroy (gameObject);
+        if (n.tag == "Cat")
+        {
+            n.GetComponent<CatControll>().CreatHeart();
+            n.SendMessage("GetPower", 1);
+            Destroy(gameObject);
+        }
 	}
 
 }

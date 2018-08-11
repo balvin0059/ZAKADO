@@ -7,6 +7,7 @@ public class CoreMove : MonoBehaviour
     public GameObject CorePower;
     bool move = false;
     bool shoot = false;
+    int bullet = 10;
     float ShootTime = 0.0f;
     // Use this for initialization
     void Start()
@@ -24,24 +25,40 @@ public class CoreMove : MonoBehaviour
     {
         if (shoot)
         {
-            if (TurnControll.Instance.turn)
+            if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
             {
-                ShootTime += Time.deltaTime;
-                if (ShootTime > 0.4f)
+                if (bullet > 0)
                 {
-                    Instantiate(CorePower, new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -3.2f), Quaternion.identity);
-                    ShootTime = 0.0f;
+                    TurnControll.instance.turnState = TurnControll.TurnState.turnPlayerShoot;
+                    ShootTime += Time.deltaTime;
+                    if (ShootTime > 0.4f)
+                    {
+                        Instantiate(CorePower, new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -3.2f), Quaternion.identity);
+                        bullet -= 1;
+                        ShootTime = 0.0f;
+                    }
+                }else if (bullet <= 0)
+                {
+                    TurnControll.instance.turnState = TurnControll.TurnState.turnAttack;
+                    shoot = false;
                 }
             }
         }
     }
     void Move()
     {
-        //移動飼料罐罐
-        if (move)
+        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
         {
-            Vector2 CorePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -4.2f);
-            gameObject.transform.position = CorePosition;
+            //移動飼料罐罐
+            if (move)
+            {
+                Vector2 CorePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -4.2f);
+                gameObject.transform.position = CorePosition;
+            }
+        }
+        else
+        {
+            gameObject.transform.position = new Vector2(0.0f, -4.2f);
         }
     }
     public void OnPressDown()
@@ -52,6 +69,5 @@ public class CoreMove : MonoBehaviour
     public void OnPressUp()
     {
         move = false;
-        shoot = false;
     }
 }

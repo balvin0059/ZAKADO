@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114367697138702414}
   m_Layer: 0
   m_Name: happy
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heart: {fileID: 1283100830293632, guid: f63a4406078e3d44385ca17c8b9bb321, type: 2}
+  getPower: 0
 --- !u!212 &212469818886459652
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -173,7 +174,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 01d048a71ac4dae47a4a2781a2c285e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
