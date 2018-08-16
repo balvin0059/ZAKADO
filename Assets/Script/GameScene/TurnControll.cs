@@ -23,6 +23,7 @@ public class TurnControll : MonoBehaviour {
     [Serializable]
     public struct CatHolder
     {
+        public GameObject[] catgenPos;
         public GameObject cat_leader;
         public GameObject cat_teammate_0;
         public GameObject cat_teammate_1;
@@ -30,6 +31,7 @@ public class TurnControll : MonoBehaviour {
     [Serializable]
     public struct EnemyHolder
     {
+        public GameObject enemyHolder;
         public GameObject[] spawn;
         public GameObject enemyGameobject;
     }
@@ -70,12 +72,8 @@ public class TurnControll : MonoBehaviour {
     // Use this for initialization
     void Start () {
         turnState = TurnState.turnPlayer;
-        cat.cat_leader.GetComponent<CatControll>().LoadData();
-        cat.cat_teammate_0.GetComponent<CatControll>().LoadData();
-        cat.cat_teammate_1.GetComponent<CatControll>().LoadData();
-        playerHp.GetComponent<PlayerControll>().SetMaxHp(HPGet());
-        playerHp.GetComponent<PlayerControll>().GetHp(HPGet());
-        enemy.enemyGameobject = GameObject.Find("enemy");
+
+        BaseSet();
     }
 
     // Update is called once per frame
@@ -105,8 +103,7 @@ public class TurnControll : MonoBehaviour {
         }
         if(turnState == TurnState.turnFinish)
         {
-            StartCoroutine(GameFinish(turnResult));
-            
+            StartCoroutine(GameFinish(turnResult));            
         }
         
     }
@@ -123,14 +120,17 @@ public class TurnControll : MonoBehaviour {
     }
     IEnumerator TurnAttack()
     {
-            yield return new WaitForSeconds(0.5f);
-            cat.cat_leader.SendMessage("Attack");
-            yield return new WaitForSeconds(0.5f);
-            cat.cat_teammate_0.SendMessage("Attack");
-            yield return new WaitForSeconds(0.5f);
-            cat.cat_teammate_1.SendMessage("Attack");
-            yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
+        cat.cat_leader.SendMessage("Attack");
+        yield return new WaitForSeconds(0.5f);
+        cat.cat_teammate_0.SendMessage("Attack");
+        yield return new WaitForSeconds(0.5f);
+        cat.cat_teammate_1.SendMessage("Attack");
+        yield return new WaitForSeconds(1.5f);
+        if (turnState != TurnState.turnFinish)
+        {
             turnState = TurnState.turnEnemy;
+        }
     }
     IEnumerator TurnEnemy()
     {
@@ -140,10 +140,13 @@ public class TurnControll : MonoBehaviour {
             InvokeRepeating("TurnEnemyAttack", 0, 0.6f);
             onlyOneTime = false;
             turnState = TurnState.turnEnemyAttack;
+            Core.SendMessage("StartShoot");
         }
         yield return new WaitForSeconds(5.0f);
         CancelInvoke("TurnEnemyAttack");
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1f);
+        Core.SendMessage("StopShoot");
+        yield return new WaitForSeconds(1f);
         turnState = TurnState.turnEnd;
     }
     IEnumerator TurnEnd()
@@ -170,7 +173,7 @@ public class TurnControll : MonoBehaviour {
     }
     IEnumerator GameFinish(TurnResult t)
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         Time.timeScale = 0f;
         if(t == TurnResult.turnLose)
         {
@@ -183,15 +186,37 @@ public class TurnControll : MonoBehaviour {
             goldText.text = "獲得金幣:" + enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
             GlobalValue.instance.gold += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold;
             gaveWinPanel.SetActive(true);
+            GlobalValue.instance.level[GlobalValue.instance.nowLevel] = true;
+            GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
+            SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         }
     }
     public void OnOver()
     {
-        PlayerPrefs.SetInt("gold", GlobalValue.instance.gold);
-        PlayerPrefs.SetInt("exp", GlobalValue.instance.exp);
+        GlobalValue.instance.gameSave.gold = GlobalValue.instance.gold;
+        GlobalValue.instance.gameSave.exp = GlobalValue.instance.exp;
+        SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         Time.timeScale = 1f;
         turnResult = TurnResult.None;
         turnState = TurnState.None;
         SceneManager.LoadScene("MapScene");
+    }
+    void BaseSet()
+    {
+        cat.cat_leader = Instantiate(GlobalValue.instance.catHolder[GlobalValue.instance.catNum[0]-1000]);
+        cat.cat_leader.transform.SetParent(cat.catgenPos[0].transform, false);
+        cat.cat_leader.GetComponent<CatControll>().LoadData();
+        cat.cat_teammate_0 = Instantiate(GlobalValue.instance.catHolder[GlobalValue.instance.catNum[1] - 1000]);
+        cat.cat_teammate_0.transform.SetParent(cat.catgenPos[1].transform, false);
+        cat.cat_teammate_0.GetComponent<CatControll>().LoadData();
+        cat.cat_teammate_1 = Instantiate(GlobalValue.instance.catHolder[GlobalValue.instance.catNum[2] - 1000]);
+        cat.cat_teammate_1.transform.SetParent(cat.catgenPos[2].transform, false);
+        cat.cat_teammate_1.GetComponent<CatControll>().LoadData();
+
+        playerHp.GetComponent<PlayerControll>().SetMaxHp(HPGet());
+        playerHp.GetComponent<PlayerControll>().GetHp(HPGet());
+
+        enemy.enemyGameobject = Instantiate(GlobalValue.instance.enemyHolder[GlobalValue.instance.nowLevel]);
+        enemy.enemyGameobject.transform.SetParent(enemy.enemyHolder.transform, false);
     }
 }

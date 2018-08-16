@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoreMove : MonoBehaviour
 {
+    public Text bulletText;
     public GameObject CorePower;
     public GameObject shovelPower;
     bool move = false;
@@ -19,6 +21,7 @@ public class CoreMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bulletText.text = bullet.ToString();
         Move();
         Fire();
     }
@@ -26,6 +29,7 @@ public class CoreMove : MonoBehaviour
     {        
         if (shoot)
         {
+            //玩家攻擊模式
             if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
             {
                 if (bullet > 0)
@@ -40,12 +44,13 @@ public class CoreMove : MonoBehaviour
                         bullet -= 1;
                         ShootTime = 0.0f;
                     }
-                }else if (bullet <= 0)
+                }else if (bullet == 0)
                 {
                     TurnControll.instance.turnState = TurnControll.TurnState.turnAttack;
                     shoot = false;
                 }
             }
+            //玩家防守模式
             if (TurnControll.instance.turnState == TurnControll.TurnState.turnEnemyAttack)
             {
                 ShootTime += Time.deltaTime;
@@ -59,6 +64,7 @@ public class CoreMove : MonoBehaviour
             }            
         }
     }
+    //移動核心
     void Move()
     {
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot|| TurnControll.instance.turnState == TurnControll.TurnState.turnEnemyAttack)
@@ -75,6 +81,8 @@ public class CoreMove : MonoBehaviour
             gameObject.transform.position = new Vector2(0.0f, -4.2f);
         }
     }
+
+    #region 按鈕
     public void OnPressDown()
     {
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
@@ -88,6 +96,7 @@ public class CoreMove : MonoBehaviour
             shoot = true;
         }
     }
+
     public void OnPressUp()
     {
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
@@ -99,10 +108,25 @@ public class CoreMove : MonoBehaviour
             move = false;
         }
     }
+    #endregion
+
+    #region 控制子彈發射器
+    //裝彈
     void ReloadBullet()
     {
         bullet = 10;
         move = false;
         shoot = false;
     }
+    //開始
+    void StartShoot()
+    {
+        shoot = true;
+    }
+    //停止
+    void StopShoot()
+    {
+        shoot = false;
+    }
+    #endregion
 }

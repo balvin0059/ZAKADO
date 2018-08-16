@@ -18,11 +18,13 @@ public class EnemyAttr : MonoBehaviour {
         public string Ai_name;
         public int Ai_id;
     }
+    public Image[] e;
     public Transform[] genPositions;
     public GameObject bullet;
     public Statestuff enemy;
     public Image hpBar;
     public int maxHp;
+    public Color c;
     // Use this for initialization
     void Start () {
         maxHp = enemy.hp;
@@ -40,6 +42,11 @@ public class EnemyAttr : MonoBehaviour {
         }
         else
         {
+            c.a -= Time.deltaTime;
+            for (int n = 0; n < e.Length; n++)
+            {
+                e[n].color = c;
+            }
             hpBar.fillAmount = 0f / (float)maxHp;
             TurnControll.instance.turnState = TurnControll.TurnState.turnFinish;
             TurnControll.instance.turnResult = TurnControll.TurnResult.turnWin;

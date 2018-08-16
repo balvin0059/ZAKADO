@@ -7,6 +7,8 @@ TagManager:
   - Cat
   - Wall
   - EnemyBullet
+  - God
+  - Enemy
   layers:
   - Default
   - TransparentFX

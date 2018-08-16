@@ -12,7 +12,6 @@ public class CatAttr {
         public int lv;
         public int hp;
         public int attack;
-        public int exp;
         public ElementType.Element type; // 0 = fire, 1 = water, 2 = lighting
         public string passives;
         public int passives_id;
