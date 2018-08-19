@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class CoreMove : MonoBehaviour
 {
+    public Image coreImage;
+    public Sprite shovel;
+    public Sprite foodPlate;
     public Text bulletText;
     public GameObject CorePower;
     public GameObject shovelPower;
@@ -32,6 +35,7 @@ public class CoreMove : MonoBehaviour
             //玩家攻擊模式
             if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer || TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerShoot)
             {
+                coreImage.sprite = foodPlate;
                 if (bullet > 0)
                 {
                     TurnControll.instance.turnState = TurnControll.TurnState.turnPlayerShoot;
@@ -53,6 +57,7 @@ public class CoreMove : MonoBehaviour
             //玩家防守模式
             if (TurnControll.instance.turnState == TurnControll.TurnState.turnEnemyAttack)
             {
+                coreImage.sprite = shovel;
                 ShootTime += Time.deltaTime;
                 if (ShootTime > 0.4f)
                 {
@@ -72,13 +77,13 @@ public class CoreMove : MonoBehaviour
             //移動飼料罐罐
             if (move)
             {
-                Vector2 CorePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -4.2f);
+                Vector2 CorePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -3.95f);
                 gameObject.transform.position = CorePosition;
             }
         }
         else
         {
-            gameObject.transform.position = new Vector2(0.0f, -4.2f);
+            gameObject.transform.position = new Vector2(0.0f, -3.95f);
         }
     }
 

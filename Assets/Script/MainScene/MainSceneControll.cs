@@ -37,9 +37,6 @@ public class MainSceneControll : MonoBehaviour {
         }
         
     }
-
-   
-
 	public void OnAdventure()
     {        
         GetLevelSchedule(GlobalValue.instance.gameSave.level);
@@ -66,6 +63,8 @@ public class MainSceneControll : MonoBehaviour {
     {
         Debug.Log(GlobalValue.instance.gameSave.everSave);
         PlayerPrefs.DeleteAll();
+        GlobalValue.instance.gameSave = SaveLoadData.LoadData();
+        Debug.Log(GlobalValue.instance.gameSave.everSave);
     }
     #endregion
 }

@@ -54,6 +54,10 @@ public class TurnControll : MonoBehaviour {
         turnLose
     }
 
+    public GameObject enemyTurnPanel;
+    public GameObject enemyTurnTextPanel;
+    public GameObject playerTurnPanel;
+    public GameObject playerTurnTextPanel;
     public GameObject gaveLosePanel;
     public Text expText;
     public Text goldText;
@@ -68,11 +72,12 @@ public class TurnControll : MonoBehaviour {
     public RectTransform rect;
     public float move = 0.0f;
     public RectTransform top;
+    public bool attacking = false;
 
     // Use this for initialization
     void Start () {
         turnState = TurnState.turnPlayer;
-
+        playerTurnPanel.SetActive(true);
         BaseSet();
     }
 
@@ -93,6 +98,7 @@ public class TurnControll : MonoBehaviour {
         }
         if (turnState == TurnState.turnEnemyAttack)
         {
+
         }
         if(turnState == TurnState.turnEnd)
         {
@@ -130,6 +136,10 @@ public class TurnControll : MonoBehaviour {
         if (turnState != TurnState.turnFinish)
         {
             turnState = TurnState.turnEnemy;
+            enemyTurnPanel.SetActive(true);
+            enemyTurnTextPanel.SetActive(true);
+            enemyTurnPanel.SendMessage("AlphaReset");
+            enemyTurnTextPanel.SendMessage("AlphaReset");
         }
     }
     IEnumerator TurnEnemy()
@@ -137,13 +147,13 @@ public class TurnControll : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
         if (onlyOneTime)
         {
-            InvokeRepeating("TurnEnemyAttack", 0, 0.6f);
+            enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
             onlyOneTime = false;
             turnState = TurnState.turnEnemyAttack;
             Core.SendMessage("StartShoot");
         }
         yield return new WaitForSeconds(5.0f);
-        CancelInvoke("TurnEnemyAttack");
+        enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");
         yield return new WaitForSeconds(1f);
         Core.SendMessage("StopShoot");
         yield return new WaitForSeconds(1f);
@@ -157,6 +167,10 @@ public class TurnControll : MonoBehaviour {
         cat.cat_teammate_0.SendMessage("ResetGP");
         cat.cat_teammate_1.SendMessage("ResetGP");
         turnState = TurnState.turnPlayer;
+        playerTurnPanel.SetActive(true);
+        playerTurnTextPanel.SetActive(true);
+        playerTurnPanel.SendMessage("AlphaReset");
+        playerTurnTextPanel.SendMessage("AlphaReset");
         yield return new WaitForSeconds(2.0f);
     }
     void TurnEnemyAttack()
@@ -181,9 +195,9 @@ public class TurnControll : MonoBehaviour {
         }
         if(t == TurnResult.turnWin)
         {
-            expText.text = "獲得經驗值:"+enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp.ToString();
+            expText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp.ToString();
             GlobalValue.instance.exp += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp;
-            goldText.text = "獲得金幣:" + enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
+            goldText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
             GlobalValue.instance.gold += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold;
             gaveWinPanel.SetActive(true);
             GlobalValue.instance.level[GlobalValue.instance.nowLevel] = true;

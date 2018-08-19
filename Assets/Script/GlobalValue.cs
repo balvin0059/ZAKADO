@@ -19,24 +19,7 @@ public class GlobalValue : MonoBehaviour {
     {
         if (instance == null)
         {
-            instance = this;
-            ge = new Thread(GetEnegy);
-            gameSave = SaveLoadData.LoadData();
-            if (!gameSave.everSave)
-            {
-                for (int i = 0; i < catHolder.Length; i++)
-                {
-                    gameSave.stateSave[i] = catHolder[i].GetComponent<CatControll>().state;
-                }
-                gameSave.recordTime = DateTime.Now;
-                gameSave.everSave = true;
-                SaveLoadData.SaveData(gameSave);
-            }
-            nowTime = DateTime.Now;
-            TimeSpan timeSpan_f = nowTime.Subtract(gameSave.recordTime);
-
-            enegy = (enegy + (int)timeSpan_f.TotalSeconds / 300 > 50) ? 50 : enegy + (int)timeSpan_f.TotalSeconds / 300;
-
+            instance = this;            
             DontDestroyOnLoad(this);
         }
         else if (this != instance)
@@ -46,33 +29,57 @@ public class GlobalValue : MonoBehaviour {
     }
     #endregion
     public GameSave gameSave = new GameSave();
+    [Header("主介面素質區")]
     public int gold = 0;
     public int exp = 0;
     public int maxEnegy = 50;
     public int enegy = 50;
-
     public bool[] level;
     public int[] catNum;
-
+    public int nowLevel;
+    public DateTime nowTime;
+    [Header("物件預載素質區")]
     public GameObject[] catHolder;
     public GameObject[] enemyHolder;
-
+    public GameObject[] effectHolder;
+    [Header("圖片預載素質區")]
     public Sprite[] catSpritHolder;
     public Sprite[] catBattleSpritHolder;
-
-    public int nowLevel;
-
-    public DateTime nowTime;
+    public Sprite[] elementHolder; // 1 = fire, 2 = water,3 = lighting
 
     #region 體力系統
     public DateTime dateTime;
     public DateTime dateTime_next;
     public TimeSpan timeSpan;
+    [Header("體力系統區")]
     public int deltaEnegy;
     public int recoverEg;
     public bool geSw;
     public bool everSet;
     Thread ge;
+    void Start()
+    {
+        ge = new Thread(GetEnegy);
+        gameSave = SaveLoadData.LoadData();
+        if (!gameSave.everSave)
+        {
+            for (int i = 0; i < catHolder.Length; i++)
+            {
+                gameSave.stateSave[i] = catHolder[i].GetComponent<CatControll>().state;
+            }
+            for (int i = 0; i < catNum.Length; i++)
+            {
+                gameSave.catNum[i] = catNum[i];
+            }
+            gameSave.recordTime = DateTime.Now;
+            gameSave.everSave = true;
+            SaveLoadData.SaveData(gameSave);
+        }
+        nowTime = DateTime.Now;
+        TimeSpan timeSpan_f = nowTime.Subtract(gameSave.recordTime);
+
+        enegy = (enegy + (int)timeSpan_f.TotalSeconds / 300 > 50) ? 50 : enegy + (int)timeSpan_f.TotalSeconds / 300;
+    }
 
     private void Update()
     {

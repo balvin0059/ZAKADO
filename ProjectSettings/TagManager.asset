@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - God
   - Enemy
+  - Shovel
   layers:
   - Default
   - TransparentFX

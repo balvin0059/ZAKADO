@@ -8,6 +8,11 @@ public class ButtonBack : MonoBehaviour {
 
     public void OnBack()
     {
+        GlobalValue.instance.gameSave = SaveLoadData.LoadData();
+        for (int i = 0; i < 3; i++)
+        {
+            GlobalValue.instance.catNum[i] = GlobalValue.instance.gameSave.catNum[i];
+        }
         SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         SceneManager.LoadScene("MainScene");
     }

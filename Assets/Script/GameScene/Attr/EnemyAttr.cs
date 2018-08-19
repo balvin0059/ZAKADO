@@ -12,11 +12,13 @@ public class EnemyAttr : MonoBehaviour {
         public string name;
         public int hp;
         public int attack;
-        public ElementType.Element type;// 0 = fire, 1 = water, 2 = lighting
+        public float speed;
+        public float attackDelay;
+        public ElementType.Element type;// 1 = fire, 2 = water, 3 = lighting
         public int exp;
         public int gold;
-        public string Ai_name;
-        public int Ai_id;
+        public string skill_name;
+        public int skill_id;
     }
     public Image[] e;
     public Transform[] genPositions;
@@ -28,11 +30,18 @@ public class EnemyAttr : MonoBehaviour {
     // Use this for initialization
     void Start () {
         maxHp = enemy.hp;
+        e[2].sprite = GlobalValue.instance.elementHolder[(int)enemy.type-1];
     }
 	void GetDamage(int dmg)
     {
         Debug.Log("敵人受到了"+dmg+"點傷害");
         enemy.hp -= dmg;
+    }
+    void GetElement(int e)
+    {
+        GameObject g = Instantiate(GlobalValue.instance.effectHolder[e]);
+        g.transform.SetParent(gameObject.transform.transform, false);
+        g.transform.position = gameObject.transform.position;
     }
     void Update()
     {
@@ -52,12 +61,22 @@ public class EnemyAttr : MonoBehaviour {
             TurnControll.instance.turnResult = TurnControll.TurnResult.turnWin;
         }
     }
+    void TurnEnemyAttack()
+    {
+        InvokeRepeating("Spawn", 0, enemy.attackDelay);
+    }
+    void TurnEnemyAttackEnd()
+    {
+        CancelInvoke("Spawn");
+    }
     void Spawn()
     {
         int a = UnityEngine.Random.Range(0, 3);
         GameObject b = Instantiate(bullet);
         b.transform.SetParent(gameObject.transform.parent, false);
         b.transform.localPosition = genPositions[a].localPosition;
-        b.GetComponent<EnemyBulletMove>().dmg = enemy.attack;
+        b.GetComponent<EnemyBulletAttr>().dmg = enemy.attack;
+        b.GetComponent<EnemyBulletAttr>().speed = enemy.speed;
+        b.GetComponent<EnemyBulletAttr>().sid = enemy.skill_id;
     }
 }

@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MapScene : MonoBehaviour {
+    public GameObject noenegyPanel;
+    public GameObject confirmenegyPanel;
+    public Text enegyText;
     public GameObject[] levelHolder;
     public GameObject[] clearArea;
     void Start()
@@ -24,10 +28,27 @@ public class MapScene : MonoBehaviour {
     }
 	public void OnLevel(int l)
     {
-        GlobalValue.instance.nowLevel = l;
+        if (GlobalValue.instance.enegy - 5 < 0)
+        {
+            noenegyPanel.SetActive(true);
+        }
+        else
+        {
+            GlobalValue.instance.nowLevel = l;
+            string str = GlobalValue.instance.enegy.ToString() + " -> " + (GlobalValue.instance.enegy - 5).ToString();
+            enegyText.text = str;
+            confirmenegyPanel.SetActive(true);
+        }
+    }
+    public void OnConfirmPanel()
+    {
         GlobalValue.instance.enegy -= 5;
         GlobalValue.instance.dateTime_next = GlobalValue.instance.dateTime_next.AddMinutes(25);
-        Debug.Log("剩餘"+ GlobalValue.instance.dateTime_next.Minute+ "分鐘回滿體力");
         SceneManager.LoadScene("GameScene");
+    }
+    public void OnNoEnegyPanel()
+    {
+        noenegyPanel.SetActive(false);
+        //or something ads
     }
 }

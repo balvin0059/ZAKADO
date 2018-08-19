@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CatControll : MonoBehaviour {
     public GameObject heart;
+    public GameObject eff;
     public int getPower;
     public bool attacking = true;
     public CatAttr.Statestuff state;
@@ -19,6 +20,9 @@ public class CatControll : MonoBehaviour {
         GameObject h = Instantiate(heart);
         h.transform.SetParent(gameObject.transform.parent, false);
         h.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+1.5f, gameObject.transform.position.z);
+        GameObject ef = Instantiate(eff);
+        ef.transform.SetParent(gameObject.transform.parent, false);
+        ef.transform.position = gameObject.transform.position;
     }
     //攻擊動作
     public void Attack()
@@ -31,7 +35,6 @@ public class CatControll : MonoBehaviour {
                 {
                     if (gameObject.transform.position.y < 1f)
                     {
-                        Debug.Log(gameObject.transform.position.y);
                         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(transform.position.x, 1f, 0.0f), 5 * Time.deltaTime);
                     }
                     else if (gameObject.transform.position.y == 1f)
@@ -59,7 +62,7 @@ public class CatControll : MonoBehaviour {
     //攻擊動作
     IEnumerator AttackMove()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
         attacking = true;
         updown = true;
     }
@@ -80,7 +83,8 @@ public class CatControll : MonoBehaviour {
         enemyToDmg = GameObject.FindWithTag("Enemy");
         enemyType = enemyToDmg.GetComponent<EnemyAttr>().enemy.type;
         float m = elementType.TypeResult(state.type, enemyType);
-        enemyToDmg.SendMessage("GetDamage", (int)((float)state.attack * m * (float)gp));
+        enemyToDmg.SendMessage("GetDamage", (int)(state.attack * m * gp));
+        enemyToDmg.SendMessage("GetElement", ((int)state.type-1));
     }
     public void LoadData()
     {

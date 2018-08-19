@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerControll : MonoBehaviour {
-
+    public string textMix;
+    public Text hpText;
     public Image playerHp;
     public int playerMaxHp;
     public int playerNowHp;
@@ -16,6 +17,8 @@ public class PlayerControll : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        textMix = "HP " + playerNowHp.ToString() + " / " + playerMaxHp.ToString();
+        hpText.text = textMix;
         if (playerNowHp > 0)
         {
             playerHp.fillAmount = (float)playerNowHp / (float)playerMaxHp;

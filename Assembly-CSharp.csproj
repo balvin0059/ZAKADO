@@ -51,15 +51,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Effect\KY_effects\Script\ConGUI.cs" />
+     <Compile Include="Assets\Effect\KY_effects\Script\Lighting.cs" />
      <Compile Include="Assets\Script\ButtonBack.cs" />
      <Compile Include="Assets\Script\GameSave.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
+     <Compile Include="Assets\Script\GameScene\Attr\EnemyBulletAttr.cs" />
+     <Compile Include="Assets\Script\GameScene\Attr\EnemySkill.cs" />
      <Compile Include="Assets\Script\GameScene\CatControll.cs" />
      <Compile Include="Assets\Script\GameScene\CatDic.cs" />
      <Compile Include="Assets\Script\GameScene\CoreMove.cs" />
      <Compile Include="Assets\Script\GameScene\CorePower.cs" />
-     <Compile Include="Assets\Script\GameScene\Ef_DestroySelf.cs" />
+     <Compile Include="Assets\Script\GameScene\Ef\Ef_AutoRotate.cs" />
+     <Compile Include="Assets\Script\GameScene\Ef\Ef_DestroySelf.cs" />
+     <Compile Include="Assets\Script\GameScene\Ef\Ef_Dself.cs" />
+     <Compile Include="Assets\Script\GameScene\Ef\Ef_fade.cs" />
      <Compile Include="Assets\Script\GameScene\ElementType.cs" />
      <Compile Include="Assets\Script\GameScene\EnemyAIDrop.cs" />
      <Compile Include="Assets\Script\GameScene\EnemyBulletMove.cs" />
@@ -72,6 +79,7 @@
      <Compile Include="Assets\Script\SaveLoadData.cs" />
      <Compile Include="Assets\Script\Teammate\Teammate.cs" />
      <Compile Include="Assets\Script\Upgrade\UpgradeScene.cs" />
+     <None Include="Assets\Effect\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
  <Reference Include="Vuforia.UnityExtensions">
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>

@@ -22,7 +22,7 @@ public class ShovelPower : MonoBehaviour {
         }
         if (n.tag == "EnemyBullet")
         {
-            Destroy(n.gameObject);
+            n.SendMessage("GetBulletDamage", 1);
             Destroy(gameObject);
         }
     }

@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Teammate : MonoBehaviour {
+    public GameObject noSetPanel;
     public Image[] catShow;
     public bool[] catSelect;
     public List<CatList> catLists = new List<CatList>();
+    public bool dontSave = false;
 
     void Start()
     {
@@ -57,8 +59,7 @@ public class Teammate : MonoBehaviour {
                 Debug.Log(catLists.Count + "個");
                 foreach (CatList temp in catLists)
                 {
-                    Debug.Log(temp.name);
-                    Debug.Log(temp.uid);
+                    Debug.Log(temp.name+","+temp.uid);
                 }
             }
         }
@@ -68,7 +69,7 @@ public class Teammate : MonoBehaviour {
     {
         if (catLists.Count > 0)
         {
-            for (int i = 0; i < catLists.Count; i++)
+            for (int i = 0; i < 3; i++)
             {
                 GlobalValue.instance.catNum[i] = 0;
                 catShow[i].gameObject.SetActive(false);
@@ -87,10 +88,36 @@ public class Teammate : MonoBehaviour {
 
     public void OnConfirm()
     {
-        for (int i = 0; i < catLists.Count; i++)
+        for (int i = 2; i > 0; i--)
         {
-            GlobalValue.instance.gameSave.catNum[i] = GlobalValue.instance.catNum[i];
+            if (GlobalValue.instance.catNum[i] == 0)
+            {
+                noSetPanel.SetActive(true);
+                dontSave = true;
+                break;
+            }
+            else
+            {
+                dontSave = false;
+            }
+        }
+        if (!dontSave)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                GlobalValue.instance.gameSave.catNum[i] = GlobalValue.instance.catNum[i];
+            }
             SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         }
+    }
+    public void NoSetTeam()
+    {
+        GlobalValue.instance.gameSave = SaveLoadData.LoadData();
+        for (int j = 0; j < 3; j++)
+        {
+            GlobalValue.instance.catNum[j] = GlobalValue.instance.gameSave.catNum[j];
+            AddCatList(j);
+        }
+        noSetPanel.SetActive(false);
     }
 }
