@@ -115,6 +115,11 @@ public class HookFood : MonoBehaviour {
         if (n.tag == "food_special")
         {
             n.GetComponent<WebBubble>().isEat = true;
+            if(n.GetComponent<WebBubble>().special_Type == 2)
+            {
+                Vector3 record = gameObjectRect.position;
+                transRecord.Add(record);
+            }
         }
     }
     public void OnTriggerExit2D(Collider2D n)

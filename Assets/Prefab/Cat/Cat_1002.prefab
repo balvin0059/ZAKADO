@@ -178,9 +178,9 @@ MonoBehaviour:
   state:
     uid: 1002
     name: "\u963F\u80A5"
-    lv: 20
-    hp: 1050
-    attack: 200
+    lv: 1
+    hp: 100
+    attack: 10
     type: 3
     actives: "\"\u7D66\u6211\u5403\u98FC\u6599\uFF5E\""
     actives_info: "\u5275\u90205\u9846\u96F7\u5C6C\u6027\u98FC\u6599"

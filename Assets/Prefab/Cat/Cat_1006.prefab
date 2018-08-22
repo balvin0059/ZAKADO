@@ -153,8 +153,8 @@ MonoBehaviour:
     uid: 1006
     name: "\u963F\u7070"
     lv: 1
-    hp: 100
-    attack: 10
+    hp: 200
+    attack: 30
     type: 1
     actives: "\"\u6211\u624D\u4E0D\u662F\u6311\u98DF\uFF5E\""
     actives_info: "\u5C07\u6240\u6709\u6CE1\u6CE1\u8B8A\u6210\u706B\u5C6C\u6027"
