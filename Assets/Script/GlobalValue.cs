@@ -35,8 +35,13 @@ public class GlobalValue : MonoBehaviour {
     public int maxEnegy = 50;
     public int enegy = 50;
     public bool[] level;
+    public bool[] mission;
     public int[] catNum;
     public int nowLevel;
+    public int nowMission = 0;
+    public bool everTeach;
+    public bool[] catBuyYet = new bool[10];
+    public int nowUnlockCat;
     public DateTime nowTime;
     [Header("物件預載素質區")]
     public GameObject[] catHolder;
@@ -46,7 +51,12 @@ public class GlobalValue : MonoBehaviour {
     public Sprite[] catSpritHolder;
     public Sprite[] catBattleSpritHolder;
     public Sprite[] elementHolder; // 1 = fire, 2 = water,3 = lighting
-
+    public Sprite[] missionTopBg;
+    public Sprite[] missionBotBg;
+    public Sprite[] missionMainBg;
+    [Header("遊戲內需要素質")]
+    public int[] GetTypePower; // 0 = fire, 1 = water,2 = lighting
+    public int playerEnegyPower;
     #region 體力系統
     public DateTime dateTime;
     public DateTime dateTime_next;
@@ -71,13 +81,40 @@ public class GlobalValue : MonoBehaviour {
             {
                 gameSave.catNum[i] = catNum[i];
             }
+            for(int i = 0; i < catBuyYet.Length; i++)
+            {
+                gameSave.catBuyYet[i] = catBuyYet[i];
+            }
             gameSave.recordTime = DateTime.Now;
             gameSave.everSave = true;
             SaveLoadData.SaveData(gameSave);
         }
         nowTime = DateTime.Now;
         TimeSpan timeSpan_f = nowTime.Subtract(gameSave.recordTime);
-
+        for (int i = 0; i < level.Length; i++)
+        {
+            level[i] = gameSave.level[i];
+        }
+        for (int i = 0; i < mission.Length; i++)
+        {
+            mission[i] = gameSave.mission[i];
+        }
+        for (int i = 0; i < catBuyYet.Length; i++)
+        {
+            if (i < 3)
+            {
+                catBuyYet[i] = true;
+            }
+            else
+            {
+                catBuyYet[i] = gameSave.catBuyYet[i];
+                if(!catBuyYet[i])
+                {
+                    nowUnlockCat = i;
+                    break;
+                }
+            }
+        }
         enegy = (enegy + (int)timeSpan_f.TotalSeconds / 300 > 50) ? 50 : enegy + (int)timeSpan_f.TotalSeconds / 300;
     }
 

@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TurnControll : MonoBehaviour {    
-    //單例模式
+public class TurnControll : MonoBehaviour {
+    #region 單例模式
     public static TurnControll instance;
     public static TurnControll Instance
     {
@@ -19,7 +19,8 @@ public class TurnControll : MonoBehaviour {
     {
         instance = this;
     }
-    //
+    #endregion
+
     [Serializable]
     public struct CatHolder
     {
@@ -54,18 +55,30 @@ public class TurnControll : MonoBehaviour {
         turnLose
     }
 
+    public GameObject[] food;
+    public GameObject[] food_special;
+    public GameObject foodHolder;
+    [Header("面板存取")]
     public GameObject enemyTurnPanel;
     public GameObject enemyTurnTextPanel;
     public GameObject playerTurnPanel;
     public GameObject playerTurnTextPanel;
     public GameObject gaveLosePanel;
+    public GameObject gaveWinPanel;
+    public GameObject SkillPanel;
+    public GameObject SkillnoEpPanel;
+    public Image PanelTopBg;
+    public Image PanelBotBg;
+    public Image PanelBg;
+
+    public Text[] skillText;//0 腳色名稱 1 技能名稱 2 技能說明 3 技能消耗EP
     public Text expText;
     public Text goldText;
-    public GameObject gaveWinPanel;
     public GameObject playerHp;
     public GameObject Core;
     public CatHolder cat;
     public EnemyHolder enemy;
+
     public TurnState turnState;
     public TurnResult turnResult;
     bool onlyOneTime = true;
@@ -73,10 +86,15 @@ public class TurnControll : MonoBehaviour {
     public float move = 0.0f;
     public RectTransform top;
     public bool attacking = false;
+    private bool isSpawnFood = false;
+    public CatSkill catskill = new CatSkill();
+    public int skillIdUse;
+    public bool skillUseIng = false;
 
     // Use this for initialization
     void Start () {
         turnState = TurnState.turnPlayer;
+        SpawnFood();
         playerTurnPanel.SetActive(true);
         BaseSet();
     }
@@ -98,13 +116,17 @@ public class TurnControll : MonoBehaviour {
         }
         if (turnState == TurnState.turnEnemyAttack)
         {
-
+            isSpawnFood = false;
         }
         if(turnState == TurnState.turnEnd)
         {
             if (rect.position == new Vector3(0f, 0f, 0f))
             {
-                StartCoroutine(TurnEnd());                
+                if (!isSpawnFood)
+                {                    
+                    SpawnFood();
+                }
+                StartCoroutine(TurnEnd());
             }
         }
         if(turnState == TurnState.turnFinish)
@@ -117,11 +139,15 @@ public class TurnControll : MonoBehaviour {
     {
         if (turnState == TurnState.turnEnemy)
         {
+            PanelTopBg.gameObject.SetActive(false);
             rect.position = Vector3.MoveTowards(rect.position, top.position, 80 * Time.deltaTime);
         }
         if (turnState == TurnState.turnPlayer|| turnState == TurnState.turnPlayerShoot || turnState == TurnState.turnAttack || turnState == TurnState.turnAttacking || turnState == TurnState.turnEnd)
         {
-            rect.position = Vector3.MoveTowards(rect.position, new Vector3(0f,0f,0f), 80 * Time.deltaTime);
+            if (rect.position == new Vector3(0f, 0f, 0f))
+            { PanelTopBg.gameObject.SetActive(true); }
+            else
+            { rect.position = Vector3.MoveTowards(rect.position, new Vector3(0f, 0f, 0f), 80 * Time.deltaTime); }
         }
     }
     IEnumerator TurnAttack()
@@ -171,20 +197,106 @@ public class TurnControll : MonoBehaviour {
         playerTurnTextPanel.SetActive(true);
         playerTurnPanel.SendMessage("AlphaReset");
         playerTurnTextPanel.SendMessage("AlphaReset");
+        for (int i = 0; i < GlobalValue.instance.GetTypePower.Length; i++)
+        {
+            GlobalValue.instance.GetTypePower[i] = 0;
+        }
         yield return new WaitForSeconds(2.0f);
     }
     void TurnEnemyAttack()
     {
         enemy.enemyGameobject.SendMessage("Spawn");
     }
-    int HPGet()
-    {
-        int a = cat.cat_leader.GetComponent<CatControll>().state.hp;
-        int b = cat.cat_teammate_0.GetComponent<CatControll>().state.hp;
-        int c = cat.cat_teammate_1.GetComponent<CatControll>().state.hp;
 
-        return a + b + c;        
+    public void SkillUse(int id)
+    {
+        skillUseIng = true;
+        skillIdUse = id;
+        skillText[0].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.name;
+        skillText[1].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives;
+        skillText[2].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_info;
+        skillText[3].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost.ToString();
+        SkillPanel.SetActive(true);
     }
+    public void ConfirmSkillUse()
+    {
+        if (GlobalValue.instance.playerEnegyPower >= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost)
+        {
+            catskill.Skill(GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.uid, GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.type);
+            GlobalValue.instance.playerEnegyPower -= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost;
+            SkillPanel.SetActive(false);
+            skillIdUse = 0;
+            skillUseIng = false;
+        }
+        else
+        {
+            SkillPanel.SetActive(false);
+            SkillnoEpPanel.SetActive(true);
+        }
+    }
+
+    public void TurnOffSkillPanel()
+    {
+        skillIdUse = 0;
+        skillUseIng = false;
+        SkillPanel.SetActive(false);
+        SkillnoEpPanel.SetActive(false);
+    }
+
+    public void SpawnFood()
+    {
+        isSpawnFood = true;
+
+        int index = UnityEngine.Random.Range(0, 3);
+        float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+        Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+
+        for (int i = 0; i < 16; i++)
+        {
+             index = UnityEngine.Random.Range(0, 3);
+             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+             area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+
+            Instantiate(food[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+        }
+    }
+
+    #region 製造飼料相關
+    public void SpawnFood(int eType, int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+            float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+
+            Instantiate(food[eType], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+        }
+    }
+    public void SpawnSpecialFood()
+    {
+        int index = UnityEngine.Random.Range(0, 3);
+        float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+        Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+    }
+    public void SpawnSpecialFood(int sType)
+    {
+        float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+        Instantiate(food_special[sType], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+    }
+    public void ChangeFoodColor(int eType)
+    {
+        GameObject[] f = GameObject.FindGameObjectsWithTag("food");
+        for(int i = 0; i < f.Length; i++)
+        {
+            Instantiate(food[eType], f[i].transform.position, Quaternion.identity, foodHolder.transform);
+            Destroy(f[i].gameObject);
+        }
+    }
+    #endregion
+
     IEnumerator GameFinish(TurnResult t)
     {
         yield return new WaitForSeconds(2.0f);
@@ -201,12 +313,21 @@ public class TurnControll : MonoBehaviour {
             GlobalValue.instance.gold += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold;
             gaveWinPanel.SetActive(true);
             GlobalValue.instance.level[GlobalValue.instance.nowLevel] = true;
+            if(GlobalValue.instance.nowLevel == 5)
+            {
+                GlobalValue.instance.mission[GlobalValue.instance.nowMission] = true;
+                GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
+            }
             GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
             SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         }
     }
     public void OnOver()
     {
+        for (int i = 0; i < GlobalValue.instance.GetTypePower.Length; i++)
+        {
+            GlobalValue.instance.GetTypePower[i] = 0;
+        }
         GlobalValue.instance.gameSave.gold = GlobalValue.instance.gold;
         GlobalValue.instance.gameSave.exp = GlobalValue.instance.exp;
         SaveLoadData.SaveData(GlobalValue.instance.gameSave);
@@ -215,8 +336,14 @@ public class TurnControll : MonoBehaviour {
         turnState = TurnState.None;
         SceneManager.LoadScene("MapScene");
     }
+
+    #region 初始化
     void BaseSet()
     {
+        PanelBg.sprite = GlobalValue.instance.missionMainBg[GlobalValue.instance.nowMission];
+        PanelBotBg.sprite = GlobalValue.instance.missionBotBg[GlobalValue.instance.nowMission];
+        PanelTopBg.sprite = GlobalValue.instance.missionTopBg[GlobalValue.instance.nowMission];
+
         cat.cat_leader = Instantiate(GlobalValue.instance.catHolder[GlobalValue.instance.catNum[0]-1000]);
         cat.cat_leader.transform.SetParent(cat.catgenPos[0].transform, false);
         cat.cat_leader.GetComponent<CatControll>().LoadData();
@@ -233,4 +360,13 @@ public class TurnControll : MonoBehaviour {
         enemy.enemyGameobject = Instantiate(GlobalValue.instance.enemyHolder[GlobalValue.instance.nowLevel]);
         enemy.enemyGameobject.transform.SetParent(enemy.enemyHolder.transform, false);
     }
+    int HPGet()
+    {
+        int a = cat.cat_leader.GetComponent<CatControll>().state.hp;
+        int b = cat.cat_teammate_0.GetComponent<CatControll>().state.hp;
+        int c = cat.cat_teammate_1.GetComponent<CatControll>().state.hp;
+
+        return a + b + c;
+    }
+    #endregion
 }

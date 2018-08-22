@@ -10,6 +10,14 @@ TagManager:
   - God
   - Enemy
   - Shovel
+  - up
+  - down
+  - left
+  - right
+  - dot
+  - food
+  - food_special
+  - hook
   layers:
   - Default
   - TransparentFX

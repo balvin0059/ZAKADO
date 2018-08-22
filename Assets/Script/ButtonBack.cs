@@ -22,7 +22,11 @@ public class ButtonBack : MonoBehaviour {
         {
             GlobalValue.instance.gameSave.recordTime = DateTime.Now;
             SaveLoadData.SaveData(GlobalValue.instance.gameSave);
-            SceneManager.LoadScene("MainScene");
+            Application.Quit();
         }
+    }
+    public void TurnOffPanel(GameObject g)
+    {
+        g.SetActive(false);
     }
 }

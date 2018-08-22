@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainSceneControll : MonoBehaviour {
+    public bool OnPaneling;
+    public GameObject noCatPanel;
     public Text goldText;
     public Text expText;
     public Text enegyText;
@@ -13,15 +15,11 @@ public class MainSceneControll : MonoBehaviour {
     public DateTime dateTime;
     public DateTime dateTime_next;
     public TimeSpan timeSpan;
-    
-
-    void Start()
-    {
-              
-    }
+    public Image indexCat;
 
     void Update()
     {
+        indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
         expText.text = GlobalValue.instance.exp.ToString();
         goldText.text = GlobalValue.instance.gold.ToString();
         if(GlobalValue.instance.enegy < GlobalValue.instance.maxEnegy)
@@ -38,17 +36,26 @@ public class MainSceneControll : MonoBehaviour {
         
     }
 	public void OnAdventure()
-    {        
-        GetLevelSchedule(GlobalValue.instance.gameSave.level);
-        SceneManager.LoadScene("MapScene");
+    {
+        if (!OnPaneling)
+        {
+            GetLevelSchedule(GlobalValue.instance.gameSave.level);
+            SceneManager.LoadScene("MapScene");
+        }
     }
     public void OnTeammate()
     {
-        SceneManager.LoadScene("TeamScene");
+        if (!OnPaneling)
+        {
+            SceneManager.LoadScene("TeamScene");
+        }
     }
     public void OnUpgrade()
     {
-        SceneManager.LoadScene("UpgradeScene");
+        if (!OnPaneling)
+        {
+            SceneManager.LoadScene("UpgradeScene");
+        }
     }
     void GetLevelSchedule(bool[] b)
     {
@@ -57,7 +64,23 @@ public class MainSceneControll : MonoBehaviour {
             GlobalValue.instance.level[i] = b[i];
         }
     }
-
+    public void OnShop()
+    {
+        if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
+        {
+            SceneManager.LoadScene("ShopScene");
+        }
+        else
+        {
+            noCatPanel.SetActive(true);
+            OnPaneling = true;
+        }
+    }
+    public void OnClose()
+    {
+        noCatPanel.SetActive(false);
+        OnPaneling = false;
+    }
     #region Test
     public void ResetSave()
     {

@@ -13,10 +13,10 @@ public class CatAttr {
         public int hp;
         public int attack;
         public ElementType.Element type; // 0 = fire, 1 = water, 2 = lighting
-        public string passives;
-        public int passives_id;
         public string actives;
+        public string actives_info;
         public int actives_id;
+        public int actives_cost;
     }
     // Use this for initialization
     void Start () {

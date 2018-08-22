@@ -4,22 +4,52 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerControll : MonoBehaviour {
+    #region 單例模式
+    public static PlayerControll instance;
+    public static PlayerControll Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
     public string textMix;
     public Text hpText;
     public Image playerHp;
     public int playerMaxHp;
     public int playerNowHp;
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    public string textEPMix;
+    public Text epText;
+    public Image playerEp;
+    public int playerMaxEP;
+    public int playerNowEP;
+    // Use this for initialization
+    void Start () {
+        playerMaxEP = 20;
+        GlobalValue.instance.playerEnegyPower = 0;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        textMix = "HP " + playerNowHp.ToString() + " / " + playerMaxHp.ToString();
+        playerNowEP = GlobalValue.instance.playerEnegyPower;
+        textMix = "HP " + playerNowHp.ToString() + "/" + playerMaxHp.ToString();
+        textEPMix = "EP " + playerNowEP.ToString() + "/" + playerMaxEP.ToString();
         hpText.text = textMix;
-        if (playerNowHp > 0)
+        epText.text = textEPMix;
+        playerEp.fillAmount = (float)playerNowEP / (float)playerMaxEP;
+        if (GlobalValue.instance.playerEnegyPower > playerMaxEP)
+        {
+            GlobalValue.instance.playerEnegyPower = playerMaxEP;
+        }
+            if (playerNowHp > 0)
         {
             playerHp.fillAmount = (float)playerNowHp / (float)playerMaxHp;
         }

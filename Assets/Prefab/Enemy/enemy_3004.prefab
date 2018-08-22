@@ -156,7 +156,7 @@ MonoBehaviour:
     hp: 2000
     attack: 180
     speed: 0.1
-    attackDelay: 1
+    attackDelay: 0.4
     type: 2
     exp: 1000
     gold: 900

@@ -58,7 +58,8 @@
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyBulletAttr.cs" />
-     <Compile Include="Assets\Script\GameScene\Attr\EnemySkill.cs" />
+     <Compile Include="Assets\Script\GameScene\Attr\Skill\CatSkill.cs" />
+     <Compile Include="Assets\Script\GameScene\Attr\Skill\EnemySkill.cs" />
      <Compile Include="Assets\Script\GameScene\CatControll.cs" />
      <Compile Include="Assets\Script\GameScene\CatDic.cs" />
      <Compile Include="Assets\Script\GameScene\CoreMove.cs" />
@@ -70,6 +71,11 @@
      <Compile Include="Assets\Script\GameScene\ElementType.cs" />
      <Compile Include="Assets\Script\GameScene\EnemyAIDrop.cs" />
      <Compile Include="Assets\Script\GameScene\EnemyBulletMove.cs" />
+     <Compile Include="Assets\Script\GameScene\HookFood.cs" />
+     <Compile Include="Assets\Script\GameScene\HookShoot.cs" />
+     <Compile Include="Assets\Script\GameScene\Item\DotScript.cs" />
+     <Compile Include="Assets\Script\GameScene\Item\FoodBubble.cs" />
+     <Compile Include="Assets\Script\GameScene\Item\WebBubble.cs" />
      <Compile Include="Assets\Script\GameScene\PlayerControll.cs" />
      <Compile Include="Assets\Script\GameScene\ShovelPower.cs" />
      <Compile Include="Assets\Script\GameScene\TurnControll.cs" />
@@ -77,6 +83,7 @@
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
      <Compile Include="Assets\Script\Map\MapScene.cs" />
      <Compile Include="Assets\Script\SaveLoadData.cs" />
+     <Compile Include="Assets\Script\Shop\ShopScript.cs" />
      <Compile Include="Assets\Script\Teammate\Teammate.cs" />
      <Compile Include="Assets\Script\Upgrade\UpgradeScene.cs" />
      <None Include="Assets\Effect\KY_effects\MagicEffectsPackFree\ReadMe.txt" />

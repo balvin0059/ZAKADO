@@ -247,7 +247,7 @@ MonoBehaviour:
     name: SlimeKing
     hp: 5000
     attack: 500
-    speed: 0.01
+    speed: 0.02
     attackDelay: 100
     type: 1
     exp: 2000

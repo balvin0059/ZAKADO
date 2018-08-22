@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Teammate : MonoBehaviour {
+    public GameObject[] catButton;
+    public GameObject SetPanel;
     public GameObject noSetPanel;
     public Image[] catShow;
     public bool[] catSelect;
@@ -12,7 +14,17 @@ public class Teammate : MonoBehaviour {
 
     void Start()
     {
-        
+        for (int i = 0; i < GlobalValue.instance.catBuyYet.Length; i++)
+        {
+            if (GlobalValue.instance.catBuyYet[i])
+            {
+                catButton[i].SetActive(GlobalValue.instance.catBuyYet[i]);
+            }
+            else
+            {
+                break;
+            }
+        }
         for (int i = 0; i < GlobalValue.instance.catNum.Length; i++)
         {
             if (GlobalValue.instance.catNum[i] > 0)
@@ -73,8 +85,11 @@ public class Teammate : MonoBehaviour {
             {
                 GlobalValue.instance.catNum[i] = 0;
                 catShow[i].gameObject.SetActive(false);
-                catShow[i].sprite = GlobalValue.instance.catBattleSpritHolder[i];
-                catSelect[i] = false;
+                catShow[i].sprite = GlobalValue.instance.catBattleSpritHolder[i];                
+            }
+            for(int j = 0; j < catSelect.Length; j++)
+            {
+                catSelect[j] = false;
             }
             catLists.Clear();
             Debug.Log(catLists.Count + "個");
@@ -87,6 +102,10 @@ public class Teammate : MonoBehaviour {
     }
 
     public void OnConfirm()
+    {
+        SetPanel.SetActive(true);
+    }
+    public void OnConfirmSetTeam()
     {
         for (int i = 2; i > 0; i--)
         {
@@ -109,6 +128,7 @@ public class Teammate : MonoBehaviour {
             }
             SaveLoadData.SaveData(GlobalValue.instance.gameSave);
         }
+        SetPanel.SetActive(false);
     }
     public void NoSetTeam()
     {

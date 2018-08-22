@@ -13,8 +13,16 @@ public class CatControll : MonoBehaviour {
     public ElementType elementType = new ElementType();
     public ElementType.Element enemyType;
     public bool updown = true; // up = true down = false;
-
-	//吃到飼料創造愛心
+    public CatSkill catSkill = new CatSkill();
+    void Awake()
+    {
+        LoadData();
+        Debug.Log("我是" + state.name + "," + state.uid + "編號" + "/n" + "屬性:" + state.type);
+    }
+    void Start()
+    {
+    }
+	//吃到飼料創造愛
     public void CreatHeart()
     {
         GameObject h = Instantiate(heart);
@@ -27,7 +35,7 @@ public class CatControll : MonoBehaviour {
     //攻擊動作
     public void Attack()
     {        
-        if (getPower > 0)
+        if (GlobalValue.instance.GetTypePower[(int)state.type-1] > 0)
         {            
             if (attacking)
             {
@@ -51,7 +59,7 @@ public class CatControll : MonoBehaviour {
                     else if (gameObject.transform.position.y == 0.3f)
                     {
                         TurnControll.instance.turnState = TurnControll.TurnState.turnAttacking;
-                        CauseDamge(getPower);
+                        CauseDamge(GlobalValue.instance.GetTypePower[(int)state.type - 1]);
                         StartCoroutine(AttackMove());
                         attacking = false;
                     }
@@ -66,15 +74,9 @@ public class CatControll : MonoBehaviour {
         attacking = true;
         updown = true;
     }
-    //吃到飼料
-    void GetPower(int gp)
-    {
-        getPower += gp;
-    }
     //重設
     void ResetGP()
     {
-        getPower = 0;
         attacking = true;
     }
 
@@ -94,5 +96,15 @@ public class CatControll : MonoBehaviour {
         gameSave = SaveLoadData.LoadData();
 
         state = gameSave.stateSave[state.uid-1000];        
+    }
+    public void Skill(int id)
+    {
+        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer)
+        {
+            if (!TurnControll.instance.skillUseIng)
+            {
+                TurnControll.instance.SkillUse(id);
+            }
+        }
     }
 }

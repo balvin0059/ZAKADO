@@ -22,6 +22,7 @@ public class ShovelPower : MonoBehaviour {
         }
         if (n.tag == "EnemyBullet")
         {
+            GlobalValue.instance.playerEnegyPower += 1;
             n.SendMessage("GetBulletDamage", 1);
             Destroy(gameObject);
         }
