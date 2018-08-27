@@ -19,5 +19,7 @@ public class GameSave
     public bool[] level = new bool[12];
     public int enegy = 0;
     public DateTime recordTime;
-    
+    public int[] item_id = new int[8];
+    public bool[] item_Use = new bool[8];
+    public int[] item_amount = new int[8];
 }

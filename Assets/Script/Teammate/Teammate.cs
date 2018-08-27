@@ -57,11 +57,12 @@ public class Teammate : MonoBehaviour {
     }
 
     public void AddCatList(int v)
-    {
+    {        
         if (!catSelect[v])
         {
             if (catLists.Count < 3)
             {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
                 catLists.Add(new CatList(GlobalValue.instance.catHolder[v].GetComponent<CatControll>().state.name, GlobalValue.instance.catHolder[v].GetComponent<CatControll>().state.uid));
                 GlobalValue.instance.catNum[catLists.Count - 1] = GlobalValue.instance.catHolder[v].GetComponent<CatControll>().state.uid;
                 catShow[catLists.Count-1].gameObject.SetActive(true);
@@ -74,11 +75,15 @@ public class Teammate : MonoBehaviour {
                     Debug.Log(temp.name+","+temp.uid);
                 }
             }
+            else
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
+            }
         }
     }
-
     public void RemoveCatList()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         if (catLists.Count > 0)
         {
             for (int i = 0; i < 3; i++)
@@ -100,13 +105,14 @@ public class Teammate : MonoBehaviour {
             }
         }
     }
-
     public void OnConfirm()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         SetPanel.SetActive(true);
     }
     public void OnConfirmSetTeam()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         for (int i = 2; i > 0; i--)
         {
             if (GlobalValue.instance.catNum[i] == 0)
@@ -126,12 +132,13 @@ public class Teammate : MonoBehaviour {
             {
                 GlobalValue.instance.gameSave.catNum[i] = GlobalValue.instance.catNum[i];
             }
-            SaveLoadData.SaveData(GlobalValue.instance.gameSave);
+            GlobalValue.instance.SaveAllData();
         }
         SetPanel.SetActive(false);
     }
     public void NoSetTeam()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         GlobalValue.instance.gameSave = SaveLoadData.LoadData();
         for (int j = 0; j < 3; j++)
         {

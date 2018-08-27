@@ -33,21 +33,20 @@ public class PlayerControll : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerMaxEP = 20;
-        GlobalValue.instance.playerEnegyPower = 0;
+        playerNowEP = GlobalValue.instance.playerEnegyPower;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        playerNowEP = GlobalValue.instance.playerEnegyPower;
         textMix = "HP " + playerNowHp.ToString() + "/" + playerMaxHp.ToString();
         textEPMix = "EP " + playerNowEP.ToString() + "/" + playerMaxEP.ToString();
         hpText.text = textMix;
         epText.text = textEPMix;
         playerEp.fillAmount = (float)playerNowEP / (float)playerMaxEP;
-        if (GlobalValue.instance.playerEnegyPower > playerMaxEP)
+        if (playerNowEP > playerMaxEP)
         {
-            GlobalValue.instance.playerEnegyPower = playerMaxEP;
+            playerNowEP = playerMaxEP;
         }
             if (playerNowHp > 0)
         {

@@ -17,6 +17,8 @@ public class CatAttr {
         public string actives_info;
         public int actives_id;
         public int actives_cost;
+        public bool equiepItem;
+        public int equiepItem_id;
     }
     // Use this for initialization
     void Start () {

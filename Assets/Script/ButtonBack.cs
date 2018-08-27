@@ -13,15 +13,14 @@ public class ButtonBack : MonoBehaviour {
         {
             GlobalValue.instance.catNum[i] = GlobalValue.instance.gameSave.catNum[i];
         }
-        SaveLoadData.SaveData(GlobalValue.instance.gameSave);
+        GlobalValue.instance.SaveAllData();
         SceneManager.LoadScene("MainScene");
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GlobalValue.instance.gameSave.recordTime = DateTime.Now;
-            SaveLoadData.SaveData(GlobalValue.instance.gameSave);
+            GlobalValue.instance.SaveAllData();
             Application.Quit();
         }
     }

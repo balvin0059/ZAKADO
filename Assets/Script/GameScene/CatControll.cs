@@ -14,6 +14,8 @@ public class CatControll : MonoBehaviour {
     public ElementType.Element enemyType;
     public bool updown = true; // up = true down = false;
     public CatSkill catSkill = new CatSkill();
+    public bool isItem;
+    public int itemID;
     void Awake()
     {
         LoadData();
@@ -21,6 +23,15 @@ public class CatControll : MonoBehaviour {
     }
     void Start()
     {
+        if(gameObject.GetComponent<CatControll>().state.equiepItem)
+        {
+            isItem = true;
+            itemID = gameObject.GetComponent<CatControll>().state.equiepItem_id;
+        }
+        else
+        {
+            isItem = false;
+        }
     }
 	//吃到飼料創造愛
     public void CreatHeart()
@@ -52,11 +63,11 @@ public class CatControll : MonoBehaviour {
                 }
                 else if (!updown)
                 {
-                    if (gameObject.transform.position.y > 0.3f)
+                    if (gameObject.transform.position.y > 0.6f)
                     {
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(transform.position.x, 0.3f, 0.0f), 5 * Time.deltaTime);
+                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(transform.position.x, 0.6f, 0.0f), 5 * Time.deltaTime);
                     }
-                    else if (gameObject.transform.position.y == 0.3f)
+                    else if (gameObject.transform.position.y == 0.6f)
                     {
                         TurnControll.instance.turnState = TurnControll.TurnState.turnAttacking;
                         CauseDamge(GlobalValue.instance.GetTypePower[(int)state.type - 1]);
@@ -70,6 +81,7 @@ public class CatControll : MonoBehaviour {
     //攻擊動作
     IEnumerator AttackMove()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.attackClip);
         yield return new WaitForSeconds(3.0f);
         attacking = true;
         updown = true;
@@ -82,10 +94,18 @@ public class CatControll : MonoBehaviour {
 
     public void CauseDamge(int gp)
     {
+        float m = 0f;
         enemyToDmg = GameObject.FindWithTag("Enemy");
         enemyType = enemyToDmg.GetComponent<EnemyAttr>().enemy.type;
-        float m = elementType.TypeResult(state.type, enemyType);
-        enemyToDmg.SendMessage("GetDamage", (int)(state.attack * m * gp));
+        if (isItem)
+        {
+            m = elementType.TypeResult(state.type, enemyType, isItem, itemID);
+        }
+        else
+        {
+            m = elementType.TypeResult(state.type, enemyType);
+        }
+        enemyToDmg.SendMessage("GetDamage", (int)(state.attack * m * gp ));
         enemyToDmg.SendMessage("GetElement", ((int)state.type-1));
     }
     public void LoadData()

@@ -70,10 +70,12 @@ public class MapScene : MonoBehaviour {
             l = l + GlobalValue.instance.nowMission * 5;
             if (GlobalValue.instance.enegy - 5 < 0)
             {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
                 noenegyPanel.SetActive(true);
             }
             else
             {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
                 GlobalValue.instance.nowLevel = l;
                 string str = GlobalValue.instance.enegy.ToString() + " -> " + (GlobalValue.instance.enegy - 5).ToString();
                 enegyText.text = str;
@@ -83,6 +85,7 @@ public class MapScene : MonoBehaviour {
     }
     public void OnConfirmPanel()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         GlobalValue.instance.enegy -= 5;
         GlobalValue.instance.dateTime_next = GlobalValue.instance.dateTime_next.AddMinutes(25);
         LevelChosing = false;
@@ -90,12 +93,14 @@ public class MapScene : MonoBehaviour {
     }
     public void OnNoEnegyPanel()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         noenegyPanel.SetActive(false);
         LevelChosing = false;
         //or something ads
     }
     public void OnNextMission()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         missionHolder[GlobalValue.instance.nowMission].SetActive(false);
         GlobalValue.instance.nowMission += 1;
         Bg.sprite = bgCange[GlobalValue.instance.nowMission];
@@ -108,6 +113,7 @@ public class MapScene : MonoBehaviour {
     }
     public void OnBackMission()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         missionHolder[GlobalValue.instance.nowMission].SetActive(false);
         GlobalValue.instance.nowMission -= 1;
         Bg.sprite = bgCange[GlobalValue.instance.nowMission];
@@ -120,6 +126,7 @@ public class MapScene : MonoBehaviour {
     }
     public void TurnOffPanel(GameObject g)
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         LevelChosing = false;
         g.SetActive(false);
     }

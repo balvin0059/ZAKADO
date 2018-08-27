@@ -22,9 +22,10 @@ public class ShovelPower : MonoBehaviour {
         }
         if (n.tag == "EnemyBullet")
         {
-            if(GlobalValue.instance.playerEnegyPower < 20)
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.catchpooClip);
+            if (PlayerControll.instance.playerNowEP < PlayerControll.instance.playerMaxEP)
             {
-                GlobalValue.instance.playerEnegyPower += 1;
+                PlayerControll.instance.playerNowEP += 1;
             }            
             n.SendMessage("GetBulletDamage", 1);
             Destroy(gameObject);

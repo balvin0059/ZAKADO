@@ -160,9 +160,13 @@ MonoBehaviour:
     actives_info: "\u5275\u90205\u9846\u6C34\u5C6C\u6027\u98FC\u6599"
     actives_id: 1001
     actives_cost: 5
+    equiepItem: 1
+    equiepItem_id: 1006
   enemyToDmg: {fileID: 0}
   enemyType: 0
   updown: 1
+  isItem: 0
+  itemID: 0
 --- !u!114 &114630952195702904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,7 +322,7 @@ RectTransform:
   m_GameObject: {fileID: 1278359173362756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 38, y: 38, z: 0}
+  m_LocalScale: {x: 32, y: 32, z: 0}
   m_Children:
   - {fileID: 4767837126358900}
   m_Father: {fileID: 0}

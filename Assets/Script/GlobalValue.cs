@@ -57,10 +57,15 @@ public class GlobalValue : MonoBehaviour {
     [Header("遊戲內需要素質")]
     public int[] GetTypePower; // 0 = fire, 1 = water,2 = lighting
     public int playerEnegyPower;
+    public int itemNBubbleBufferAmount;
+    public int itemSBubbleBufferAmount;
+
     #region 體力系統
     public DateTime dateTime;
     public DateTime dateTime_next;
     public TimeSpan timeSpan;
+    public TimeSpan timeSpan_f;
+    public TimeSpan timeSpan_d;
     [Header("體力系統區")]
     public int deltaEnegy;
     public int recoverEg;
@@ -85,37 +90,15 @@ public class GlobalValue : MonoBehaviour {
             {
                 gameSave.catBuyYet[i] = catBuyYet[i];
             }
-            gameSave.recordTime = DateTime.Now;
-            gameSave.everSave = true;
-            SaveLoadData.SaveData(gameSave);
+            SaveAllData();
         }
         nowTime = DateTime.Now;
-        TimeSpan timeSpan_f = nowTime.Subtract(gameSave.recordTime);
-        for (int i = 0; i < level.Length; i++)
-        {
-            level[i] = gameSave.level[i];
-        }
-        for (int i = 0; i < mission.Length; i++)
-        {
-            mission[i] = gameSave.mission[i];
-        }
-        for (int i = 0; i < catBuyYet.Length; i++)
-        {
-            if (i < 3)
-            {
-                catBuyYet[i] = true;
-            }
-            else
-            {
-                catBuyYet[i] = gameSave.catBuyYet[i];
-                if(!catBuyYet[i])
-                {
-                    nowUnlockCat = i;
-                    break;
-                }
-            }
-        }
-        enegy = (enegy + (int)timeSpan_f.TotalSeconds / 300 > 50) ? 50 : enegy + (int)timeSpan_f.TotalSeconds / 300;
+        timeSpan_f = nowTime.Subtract(gameSave.recordTime);
+        Debug.Log(timeSpan_f.TotalSeconds+"秒");
+        int deltaenegy = (int)timeSpan_f.TotalSeconds / 300;
+        LoadAllData();
+        enegy = (enegy + deltaenegy > 50) ? 50 : enegy + deltaenegy;
+        timeSpan_d = timeSpan_f.Add(new TimeSpan(0, 0, -deltaenegy*300));
     }
 
     private void Update()
@@ -167,14 +150,125 @@ public class GlobalValue : MonoBehaviour {
         }
         dateTime = DateTime.Now;
         timeSpan = dateTime_next.Subtract(dateTime);
+        if (timeSpan > timeSpan_f)
+        {
+            timeSpan -= timeSpan_f;
+        }else if(timeSpan > timeSpan_d)
+        {
+            timeSpan -= timeSpan_d;
+        }
     }
     private void OnApplicationQuit()
     {
-        gameSave.recordTime = DateTime.Now;
-        SaveLoadData.SaveData(gameSave);
+        SaveAllData();
         ge.Abort();
     }
     #endregion
+
+    public void SaveAllData()
+    {
+        for (int i = 0; i < catHolder.Length; i++)
+        {
+            gameSave.stateSave[i] = catHolder[i].GetComponent<CatControll>().state;
+        }
+        for (int i = 0; i < catNum.Length; i++)
+        {
+            gameSave.catNum[i] = catNum[i];
+        }
+        for (int i = 0; i < catBuyYet.Length; i++)
+        {
+            gameSave.catBuyYet[i] = catBuyYet[i];
+        }
+        for (int i = 0; i < level.Length; i++)
+        {
+            gameSave.level[i] = level[i];
+        }
+        for (int i = 0; i < mission.Length; i++)
+        {
+            gameSave.mission[i] = mission[i];
+        }
+        for(int i = 0; i < ItemHolder.instance.globleItems.Count; i++)
+        {
+            gameSave.item_id[i] = ItemHolder.instance.globleItems[i].id;
+            gameSave.item_Use[i] = ItemHolder.instance.globleItems[i].itemUse;
+            gameSave.item_amount[i] = ItemHolder.instance.globleItems[i].amount;
+        }
+        gameSave.gold = gold;
+        gameSave.exp = exp;
+        gameSave.recordTime = DateTime.Now;
+        gameSave.enegy = enegy;
+        gameSave.everTeach = everTeach;
+        gameSave.everSave = true;
+
+        SaveLoadData.SaveData(gameSave);
+    }
+    public void LoadAllData()
+    {
+        gameSave = SaveLoadData.LoadData();
+        if (!gameSave.everSave)
+        {
+            for (int i = 0; i < catHolder.Length; i++)
+            {
+                gameSave.stateSave[i] = catHolder[i].GetComponent<CatControll>().state;
+            }
+            for (int i = 0; i < catNum.Length; i++)
+            {
+                gameSave.catNum[i] = catNum[i];
+            }
+            for (int i = 0; i < catBuyYet.Length; i++)
+            {
+                gameSave.catBuyYet[i] = catBuyYet[i];
+            }
+            for (int i = 0; i < ItemHolder.instance.globleItems.Count; i++)
+            {
+                gameSave.item_id[i] = ItemHolder.instance.globleItems[i].id;
+                gameSave.item_Use[i] = ItemHolder.instance.globleItems[i].itemUse;
+                gameSave.item_amount[i] = ItemHolder.instance.globleItems[i].amount;
+            }
+        }
+        for (int i = 0; i < catHolder.Length; i++)
+        {
+            catHolder[i].GetComponent<CatControll>().state = gameSave.stateSave[i];
+        }
+        for (int i = 0; i < catNum.Length; i++)
+        {
+            catNum[i] = gameSave.catNum[i];
+        }
+        for (int i = 0; i < level.Length; i++)
+        {
+            level[i] = gameSave.level[i];
+        }
+        for (int i = 0; i < mission.Length; i++)
+        {
+            mission[i] = gameSave.mission[i];
+        }
+        for (int i = 0; i < catBuyYet.Length; i++)
+        {
+            if (i < 3)
+            {
+                catBuyYet[i] = true;
+            }
+            else
+            {
+                catBuyYet[i] = gameSave.catBuyYet[i];
+                if (!catBuyYet[i])
+                {
+                    nowUnlockCat = i;
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < ItemHolder.instance.globleItems.Count; i++)
+        {
+            ItemHolder.instance.globleItems[i].id = gameSave.item_id[i];
+            ItemHolder.instance.globleItems[i].itemUse = gameSave.item_Use[i];
+            ItemHolder.instance.globleItems[i].amount = gameSave.item_amount[i];
+        }
+        gold = gameSave.gold;
+        exp = gameSave.exp;
+        enegy = gameSave.enegy;
+        everTeach = gameSave.everTeach;
+    }
 }
 
 public class CatList

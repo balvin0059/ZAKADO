@@ -30,14 +30,17 @@ public class HookShoot : MonoBehaviour {
         {
             if (!TurnControll.instance.skillUseIng)
             {
-                if (coreBase.transform.GetComponent<CoreMove>().distance > 2.0f)
+                if (GlobalValue.instance.everTeach)
                 {
-                    GameObject b = Instantiate(hooker);
-                    b.transform.SetParent(hookHolder.transform, false);
-                    b.transform.position = coreBase.transform.Find("CorePos").position;
-                    b.transform.rotation = coreBase.transform.Find("CorePos").rotation;
-                    b.transform.GetComponent<HookFood>().speed = coreBase.transform.GetComponent<CoreMove>().distance;
-                    TurnControll.instance.turnState = TurnControll.TurnState.turnPlayerShoot;
+                    if (coreBase.transform.GetComponent<CoreMove>().distance > 2.0f)
+                    {
+                        GameObject b = Instantiate(hooker);
+                        b.transform.SetParent(hookHolder.transform, false);
+                        b.transform.position = coreBase.transform.Find("CorePos").position;
+                        b.transform.rotation = coreBase.transform.Find("CorePos").rotation;
+                        b.transform.GetComponent<HookFood>().speed = coreBase.transform.GetComponent<CoreMove>().distance;
+                        TurnControll.instance.turnState = TurnControll.TurnState.turnPlayerShoot;
+                    }
                 }
             }
         }

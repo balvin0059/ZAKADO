@@ -110,10 +110,12 @@ public class HookFood : MonoBehaviour {
         }
         if (n.tag == "food")
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.eatBubbleClip);
             n.GetComponent<FoodBubble>().isEat = true;
         }
         if (n.tag == "food_special")
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.eatBubbleClip);
             n.GetComponent<WebBubble>().isEat = true;
             if(n.GetComponent<WebBubble>().special_Type == 2)
             {

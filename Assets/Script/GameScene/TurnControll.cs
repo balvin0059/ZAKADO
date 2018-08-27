@@ -67,6 +67,7 @@ public class TurnControll : MonoBehaviour {
     public GameObject gaveWinPanel;
     public GameObject SkillPanel;
     public GameObject SkillnoEpPanel;
+    public GameObject TeachPanel;
     public Image PanelTopBg;
     public Image PanelBotBg;
     public Image PanelBg;
@@ -93,10 +94,19 @@ public class TurnControll : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_02);
         turnState = TurnState.turnPlayer;
         SpawnFood();
         playerTurnPanel.SetActive(true);
         BaseSet();
+        if (GlobalValue.instance.everTeach)
+        {
+            Destroy(TeachPanel.gameObject);
+        }
+        else
+        {
+            TeachPanel.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -210,26 +220,32 @@ public class TurnControll : MonoBehaviour {
 
     public void SkillUse(int id)
     {
-        skillUseIng = true;
-        skillIdUse = id;
-        skillText[0].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.name;
-        skillText[1].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives;
-        skillText[2].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_info;
-        skillText[3].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost.ToString();
-        SkillPanel.SetActive(true);
+        if (GlobalValue.instance.everTeach)
+        {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+            skillUseIng = true;
+            skillIdUse = id;
+            skillText[0].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.name;
+            skillText[1].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives;
+            skillText[2].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_info;
+            skillText[3].text = GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost.ToString();
+            SkillPanel.SetActive(true);
+        }
     }
     public void ConfirmSkillUse()
     {
-        if (GlobalValue.instance.playerEnegyPower >= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost)
+        if (PlayerControll.instance.playerNowEP >= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost)
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
             catskill.Skill(GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.uid, GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.type);
-            GlobalValue.instance.playerEnegyPower -= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost;
+            PlayerControll.instance.playerNowEP -= GlobalValue.instance.catHolder[skillIdUse].GetComponent<CatControll>().state.actives_cost;
             SkillPanel.SetActive(false);
             skillIdUse = 0;
             skillUseIng = false;
         }
         else
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
             SkillPanel.SetActive(false);
             SkillnoEpPanel.SetActive(true);
         }
@@ -237,38 +253,44 @@ public class TurnControll : MonoBehaviour {
 
     public void TurnOffSkillPanel()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         skillIdUse = 0;
         skillUseIng = false;
         SkillPanel.SetActive(false);
         SkillnoEpPanel.SetActive(false);
     }
 
+    #region 製造飼料相關
     public void SpawnFood()
     {
         isSpawnFood = true;
 
         int index = UnityEngine.Random.Range(0, 3);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
-        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
-        Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
-
-        for (int i = 0; i < 16; i++)
+        float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
+        for (int i = 0; i < 1 + GlobalValue.instance.itemSBubbleBufferAmount; i++)
         {
-             index = UnityEngine.Random.Range(0, 3);
-             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
-             area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+            index = UnityEngine.Random.Range(0, 3);
+            area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+            area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
+            Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+        }
+
+        for (int i = 0; i < 16 + GlobalValue.instance.itemNBubbleBufferAmount; i++)
+        {
+            index = UnityEngine.Random.Range(0, 3);
+            area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+            area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
 
             Instantiate(food[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
         }
     }
-
-    #region 製造飼料相關
     public void SpawnFood(int eType, int num)
     {
         for (int i = 0; i < num; i++)
         {
             float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
-            float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+            float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
 
             Instantiate(food[eType], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
         }
@@ -277,13 +299,14 @@ public class TurnControll : MonoBehaviour {
     {
         int index = UnityEngine.Random.Range(0, 3);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
-        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+        float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
         Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+
     }
     public void SpawnSpecialFood(int sType)
     {
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
-        float area_w = UnityEngine.Random.Range(-3.5f, -0.8f);
+        float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
         Instantiate(food_special[sType], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
     }
     public void ChangeFoodColor(int eType)
@@ -319,24 +342,30 @@ public class TurnControll : MonoBehaviour {
                 GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
             }
             GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
-            SaveLoadData.SaveData(GlobalValue.instance.gameSave);
+            GlobalValue.instance.SaveAllData();
         }
     }
     public void OnOver()
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         for (int i = 0; i < GlobalValue.instance.GetTypePower.Length; i++)
         {
             GlobalValue.instance.GetTypePower[i] = 0;
         }
         GlobalValue.instance.gameSave.gold = GlobalValue.instance.gold;
         GlobalValue.instance.gameSave.exp = GlobalValue.instance.exp;
-        SaveLoadData.SaveData(GlobalValue.instance.gameSave);
+        GlobalValue.instance.SaveAllData();
         Time.timeScale = 1f;
         turnResult = TurnResult.None;
         turnState = TurnState.None;
         SceneManager.LoadScene("MapScene");
     }
-
+    public void OnTeachPanel(GameObject g)
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+        GlobalValue.instance.everTeach = true;
+        Destroy(g.gameObject);
+    }
     #region 初始化
     void BaseSet()
     {

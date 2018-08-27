@@ -54,6 +54,7 @@
      <Compile Include="Assets\Effect\KY_effects\Script\ConGUI.cs" />
      <Compile Include="Assets\Effect\KY_effects\Script\Lighting.cs" />
      <Compile Include="Assets\Script\ButtonBack.cs" />
+     <Compile Include="Assets\Script\CutScene.cs" />
      <Compile Include="Assets\Script\GameSave.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
@@ -80,11 +81,16 @@
      <Compile Include="Assets\Script\GameScene\ShovelPower.cs" />
      <Compile Include="Assets\Script\GameScene\TurnControll.cs" />
      <Compile Include="Assets\Script\GlobalValue.cs" />
+     <Compile Include="Assets\Script\Item\GlobleItem.cs" />
+     <Compile Include="Assets\Script\Item\ItemAttribute.cs" />
+     <Compile Include="Assets\Script\Item\ItemHolder.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
      <Compile Include="Assets\Script\Map\MapScene.cs" />
      <Compile Include="Assets\Script\SaveLoadData.cs" />
      <Compile Include="Assets\Script\Shop\ShopScript.cs" />
+     <Compile Include="Assets\Script\SoundControll.cs" />
      <Compile Include="Assets\Script\Teammate\Teammate.cs" />
+     <Compile Include="Assets\Script\Upgrade\ItemScript.cs" />
      <Compile Include="Assets\Script\Upgrade\UpgradeScene.cs" />
      <None Include="Assets\Effect\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
  <Reference Include="Vuforia.UnityExtensions">
