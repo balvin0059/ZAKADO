@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class MapScene : MonoBehaviour {
     public Image Bg;
@@ -97,6 +98,13 @@ public class MapScene : MonoBehaviour {
         noenegyPanel.SetActive(false);
         LevelChosing = false;
         //or something ads
+    }
+    public void OnADButton()
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+        noenegyPanel.SetActive(false);
+        LevelChosing = false;
+        AdsScript.instance.ShowAd("rewardedVideo");
     }
     public void OnNextMission()
     {

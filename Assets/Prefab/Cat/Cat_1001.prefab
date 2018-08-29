@@ -160,8 +160,8 @@ MonoBehaviour:
     actives_info: "\u5275\u90205\u9846\u6C34\u5C6C\u6027\u98FC\u6599"
     actives_id: 1001
     actives_cost: 5
-    equiepItem: 1
-    equiepItem_id: 1006
+    equiepItem: 0
+    equiepItem_id: 0
   enemyToDmg: {fileID: 0}
   enemyType: 0
   updown: 1

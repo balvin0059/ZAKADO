@@ -126,6 +126,14 @@ public class TurnControll : MonoBehaviour {
         }
         if (turnState == TurnState.turnEnemyAttack)
         {
+            if(enemy.enemyGameobject.GetComponent<EnemyAttr>().limit <= 0)
+            {
+                enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");                
+            }
+            if (enemy.enemyGameobject.GetComponent<EnemyAttr>().bulletend <= 0)
+            {
+                turnState = TurnState.turnEnd;
+            }
             isSpawnFood = false;
         }
         if(turnState == TurnState.turnEnd)
@@ -135,6 +143,7 @@ public class TurnControll : MonoBehaviour {
                 if (!isSpawnFood)
                 {                    
                     SpawnFood();
+                    enemy.enemyGameobject.SendMessage("Reset");
                 }
                 StartCoroutine(TurnEnd());
             }
@@ -186,14 +195,7 @@ public class TurnControll : MonoBehaviour {
             enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
             onlyOneTime = false;
             turnState = TurnState.turnEnemyAttack;
-            Core.SendMessage("StartShoot");
         }
-        yield return new WaitForSeconds(5.0f);
-        enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");
-        yield return new WaitForSeconds(1f);
-        Core.SendMessage("StopShoot");
-        yield return new WaitForSeconds(1f);
-        turnState = TurnState.turnEnd;
     }
     IEnumerator TurnEnd()
     {

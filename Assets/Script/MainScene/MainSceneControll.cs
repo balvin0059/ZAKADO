@@ -18,6 +18,7 @@ public class MainSceneControll : MonoBehaviour {
     public Image indexCat;
     void Start()
     {
+        indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
         SoundControll.instance.toggle = GameObject.Find("soundOnOff").GetComponent<Toggle>();
         if (SoundControll.instance.bgmAudioSource.clip != SoundControll.Instance.Bg_01)
         {

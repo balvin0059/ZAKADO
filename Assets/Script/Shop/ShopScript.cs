@@ -14,29 +14,53 @@ public class ShopScript : MonoBehaviour {
     public Image catSprite;
     public Text catCost;
     public GameObject buttonSetActive;
+    public int catIndex;
+    public GameObject lockPanel;
+    public bool locking = false;
+    public GameObject buyButton;
+    public GameObject buyedText;
 	// Use this for initialization
 	void Start () {
-        if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
+        //if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
+        //{
+        //    catName.text = GlobalValue.instance.catHolder[GlobalValue.instance.nowUnlockCat].GetComponent<CatControll>().state.name;
+        //    catSprite.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.nowUnlockCat];
+        //    catCost.text = (GlobalValue.instance.nowUnlockCat * 1000).ToString();
+        //}
+    }
+    void Update()
+    {
+        catName.text = GlobalValue.instance.catHolder[gameObject.GetComponent<ScrollScript>().index+3].GetComponent<CatControll>().state.name;
+        catCost.text = ((gameObject.GetComponent<ScrollScript>().index+1) * 3000).ToString();
+        buyButton.SetActive(!GlobalValue.instance.catBuyYet[gameObject.GetComponent<ScrollScript>().index + 3]);
+        buyedText.SetActive(GlobalValue.instance.catBuyYet[gameObject.GetComponent<ScrollScript>().index + 3]);
+        if (!GlobalValue.instance.catBuyYet[gameObject.GetComponent<ScrollScript>().index + 2])
         {
-            catName.text = GlobalValue.instance.catHolder[GlobalValue.instance.nowUnlockCat].GetComponent<CatControll>().state.name;
-            catSprite.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.nowUnlockCat];
-            catCost.text = (GlobalValue.instance.nowUnlockCat * 1000).ToString();
+            lockPanel.SetActive(true);
+            locking = true;
+        }
+        else
+        {
+            lockPanel.SetActive(false);
+            locking = false;
         }
     }
     public void OnBuy()
     {
-
-        if (GlobalValue.instance.gold >= GlobalValue.instance.nowUnlockCat * 1000)
+        if (!locking)
         {
-            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-            string s = GlobalValue.instance.gold.ToString() + "->" + (GlobalValue.instance.gold - GlobalValue.instance.nowUnlockCat * 1000).ToString();
-            requierdCost.text = s;
-            confirmPanel.SetActive(true);
-        }
-        else
-        {
-            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
-            noMoneyPanel.SetActive(true);
+            if (GlobalValue.instance.gold >= GlobalValue.instance.nowUnlockCat * 1000)
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+                string s = GlobalValue.instance.gold.ToString() + "->" + (GlobalValue.instance.gold - GlobalValue.instance.nowUnlockCat * 1000).ToString();
+                requierdCost.text = s;
+                confirmPanel.SetActive(true);
+            }
+            else
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
+                noMoneyPanel.SetActive(true);
+            }
         }
     }
     public void OnConfirm()

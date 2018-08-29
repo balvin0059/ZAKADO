@@ -27,8 +27,12 @@ public class EnemyAttr : MonoBehaviour {
     public Image hpBar;
     public int maxHp;
     public Color c;
+    public int limitMax = 10;
+    public int limit = 10;
+    public int bulletend;
     // Use this for initialization
     void Start () {
+        bulletend = limitMax;
         maxHp = enemy.hp;
         e[2].sprite = GlobalValue.instance.elementHolder[(int)enemy.type-1];
     }
@@ -71,6 +75,7 @@ public class EnemyAttr : MonoBehaviour {
     }
     void Spawn()
     {
+        limit -= 1;
         int a = UnityEngine.Random.Range(0, 3);
         GameObject b = Instantiate(bullet);
         b.transform.SetParent(gameObject.transform.parent, false);
@@ -78,5 +83,10 @@ public class EnemyAttr : MonoBehaviour {
         b.GetComponent<EnemyBulletAttr>().dmg = enemy.attack;
         b.GetComponent<EnemyBulletAttr>().speed = enemy.speed;
         b.GetComponent<EnemyBulletAttr>().sid = enemy.skill_id;
+    }
+    void Reset()
+    {
+        limit = limitMax;
+        bulletend = limitMax;
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBulletAttr : MonoBehaviour {
+    public GameObject eff_star;
+    public GameObject enemy;
     public bool boss = false;
     public int bulletLive;
     public int dmg;
@@ -12,6 +14,7 @@ public class EnemyBulletAttr : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameObject.AddComponent<Ef_AutoRotate>().speed = 0.0f;
+        enemy = GameObject.FindWithTag("Enemy");
         if(sid == 3005)
         {
             boss = true;
@@ -84,24 +87,34 @@ public class EnemyBulletAttr : MonoBehaviour {
         if (n.tag == "Wall")
         {
             n.SendMessage("GetDamage", dmg);
+            Instantiate(eff_star, gameObject.transform.position, Quaternion.identity, transform.parent);
+            enemy.GetComponent<EnemyAttr>().bulletend -= 1;
             Destroy(gameObject);
         }
     }
-    void GetBulletDamage(int i)
+    public void GetBulletDamage(int i)
     {
         if (boss)
         {
             if (bulletLive > 0)
             {
                 bulletLive -= i;
+                Instantiate(eff_star, gameObject.transform.position, Quaternion.identity, transform.parent);
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.attackPoo);
             }
             else
             {
-                Destroy(gameObject);
+                Instantiate(eff_star, gameObject.transform.position, Quaternion.identity, transform.parent);
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.catchpooClip);
+                enemy.GetComponent<EnemyAttr>().bulletend -= 1;
+                Destroy(gameObject);                
             }
         } else
         {
-            Destroy(gameObject);
+            Instantiate(eff_star, gameObject.transform.position, Quaternion.identity, transform.parent);
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.catchpooClip);
+            enemy.GetComponent<EnemyAttr>().bulletend -= 1;
+            Destroy(gameObject);            
         }
     }
 }

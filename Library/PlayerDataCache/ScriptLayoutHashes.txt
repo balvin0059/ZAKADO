@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/tim/Desktop/Zakado_cheat.apk
+C:/Users/tim/Desktop/Zakado.apk
 SceneListBegin?
 Assets/Scene/MainScene.unity
 Assets/Scene/MapScene.unity
@@ -23,7 +23,8 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 31aaf521b3ef8699466676591ea0efd4 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 d6820c7ee1c11afbb0ec3a0e52dad479 Assembly-CSharp.dll:.CutScene
-f5eec6212fa4c3e05d54c45e8a2d05d1 Assembly-CSharp.dll:.SoundControll
+4c1aaedc086330707b9f03fe94531a0b Assembly-CSharp.dll:.SoundControll
+228d9694f8478f488deae46bb25adc0a Assembly-CSharp.dll:.ScrollScript
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -56,7 +57,7 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-d09b148f65a8176f511956db2778a7e7 Assembly-CSharp.dll:.CatControll
+309401867e7af7c31074d371a75f4312 Assembly-CSharp.dll:.CatControll
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -89,6 +90,7 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+6b0d82557f0a7c0c336c0e0afae94d20 Assembly-CSharp.dll:.ItemHolder
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 dbc29a6f2739d277c10da432d73adb6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -117,13 +119,13 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-4303f162a7392838c5def4818b738d94 Assembly-CSharp.dll:.ShopScript
+af0abb2d41c3790711582c6e5485d284 Assembly-CSharp.dll:.ShopScript
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-e7a1c5bd218ff30776ecac84e4b4118f Assembly-CSharp.dll:.EnemyAttr
+3aaf07130c68c7a225dc00b7a8cce0eb Assembly-CSharp.dll:.EnemyAttr
 eb7ca56a2bb6a82bfc60f1c306aa9086 Assembly-CSharp.dll:.Lighting
 44de636c288adc376b86700cc56b0340 Assembly-CSharp.dll:.TurnControll
-aa1a3e2509d7b2f17d342094cfcbe377 Assembly-CSharp.dll:.GlobalValue
+fed8a712a2e4e9582aa3ec761f7157a0 Assembly-CSharp.dll:.GlobalValue
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -204,11 +206,13 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 6c262580e458ec9d725f0cc179822c63 Assembly-CSharp.dll:.HookFood
+cc341d056f474a21bf21f7f3b89c59ff Assembly-CSharp.dll:.ItemAttribute
 dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.Ef_AutoRotate
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-d1019ee5a7c628485459709afb3a7afb Assembly-CSharp.dll:.EnemyBulletAttr
+b8059330a483073f0409ce38b5465486 Assembly-CSharp.dll:.EnemyBulletAttr
 7a0f48fb129e472af6552a847bfd13a8 Assembly-CSharp.dll:.Ef_Dself
+d9a57585ab291014e06e36535faf5343 Assembly-CSharp.dll:.ItemScript
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -250,6 +254,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 53cc07f0dde87012f0e95087078efec2 Assembly-CSharp.dll:.CoreMove
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 92e86f31a03473f43e68664013bde53e Assembly-CSharp.dll:.Ef_fade
+f3e2518f01813179bc58a77cea9ffb73 Assembly-CSharp.dll:.AdsScript
 26215f135eeb48d8fa1189498c107f6c Vuforia.UnityExtensions.dll:Vuforia.AnchorBehaviour
 0561521e336e270e6e5a9c61387cb838 Vuforia.UnityExtensions.dll:Vuforia.AnchorInputListenerBehaviour
 2e0fd93f459db951da0e2e94e2e33fb7 Vuforia.UnityExtensions.dll:Vuforia.AnchorStageBehaviour
@@ -287,7 +292,7 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 0793b323244ebf72eb54e938665afc07 Assembly-CSharp.dll:.FoodBubble
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ButtonBack
-e3ef28f169fdbe394c773c9c719ea2c6 Assembly-CSharp.dll:.UpgradeScene
+aca53db89f41c88b481fba62e33739f3 Assembly-CSharp.dll:.UpgradeScene
 26215f135eeb48d8fa1189498c107f6c Vuforia.UnityExtensions.dll:Vuforia.AnchorBehaviour
 0561521e336e270e6e5a9c61387cb838 Vuforia.UnityExtensions.dll:Vuforia.AnchorInputListenerBehaviour
 2e0fd93f459db951da0e2e94e2e33fb7 Vuforia.UnityExtensions.dll:Vuforia.AnchorStageBehaviour

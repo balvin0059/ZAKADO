@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f57d281aa62db4d897249ad2c10c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eff_star: {fileID: 1048598463021896, guid: 424779415fd4ddb458405ebb18205099, type: 2}
   boss: 0
   bulletLive: 0
   dmg: 0

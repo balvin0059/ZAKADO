@@ -133,9 +133,13 @@ MonoBehaviour:
     actives_info: "\u88FD\u9020\u4E00\u500B\u7DB2\u5B50\u6CE1\u6CE1"
     actives_id: 1003
     actives_cost: 5
+    equiepItem: 0
+    equiepItem_id: 0
   enemyToDmg: {fileID: 0}
   enemyType: 0
   updown: 1
+  isItem: 0
+  itemID: 0
 --- !u!114 &114557891476633026
 MonoBehaviour:
   m_ObjectHideFlags: 1

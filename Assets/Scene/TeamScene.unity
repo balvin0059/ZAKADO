@@ -2909,10 +2909,15 @@ Prefab:
     - target: {fileID: 114977478311078418, guid: 843700a8dad2ebe47b224ce8b3b63bb7,
         type: 2}
       propertyPath: fadeSpeed
-      value: 2.5
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 1010713656159818, guid: 843700a8dad2ebe47b224ce8b3b63bb7, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114970157202123724, guid: 843700a8dad2ebe47b224ce8b3b63bb7,
+        type: 2}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

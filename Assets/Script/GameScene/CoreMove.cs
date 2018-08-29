@@ -14,9 +14,7 @@ public class CoreMove : MonoBehaviour
     public GameObject CorePower;
     public GameObject shovelPower;
     bool move = false;
-    bool shoot = false;
     int bullet = 10;
-    float ShootTime = 0.0f;
 
     #region 玩家回合需要變數
     public RectTransform UGUICanvas;//宣告一個canvas
@@ -56,18 +54,6 @@ public class CoreMove : MonoBehaviour
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnEnemyAttack)
         {
             coreImage.sprite = shovel;
-            if (shoot)
-            {
-                coreImage.sprite = shovel;
-                ShootTime += Time.deltaTime;
-                if (ShootTime > 0.3f)
-                {
-                    GameObject s = Instantiate(shovelPower, new Vector2(gameObject.transform.position.x, -3.8f), Quaternion.identity);
-                    s.transform.SetParent(gameObject.transform.parent, false);
-                    s.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
-                    ShootTime = 0.0f;
-                }
-            }
         }
     }
     //移動核心
@@ -94,7 +80,6 @@ public class CoreMove : MonoBehaviour
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnEnemyAttack)
         {
             move = true;
-            shoot = true;
         }
     }
 
@@ -115,17 +100,6 @@ public class CoreMove : MonoBehaviour
         distance = 0;
         bullet = 10;
         move = false;
-        shoot = false;
-    }
-    //開始
-    void StartShoot()
-    {
-        shoot = true;
-    }
-    //停止
-    void StopShoot()
-    {
-        shoot = false;
     }
     #endregion
 
@@ -165,5 +139,18 @@ public class CoreMove : MonoBehaviour
         mousePos_1 = new Vector3(0, 0, 0);
         mousePos_2 = new Vector3(0, 0, 0);
         directionVector = new Vector2(0, 0);
+    }
+
+    public void OnTriggerEnter2D(Collider2D n)
+    {
+        if (n.tag == "EnemyBullet")
+        {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.catchpooClip);
+            if (PlayerControll.instance.playerNowEP < PlayerControll.instance.playerMaxEP)
+            {
+                PlayerControll.instance.playerNowEP += 1;
+            }
+            n.SendMessage("GetBulletDamage", 1);
+        }
     }
 }

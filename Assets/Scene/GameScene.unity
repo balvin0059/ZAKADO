@@ -1132,7 +1132,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -455}
-  m_SizeDelta: {x: 540, y: 50}
+  m_SizeDelta: {x: 2000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &329051915
 BoxCollider2D:
@@ -1157,7 +1157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 540, y: 50}
+  m_Size: {x: 2000, y: 50}
   m_EdgeRadius: 0
 --- !u!114 &329051916
 MonoBehaviour:
@@ -2071,7 +2071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -435}
+  m_AnchoredPosition: {x: 0, y: -445}
   m_SizeDelta: {x: 540, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &786934496
@@ -2130,7 +2130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 540, y: 15}
+  m_Size: {x: 540, y: 35}
   m_EdgeRadius: 0
 --- !u!1001 &811127804
 Prefab:
@@ -2381,7 +2381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -275, y: -220}
+  m_AnchoredPosition: {x: -286.5, y: -220}
   m_SizeDelta: {x: 15, y: 385}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &850636748
@@ -2440,7 +2440,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 480}
+  m_Size: {x: 35, y: 480}
   m_EdgeRadius: 0
 --- !u!1 &860961913
 GameObject:
@@ -3240,7 +3240,12 @@ Prefab:
     - target: {fileID: 114977478311078418, guid: 843700a8dad2ebe47b224ce8b3b63bb7,
         type: 2}
       propertyPath: fadeSpeed
-      value: 2.5
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114970157202123724, guid: 843700a8dad2ebe47b224ce8b3b63bb7,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 843700a8dad2ebe47b224ce8b3b63bb7, type: 2}
@@ -3699,9 +3704,10 @@ GameObject:
   - component: {fileID: 1281549041}
   - component: {fileID: 1281549042}
   - component: {fileID: 1281549043}
+  - component: {fileID: 1281549044}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: Shovel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3873,6 +3879,31 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!61 &1281549044
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1281549037}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 80, y: 150}
+  m_EdgeRadius: 0
 --- !u!1 &1295228834
 GameObject:
   m_ObjectHideFlags: 0
@@ -4864,7 +4895,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 540, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609161031
@@ -4923,7 +4954,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 540, y: 15}
+  m_Size: {x: 540, y: 35}
   m_EdgeRadius: 0
 --- !u!1 &1621942894
 GameObject:
@@ -5706,7 +5737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 275, y: -220}
+  m_AnchoredPosition: {x: 286.5, y: -220}
   m_SizeDelta: {x: 15, y: 385}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885488033
@@ -5765,7 +5796,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 480}
+  m_Size: {x: 35, y: 480}
   m_EdgeRadius: 0
 --- !u!1 &1898986788
 GameObject:

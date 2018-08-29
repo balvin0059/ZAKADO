@@ -177,6 +177,9 @@ MonoBehaviour:
   hpBar: {fileID: 114593362111938942}
   maxHp: 0
   c: {r: 1, g: 1, b: 1, a: 1}
+  limitMax: 1
+  limit: 1
+  bulletend: 0
 --- !u!114 &114152506166440596
 MonoBehaviour:
   m_ObjectHideFlags: 1
