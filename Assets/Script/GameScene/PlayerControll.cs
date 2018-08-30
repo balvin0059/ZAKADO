@@ -54,6 +54,7 @@ public class PlayerControll : MonoBehaviour {
         }
         else
         {
+            playerNowHp = 0;
             playerHp.fillAmount = 0f / (float)playerMaxHp;
             TurnControll.instance.turnState = TurnControll.TurnState.turnFinish;
             TurnControll.instance.turnResult = TurnControll.TurnResult.turnLose;

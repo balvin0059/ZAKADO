@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e2914651e7ed2f743b1e50fc1f4d0521
+timeCreated: 1535594184
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DFPYunW3-B5
+  fontNames:
+  - DFPYunW3-B5
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

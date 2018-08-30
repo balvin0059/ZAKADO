@@ -95,6 +95,7 @@ public class WebBubble : MonoBehaviour {
             if (n.tag == "food")
             {
                 n.GetComponent<FoodBubble>().isEat = true;
+                TurnControll.instance.ComboGet(1);
             }
         }
     }

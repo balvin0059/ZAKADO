@@ -108,28 +108,34 @@ public class MapScene : MonoBehaviour {
     }
     public void OnNextMission()
     {
-        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        missionHolder[GlobalValue.instance.nowMission].SetActive(false);
-        GlobalValue.instance.nowMission += 1;
-        Bg.sprite = bgCange[GlobalValue.instance.nowMission];
-        missionHolder[GlobalValue.instance.nowMission].SetActive(true);
-        backButton.SetActive(true);
-        if (GlobalValue.instance.nowMission == 1)
+        if (!LevelChosing)
         {
-            nextButton.SetActive(false);
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+            missionHolder[GlobalValue.instance.nowMission].SetActive(false);
+            GlobalValue.instance.nowMission += 1;
+            Bg.sprite = bgCange[GlobalValue.instance.nowMission];
+            missionHolder[GlobalValue.instance.nowMission].SetActive(true);
+            backButton.SetActive(true);
+            if (GlobalValue.instance.nowMission == 1)
+            {
+                nextButton.SetActive(false);
+            }
         }
     }
     public void OnBackMission()
     {
-        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        missionHolder[GlobalValue.instance.nowMission].SetActive(false);
-        GlobalValue.instance.nowMission -= 1;
-        Bg.sprite = bgCange[GlobalValue.instance.nowMission];
-        missionHolder[GlobalValue.instance.nowMission].SetActive(true);
-        nextButton.SetActive(true);
-        if (GlobalValue.instance.nowMission == 0)
+        if (!LevelChosing)
         {
-            backButton.SetActive(false);
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+            missionHolder[GlobalValue.instance.nowMission].SetActive(false);
+            GlobalValue.instance.nowMission -= 1;
+            Bg.sprite = bgCange[GlobalValue.instance.nowMission];
+            missionHolder[GlobalValue.instance.nowMission].SetActive(true);
+            nextButton.SetActive(true);
+            if (GlobalValue.instance.nowMission == 0)
+            {
+                backButton.SetActive(false);
+            }
         }
     }
     public void TurnOffPanel(GameObject g)

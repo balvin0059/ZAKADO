@@ -92,6 +92,11 @@ public class TurnControll : MonoBehaviour {
     public int skillIdUse;
     public bool skillUseIng = false;
 
+    public GameObject comboPanel;
+    public int comboNum;
+    public Text comboText;
+    public int clearAmount;
+    public GameObject clearPanel;
     // Use this for initialization
     void Start () {
         SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_02);
@@ -115,7 +120,10 @@ public class TurnControll : MonoBehaviour {
         MoveTopHolder();
         if (turnState == TurnState.turnAttack)
         {
+            comboPanel.SetActive(false);
+            clearPanel.SetActive(false);
             StartCoroutine(TurnAttack());
+            enemy.enemyGameobject.SendMessage("Reset");
         }
         if (turnState == TurnState.turnEnemy)
         {
@@ -128,10 +136,12 @@ public class TurnControll : MonoBehaviour {
         {
             if(enemy.enemyGameobject.GetComponent<EnemyAttr>().limit <= 0)
             {
-                enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");                
+                enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");
+                enemy.enemyGameobject.GetComponent<EnemyAttr>().limit = 0;
             }
             if (enemy.enemyGameobject.GetComponent<EnemyAttr>().bulletend <= 0)
             {
+                enemy.enemyGameobject.GetComponent<EnemyAttr>().bulletend = 0;
                 turnState = TurnState.turnEnd;
             }
             isSpawnFood = false;
@@ -142,8 +152,7 @@ public class TurnControll : MonoBehaviour {
             {
                 if (!isSpawnFood)
                 {                    
-                    SpawnFood();
-                    enemy.enemyGameobject.SendMessage("Reset");
+                    SpawnFood();                    
                 }
                 StartCoroutine(TurnEnd());
             }
@@ -208,13 +217,17 @@ public class TurnControll : MonoBehaviour {
         playerTurnPanel.SetActive(true);
         playerTurnTextPanel.SetActive(true);
         playerTurnPanel.SendMessage("AlphaReset");
-        playerTurnTextPanel.SendMessage("AlphaReset");
+        playerTurnTextPanel.SendMessage("AlphaReset");        
+        cat.cat_leader.GetComponent<CatControll>().clear = 1f;
+        cat.cat_teammate_0.GetComponent<CatControll>().clear = 1f;
+        cat.cat_teammate_1.GetComponent<CatControll>().clear = 1f;
         for (int i = 0; i < GlobalValue.instance.GetTypePower.Length; i++)
         {
             GlobalValue.instance.GetTypePower[i] = 0;
         }
         yield return new WaitForSeconds(2.0f);
     }
+
     void TurnEnemyAttack()
     {
         enemy.enemyGameobject.SendMessage("Spawn");
@@ -266,7 +279,8 @@ public class TurnControll : MonoBehaviour {
     public void SpawnFood()
     {
         isSpawnFood = true;
-
+        comboNum = 0;
+        clearAmount = 0;
         int index = UnityEngine.Random.Range(0, 3);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
         float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
@@ -283,7 +297,7 @@ public class TurnControll : MonoBehaviour {
             index = UnityEngine.Random.Range(0, 3);
             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
             area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
-
+            clearAmount += 1;
             Instantiate(food[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
         }
     }
@@ -293,7 +307,7 @@ public class TurnControll : MonoBehaviour {
         {
             float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
             float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
-
+            clearAmount += 1;
             Instantiate(food[eType], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
         }
     }
@@ -368,6 +382,26 @@ public class TurnControll : MonoBehaviour {
         GlobalValue.instance.everTeach = true;
         Destroy(g.gameObject);
     }
+
+    public void ComboGet(int a)
+    {
+        comboNum += a;
+        comboText.text = comboNum.ToString();
+        comboPanel.SetActive(true);
+        ClearCombo();
+    }
+    void ClearCombo()
+    {
+        if(comboNum == clearAmount)
+        {
+            comboPanel.SetActive(false);
+            clearPanel.SetActive(true);
+            cat.cat_leader.GetComponent<CatControll>().clear = 1.5f;
+            cat.cat_teammate_0.GetComponent<CatControll>().clear = 1.5f;
+            cat.cat_teammate_1.GetComponent<CatControll>().clear = 1.5f;
+            Instantiate(GlobalValue.instance.effectHolder[3], clearPanel.transform.position, Quaternion.identity, clearPanel.transform);
+        }
+    }
     #region 初始化
     void BaseSet()
     {
@@ -400,4 +434,6 @@ public class TurnControll : MonoBehaviour {
         return a + b + c;
     }
     #endregion
+
+
 }

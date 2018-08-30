@@ -16,6 +16,7 @@ public class CatControll : MonoBehaviour {
     public CatSkill catSkill = new CatSkill();
     public bool isItem;
     public int itemID;
+    public float clear = 1;
     void Awake()
     {
         LoadData();
@@ -52,23 +53,25 @@ public class CatControll : MonoBehaviour {
             {
                 if (updown)
                 {
-                    if (gameObject.transform.position.y < 1f)
+                    if (gameObject.transform.localPosition.y < 35f)
                     {
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(transform.position.x, 1f, 0.0f), 5 * Time.deltaTime);
+                        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, new Vector3(transform.localPosition.x, 35f, 0.0f), 340 * Time.deltaTime);
                     }
-                    else if (gameObject.transform.position.y == 1f)
+                    else if (gameObject.transform.localPosition.y >= 35f)
                     {
+                        gameObject.transform.localPosition = new Vector3(transform.localPosition.x, 35f, 0.0f);
                         updown = false;
                     }
                 }
                 else if (!updown)
                 {
-                    if (gameObject.transform.position.y > 0.6f)
+                    if (gameObject.transform.localPosition.y > 0f)
                     {
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(transform.position.x, 0.6f, 0.0f), 5 * Time.deltaTime);
+                        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, new Vector3(transform.localPosition.x, 0.0f, 0.0f), 340 * Time.deltaTime);
                     }
-                    else if (gameObject.transform.position.y == 0.6f)
+                    else if (gameObject.transform.localPosition.y <= 0f)
                     {
+                        gameObject.transform.localPosition = new Vector3(transform.localPosition.x, 0.0f, 0.0f);
                         TurnControll.instance.turnState = TurnControll.TurnState.turnAttacking;
                         CauseDamge(GlobalValue.instance.GetTypePower[(int)state.type - 1]);
                         StartCoroutine(AttackMove());
@@ -105,7 +108,7 @@ public class CatControll : MonoBehaviour {
         {
             m = elementType.TypeResult(state.type, enemyType);
         }
-        enemyToDmg.SendMessage("GetDamage", (int)(state.attack * m * gp ));
+        enemyToDmg.SendMessage("GetDamage", (int)(state.attack * m * gp * clear));
         enemyToDmg.SendMessage("GetElement", ((int)state.type-1));
     }
     public void LoadData()

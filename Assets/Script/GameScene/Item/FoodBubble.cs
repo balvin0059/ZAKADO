@@ -34,6 +34,7 @@ public class FoodBubble : MonoBehaviour {
         if (isEat)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(-2f, 3.85f,0.0f), 8 * Time.deltaTime);
+            Destroy(gameObject.GetComponent<CircleCollider2D>());
             Destroy(bubble.gameObject);
         }
     }

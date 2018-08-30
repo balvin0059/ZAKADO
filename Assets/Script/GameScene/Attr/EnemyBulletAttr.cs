@@ -19,6 +19,10 @@ public class EnemyBulletAttr : MonoBehaviour {
         {
             boss = true;
             bulletLive = 10;
+        }else if (sid == 3011)
+        {
+            boss = true;
+            bulletLive = 20;
         }
     }
 	
@@ -99,6 +103,7 @@ public class EnemyBulletAttr : MonoBehaviour {
             if (bulletLive > 0)
             {
                 bulletLive -= i;
+                PlayerControll.instance.playerNowEP += 1;
                 Instantiate(eff_star, gameObject.transform.position, Quaternion.identity, transform.parent);
                 SoundControll.Instance.PlayEffecSound(SoundControll.Instance.attackPoo);
             }

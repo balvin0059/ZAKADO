@@ -92,40 +92,43 @@ public class UpgradeScene : MonoBehaviour {
     }
     public void OnUpgrade()
     {
-        if (!skillUseIng)
+        if (!itemSelect)
         {
-            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
             if (!skillUseIng)
             {
-                if (GlobalValue.instance.exp >= exprequired)
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+                if (!skillUseIng)
                 {
-                    SoundControll.Instance.PlayEffecSound(SoundControll.Instance.upgradeClip);
-                    GlobalValue.instance.exp -= exprequired;
-                    GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv += 1;
-                    lvText.text = "Lv:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv.ToString("00");
-                    GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.hp += 50;
-                    hpText.text = "HP:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.hp.ToString();
-                    GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.attack += 10;
-                    atkText.text = "攻擊:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.attack.ToString();
-                    exprequired = 500 + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv * 100;
-                    if (GlobalValue.instance.exp > exprequired)
+                    if (GlobalValue.instance.exp >= exprequired)
                     {
-                        expText.color = Color.black;
-                        expText.text = exprequired.ToString();
+                        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.upgradeClip);
+                        GlobalValue.instance.exp -= exprequired;
+                        GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv += 1;
+                        lvText.text = "Lv:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv.ToString("00");
+                        GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.hp += 50;
+                        hpText.text = "HP:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.hp.ToString();
+                        GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.attack += 10;
+                        atkText.text = "攻擊:" + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.attack.ToString();
+                        exprequired = 500 + GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state.lv * 100;
+                        if (GlobalValue.instance.exp > exprequired)
+                        {
+                            expText.color = Color.black;
+                            expText.text = exprequired.ToString();
+                        }
+                        else
+                        {
+                            expText.color = Color.red;
+                            expText.text = exprequired.ToString();
+                        }
+                        GameObject effect = Instantiate(GlobalValue.instance.effectHolder[3]);
+                        effect.transform.SetParent(catImage.gameObject.transform, false);
+                        GlobalValue.instance.gameSave.stateSave[indexCat] = GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state;
+                        GlobalValue.instance.SaveAllData();
                     }
                     else
                     {
-                        expText.color = Color.red;
-                        expText.text = exprequired.ToString();
+                        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
                     }
-                    GameObject effect = Instantiate(GlobalValue.instance.effectHolder[3]);
-                    effect.transform.SetParent(catImage.gameObject.transform, false);
-                    GlobalValue.instance.gameSave.stateSave[indexCat] = GlobalValue.instance.catHolder[indexCat].GetComponent<CatControll>().state;
-                    GlobalValue.instance.SaveAllData();
-                }
-                else
-                {
-                    SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
                 }
             }
         }

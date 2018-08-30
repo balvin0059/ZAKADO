@@ -64,6 +64,10 @@ public class EnemyAttr : MonoBehaviour {
             TurnControll.instance.turnState = TurnControll.TurnState.turnFinish;
             TurnControll.instance.turnResult = TurnControll.TurnResult.turnWin;
         }
+        if(limit <= 0)
+        {
+            TurnEnemyAttackEnd();
+        }
     }
     void TurnEnemyAttack()
     {
@@ -75,14 +79,17 @@ public class EnemyAttr : MonoBehaviour {
     }
     void Spawn()
     {
-        limit -= 1;
-        int a = UnityEngine.Random.Range(0, 3);
-        GameObject b = Instantiate(bullet);
-        b.transform.SetParent(gameObject.transform.parent, false);
-        b.transform.localPosition = genPositions[a].localPosition;
-        b.GetComponent<EnemyBulletAttr>().dmg = enemy.attack;
-        b.GetComponent<EnemyBulletAttr>().speed = enemy.speed;
-        b.GetComponent<EnemyBulletAttr>().sid = enemy.skill_id;
+        if (limit > 0)
+        {
+            limit -= 1;
+            int a = UnityEngine.Random.Range(0, 3);
+            GameObject b = Instantiate(bullet);
+            b.transform.SetParent(gameObject.transform.parent, false);
+            b.transform.localPosition = genPositions[a].localPosition;
+            b.GetComponent<EnemyBulletAttr>().dmg = enemy.attack;
+            b.GetComponent<EnemyBulletAttr>().speed = enemy.speed;
+            b.GetComponent<EnemyBulletAttr>().sid = enemy.skill_id;
+        }
     }
     void Reset()
     {
