@@ -51,8 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Effect\KY_effects\Script\ConGUI.cs" />
-     <Compile Include="Assets\Effect\KY_effects\Script\Lighting.cs" />
      <Compile Include="Assets\Script\AdsScript.cs" />
      <Compile Include="Assets\Script\ButtonBack.cs" />
      <Compile Include="Assets\Script\CutScene.cs" />
@@ -87,14 +85,18 @@
      <Compile Include="Assets\Script\Item\ItemHolder.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
      <Compile Include="Assets\Script\Map\MapScene.cs" />
+     <Compile Include="Assets\Script\MissionSystem.cs" />
+     <Compile Include="Assets\Script\Quest\QuestAttr.cs" />
+     <Compile Include="Assets\Script\Quest\QuestHolder.cs" />
      <Compile Include="Assets\Script\SaveLoadData.cs" />
+     <Compile Include="Assets\Script\ScrollScript.cs" />
      <Compile Include="Assets\Script\Shop\ShopScript.cs" />
      <Compile Include="Assets\Script\SoundControll.cs" />
      <Compile Include="Assets\Script\Teammate\Teammate.cs" />
      <Compile Include="Assets\Script\Upgrade\ItemScript.cs" />
      <Compile Include="Assets\Script\Upgrade\UpgradeScene.cs" />
-     <Compile Include="Assets\TestScript\ScrollScript.cs" />
-     <None Include="Assets\Effect\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
+     <None Include="Assets\Effect\MagicEffectsPackFree\ReadMe.txt" />
+     <None Include="Assets\TexturePackerImporter\Readme.txt" />
  <Reference Include="Vuforia.UnityExtensions">
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>

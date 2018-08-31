@@ -30,6 +30,7 @@ public class EnemyAttr : MonoBehaviour {
     public int limitMax = 10;
     public int limit = 10;
     public int bulletend;
+    bool dead = false;
     // Use this for initialization
     void Start () {
         bulletend = limitMax;
@@ -61,6 +62,11 @@ public class EnemyAttr : MonoBehaviour {
                 e[n].color = c;
             }
             hpBar.fillAmount = 0f / (float)maxHp;
+            if (!dead)
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.enemyDead);
+                dead = true;
+            }
             TurnControll.instance.turnState = TurnControll.TurnState.turnFinish;
             TurnControll.instance.turnResult = TurnControll.TurnResult.turnWin;
         }

@@ -71,17 +71,10 @@ public class ShopScript : MonoBehaviour {
         GlobalValue.instance.gameSave.catBuyYet[GlobalValue.instance.nowUnlockCat] = GlobalValue.instance.catBuyYet[GlobalValue.instance.nowUnlockCat];
         GlobalValue.instance.nowUnlockCat += 1;
         GlobalValue.instance.gameSave.nowUnlockCat = GlobalValue.instance.nowUnlockCat;
-        if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
-        {
-            catName.text = GlobalValue.instance.catHolder[GlobalValue.instance.nowUnlockCat].GetComponent<CatControll>().state.name;
-            catSprite.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.nowUnlockCat];
-            catCost.text = (GlobalValue.instance.nowUnlockCat * 1000).ToString();
-        }else if (GlobalValue.instance.nowUnlockCat >= GlobalValue.instance.catHolder.Length)
+        if (GlobalValue.instance.nowUnlockCat >= GlobalValue.instance.catHolder.Length)
         {
             catName.text = null;
             catName.gameObject.SetActive(false);
-            catSprite.sprite = null;
-            catSprite.gameObject.SetActive(false);
             catCost.text = null;
             catCost.gameObject.SetActive(false);
             buttonSetActive.SetActive(false);

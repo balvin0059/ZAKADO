@@ -8,12 +8,11 @@ public class GlobleItem {
     public int id;
     public bool itemUse;
     public int amount;
+    public int order;
 
     public GlobleItem(ItemAttribute itemAttribute, int id)
     {
         this.itemAttribute = itemAttribute;
         this.id = id;
     }
-
-
 }

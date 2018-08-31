@@ -71,6 +71,8 @@ public class WebBubble : MonoBehaviour {
             {
                 int sum = PlayerControll.instance.playerNowHp += PlayerControll.instance.playerMaxHp / 10;
                 PlayerControll.instance.playerNowHp = (sum >= PlayerControll.instance.playerMaxHp) ? PlayerControll.instance.playerMaxHp : sum;
+                Instantiate(GlobalValue.instance.effectHolder[5], transform.position, Quaternion.identity, transform.parent);
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.getHeart);
                 Destroy(gameObject);
             }
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(-1.62f, -4.55f, 0.0f), 8 * Time.deltaTime);

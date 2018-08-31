@@ -28,6 +28,6 @@ public class ItemHolder : MonoBehaviour {
 
     [Header("Item Holder")]
     public List<GlobleItem> globleItems = new List<GlobleItem>();
-
+    public int amount;
 
 }

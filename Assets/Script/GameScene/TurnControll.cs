@@ -217,7 +217,7 @@ public class TurnControll : MonoBehaviour {
         playerTurnPanel.SetActive(true);
         playerTurnTextPanel.SetActive(true);
         playerTurnPanel.SendMessage("AlphaReset");
-        playerTurnTextPanel.SendMessage("AlphaReset");        
+        playerTurnTextPanel.SendMessage("AlphaReset");
         cat.cat_leader.GetComponent<CatControll>().clear = 1f;
         cat.cat_teammate_0.GetComponent<CatControll>().clear = 1f;
         cat.cat_teammate_1.GetComponent<CatControll>().clear = 1f;
@@ -281,18 +281,20 @@ public class TurnControll : MonoBehaviour {
         isSpawnFood = true;
         comboNum = 0;
         clearAmount = 0;
+        int rForFood = UnityEngine.Random.Range(15, 20);
+        int rForSFood = UnityEngine.Random.Range(1, 3);
         int index = UnityEngine.Random.Range(0, 3);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
         float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
-        for (int i = 0; i < 1 + GlobalValue.instance.itemSBubbleBufferAmount; i++)
+        for (int i = 0; i < rForSFood + GlobalValue.instance.itemSBubbleBufferAmount; i++)
         {
             index = UnityEngine.Random.Range(0, 3);
             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
             area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
             Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
         }
-
-        for (int i = 0; i < 16 + GlobalValue.instance.itemNBubbleBufferAmount; i++)
+        
+        for (int i = 0; i < rForFood + GlobalValue.instance.itemNBubbleBufferAmount; i++)
         {
             index = UnityEngine.Random.Range(0, 3);
             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
@@ -342,10 +344,12 @@ public class TurnControll : MonoBehaviour {
         Time.timeScale = 0f;
         if(t == TurnResult.turnLose)
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youLose);
             gaveLosePanel.SetActive(true);
         }
         if(t == TurnResult.turnWin)
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youWin);
             expText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp.ToString();
             GlobalValue.instance.exp += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp;
             goldText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
@@ -358,7 +362,9 @@ public class TurnControll : MonoBehaviour {
                 GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
             }
             GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
+            CheckQuest();
             GlobalValue.instance.SaveAllData();
+            
         }
     }
     public void OnOver()
@@ -394,12 +400,36 @@ public class TurnControll : MonoBehaviour {
     {
         if(comboNum == clearAmount)
         {
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.clearClip);
             comboPanel.SetActive(false);
             clearPanel.SetActive(true);
             cat.cat_leader.GetComponent<CatControll>().clear = 1.5f;
             cat.cat_teammate_0.GetComponent<CatControll>().clear = 1.5f;
             cat.cat_teammate_1.GetComponent<CatControll>().clear = 1.5f;
             Instantiate(GlobalValue.instance.effectHolder[3], clearPanel.transform.position, Quaternion.identity, clearPanel.transform);
+        }
+    }
+    void CheckQuest()
+    {
+        if(cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Fire &&  cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Fire &&  cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Fire)
+        {
+            QuestHolder.instance.quest[0].questAttr.isComplete = true;
+        }
+        if (cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Water && cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Water && cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Water)
+        {
+            QuestHolder.instance.quest[1].questAttr.isComplete = true;
+        }
+        if (cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Lighting && cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Lighting && cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Lighting)
+        {
+            QuestHolder.instance.quest[2].questAttr.isComplete = true;
+        }
+        if(GlobalValue.instance.nowLevel == 5)
+        {
+            QuestHolder.instance.quest[3].questAttr.isComplete = true;
+        }
+        if (GlobalValue.instance.nowLevel == 11)
+        {
+            QuestHolder.instance.quest[4].questAttr.isComplete = true;
         }
     }
     #region 初始化

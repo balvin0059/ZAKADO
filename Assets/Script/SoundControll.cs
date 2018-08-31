@@ -39,6 +39,13 @@ public class SoundControll : MonoBehaviour {
     public AudioClip catchpooClip;//升級音效
     public AudioClip cantdoClip;
     public AudioClip attackPoo;
+    public AudioClip getFoodinBot;
+    public AudioClip getHeart;
+    public AudioClip enemyDead;
+    public AudioClip questComplete;
+    public AudioClip youLose;
+    public AudioClip youWin;
+    public AudioClip clearClip;
 
     public AudioClip Bg_01;
     public AudioClip Bg_02;

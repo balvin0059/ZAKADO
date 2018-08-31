@@ -1,0 +1,574 @@
+fileFormatVersion: 2
+guid: 393d4a51cd9acb548b643dd5d1e67c0c
+timeCreated: 1535702942
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MyUIPanelAndButton
+    21300002: A_mu03bg
+    21300004: APP_logo
+    21300006: B_mu03bg
+    21300008: cat_s_01
+    21300010: cat_s_02
+    21300012: cat_s_03
+    21300014: D7_01
+    21300016: D7_02
+    21300018: D7_03
+    21300020: menu_01
+    21300022: menu_02
+    21300024: menu_03
+    21300026: PHP
+    21300028: Prop_bg1
+    21300030: Prop_bg2
+    21300032: Prop_bg3
+    21300034: Prop_bg4
+    21300036: Prop_bg5
+    21300038: Prop_bg6-1
+    21300040: Prop_bg6-2
+    21300042: Prop_bg6-3
+    21300044: Prop_bg6-4
+    21300046: Prop_bg6-5
+    21300048: Prop_bg7-1
+    21300050: Prop_bg7-2
+    21300052: Prop_bg7-3
+    21300054: Prop_bg7-4
+    21300056: Prop_bg7-5
+    21300058: Prop_bg8-1
+    21300060: Prop_bg8-2
+    21300062: Prop_bg8-3
+    21300064: Prop_bg8-4
+    21300066: Prop_bg8-5
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: A_mu03bg
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1220
+        width: 551
+        height: 485
+      alignment: 9
+      pivot: {x: 0.50544465, y: 0.48659793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: APP_logo
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 1582
+        width: 123
+        height: 123
+      alignment: 9
+      pivot: {x: 0.50406504, y: 0.49593496}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: B_mu03bg
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 1467
+        width: 927
+        height: 580
+      alignment: 9
+      pivot: {x: 0.50053936, y: 0.49913794}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cat_s_01
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 918
+        width: 301
+        height: 300
+      alignment: 9
+      pivot: {x: 0.5016611, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cat_s_02
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 1165
+        width: 301
+        height: 300
+      alignment: 9
+      pivot: {x: 0.5016611, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cat_s_03
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 1165
+        width: 301
+        height: 300
+      alignment: 9
+      pivot: {x: 0.49833888, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D7_01
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1933
+        width: 1080
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49122807}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D7_02
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1820
+        width: 1080
+        height: 111
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4864865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D7_03
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1707
+        width: 1080
+        height: 111
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4864865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_01
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 1097
+        width: 350
+        height: 303
+      alignment: 9
+      pivot: {x: 0.50142854, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_02
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 1402
+        width: 352
+        height: 303
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_03
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 1162
+        width: 351
+        height: 303
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PHP
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 1487
+        width: 87
+        height: 93
+      alignment: 9
+      pivot: {x: 0.51724136, y: 0.5107527}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg1
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1038
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg2
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 983
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg3
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 980
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg4
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 915
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg5
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 856
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg6-1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 736
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg6-2
+      rect:
+        serializedVersion: 2
+        x: 1473
+        y: 983
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg6-3
+      rect:
+        serializedVersion: 2
+        x: 1685
+        y: 983
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg6-4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 554
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg6-5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 372
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg7-1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 190
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg7-2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 8
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg7-3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 674
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg7-4
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 492
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg7-5
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 310
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg8-1
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 128
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg8-2
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 674
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg8-3
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 492
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg8-4
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 310
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Prop_bg8-5
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 128
+        width: 210
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

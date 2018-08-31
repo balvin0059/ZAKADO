@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Item Attribute")]
+[CreateAssetMenu (menuName = "Creat GameStuff/ Item Attribute")]
 public class ItemAttribute : ScriptableObject
 {
     public string Desciption;

@@ -22,4 +22,9 @@ public class GameSave
     public int[] item_id = new int[8];
     public bool[] item_Use = new bool[8];
     public int[] item_amount = new int[8];
+    public int[] itemOrder = new int[8];
+    public int item_all;
+
+    public int[] quest_id = new int[5];
+    public bool[] quest_complete = new bool[5];
 }

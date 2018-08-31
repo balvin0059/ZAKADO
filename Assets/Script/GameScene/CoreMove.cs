@@ -14,7 +14,6 @@ public class CoreMove : MonoBehaviour
     public GameObject CorePower;
     public GameObject shovelPower;
     bool move = false;
-    int bullet = 10;
 
     #region 玩家回合需要變數
     public RectTransform UGUICanvas;//宣告一個canvas
@@ -29,11 +28,10 @@ public class CoreMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bulletText.text = bullet.ToString();
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer)
         {
-            tipLine.transform.localPosition = new Vector3(1, 15*distance, 1);
-            tipLine.transform.localScale = new Vector3(1, 2*distance, 1);
+            tipLine.transform.localPosition = new Vector3(0, 20*distance, 0);
+            tipLine.transform.localScale = new Vector3(1.2f, 1.5f*distance, 1);
             coreImage.sprite = foodPlate;
             Hook();
         }
@@ -98,7 +96,6 @@ public class CoreMove : MonoBehaviour
     {
         z = 0;
         distance = 0;
-        bullet = 10;
         move = false;
     }
     #endregion

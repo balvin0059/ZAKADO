@@ -21,11 +21,11 @@ public class FoodBubble : MonoBehaviour {
         {
             GlobalValue.instance.GetTypePower[elemenyType] += 1;
             Instantiate(ef_star, gameObject.transform.position, Quaternion.identity, gameObject.transform.parent);
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.getFoodinBot);
             Destroy(gameObject);
         }
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnEnemy)
         {
-            Instantiate(ef_star, gameObject.transform);
             Destroy(gameObject);
         }
     }

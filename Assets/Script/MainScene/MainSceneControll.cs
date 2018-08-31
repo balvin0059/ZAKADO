@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class MainSceneControll : MonoBehaviour {
     public bool OnPaneling;
     public GameObject noCatPanel;
+    public bool OnQuestIng;
+    public GameObject questPanel;
     public Text goldText;
     public Text expText;
     public Text enegyText;
@@ -16,6 +18,8 @@ public class MainSceneControll : MonoBehaviour {
     public DateTime dateTime_next;
     public TimeSpan timeSpan;
     public Image indexCat;
+    public GameObject enegyPanelMax;
+    public GameObject enegyPanelCount;
     void Start()
     {
         indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
@@ -25,6 +29,7 @@ public class MainSceneControll : MonoBehaviour {
             SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_01);
         }
     }
+
     void Update()
     {
         //indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
@@ -32,48 +37,59 @@ public class MainSceneControll : MonoBehaviour {
         goldText.text = GlobalValue.instance.gold.ToString();
         if(GlobalValue.instance.enegy < GlobalValue.instance.maxEnegy)
         {
+            enegyPanelMax.gameObject.SetActive(false);
             enegyText.text = GlobalValue.instance.enegy.ToString() +"/"+ GlobalValue.instance.maxEnegy.ToString();
-            enegyTimeText.gameObject.SetActive(true);
+            enegyPanelCount.gameObject.SetActive(true);
             enegyTimeText.text = (GlobalValue.instance.timeSpan.Minutes % 5).ToString() + ":" + GlobalValue.instance.timeSpan.Seconds.ToString("00");
         }
         else
         {
             enegyText.text = GlobalValue.instance.enegy.ToString();
-            enegyTimeText.gameObject.SetActive(false);
+            enegyPanelCount.gameObject.SetActive(false);
+            enegyPanelMax.gameObject.SetActive(true);
         }
         
     }
 
     #region 按鈕
-    public void ToggleEvent()
+    public void ToggleEvent()//音樂控制關閉
     {
         SoundControll.instance.SwitchMuteState(SoundControll.instance.toggle.isOn);
     }
-    public void OnAdventure()
+    public void OnAdventure()//冒險按鈕
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        if (!OnPaneling)
+        if (!OnQuestIng)
         {
-            GetLevelSchedule(GlobalValue.instance.gameSave.level);
-            SceneManager.LoadScene("MapScene");
+            if (!OnPaneling)
+            {
+                GetLevelSchedule(GlobalValue.instance.gameSave.level);
+                SceneManager.LoadScene("MapScene");
+            }
         }
     }
-    public void OnTeammate()
+    public void OnTeammate()//組隊按鈕
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        if (!OnPaneling)
+        if (!OnQuestIng)
         {
-            SceneManager.LoadScene("TeamScene");
+            if (!OnPaneling)
+            {
+                SceneManager.LoadScene("TeamScene");
+            }
         }
     }
     public void OnUpgrade()
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        if (!OnPaneling)
+        if (!OnQuestIng)
         {
-            SceneManager.LoadScene("UpgradeScene");
+            if (!OnPaneling)
+            {
+                SceneManager.LoadScene("UpgradeScene");
+            }
         }
-    }
+    }//強化按鈕
     void GetLevelSchedule(bool[] b)
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
@@ -85,24 +101,73 @@ public class MainSceneControll : MonoBehaviour {
     public void OnShop()
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
+        if (!OnQuestIng)
         {
+            if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
+            {
 
-            SceneManager.LoadScene("ShopScene");
+                SceneManager.LoadScene("ShopScene");
+            }
+            else
+            {
+                noCatPanel.SetActive(true);
+                OnPaneling = true;
+            }
         }
-        else
-        {
-            noCatPanel.SetActive(true);
-            OnPaneling = true;
-        }
-    }
-    public void OnClose()
+    }//商店按鈕
+    public void OnClose(GameObject g)
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        noCatPanel.SetActive(false);
+        g.SetActive(false);
         OnPaneling = false;
+        OnQuestIng = false;
+    }//關閉面板事件
+    public void OnQuest()//任務按鈕
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+        questPanel.SetActive(true);
+        CheckquestComplete();
+        OnQuestIng = true;
     }
     #endregion
+    public void OnReward(int id)//帶入MissionID
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.questComplete);
+        ItemHolder.instance.amount += 1;
+        ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].order = ItemHolder.instance.amount;
+        ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].amount += 1;
+        QuestHolder.instance.quest[id].isComplete = true;
+        QuestHolder.instance.quest[id].questAttr.isReward = true;
+        questRewardActive[id].SetActive(false);
+        questClearActive[id].SetActive(true);
+
+    }
+
+    [Header("Quest Holder")]
+    public GameObject[] questRewardActive;
+    public GameObject[] questClearActive;
+    void CheckquestComplete()
+    {
+        for(int i = 0; i < QuestHolder.instance.quest.Count; i++)
+        {
+            if(QuestHolder.instance.quest[i].questAttr.isComplete)
+            {
+                if(QuestHolder.instance.quest[i].questAttr.isReward)
+                {
+                    if (QuestHolder.instance.quest[i].isComplete)
+                    {
+                        questClearActive[i].SetActive(true);
+                    }
+                }
+                else if (!QuestHolder.instance.quest[i].questAttr.isReward)
+                {
+                    questRewardActive[i].SetActive(true);
+                }
+            }
+        }
+    }
+
+
     #region Test
     public void ResetSave()
     {

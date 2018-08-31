@@ -170,29 +170,36 @@ public class GlobalValue : MonoBehaviour {
         for (int i = 0; i < catHolder.Length; i++)
         {
             gameSave.stateSave[i] = catHolder[i].GetComponent<CatControll>().state;
-        }
+        }//存貓咪資料
         for (int i = 0; i < catNum.Length; i++)
         {
             gameSave.catNum[i] = catNum[i];
-        }
+        }//存貓咪隊伍編排資料
         for (int i = 0; i < catBuyYet.Length; i++)
         {
             gameSave.catBuyYet[i] = catBuyYet[i];
-        }
+        }//存以購買貓咪資料
         for (int i = 0; i < level.Length; i++)
         {
             gameSave.level[i] = level[i];
-        }
+        }//存現在已完成關卡資料
         for (int i = 0; i < mission.Length; i++)
         {
             gameSave.mission[i] = mission[i];
-        }
-        for(int i = 0; i < ItemHolder.instance.globleItems.Count; i++)
+        }//存現在已完成章節資料
+        for (int i = 0; i < ItemHolder.instance.globleItems.Count; i++)
         {
             gameSave.item_id[i] = ItemHolder.instance.globleItems[i].id;
             gameSave.item_Use[i] = ItemHolder.instance.globleItems[i].itemUse;
             gameSave.item_amount[i] = ItemHolder.instance.globleItems[i].amount;
-        }
+            gameSave.itemOrder[i] = ItemHolder.instance.globleItems[i].order;
+        }//存現有道具資料
+        for(int i = 0; i < QuestHolder.instance.quest.Count; i++)
+        {
+            gameSave.quest_complete[i] = QuestHolder.instance.quest[i].isComplete;
+            gameSave.quest_id[i] = QuestHolder.instance.quest[i].id;
+        }//存現在任務資料
+        gameSave.item_all = ItemHolder.instance.amount;
         gameSave.gold = gold;
         gameSave.exp = exp;
         gameSave.recordTime = DateTime.Now;
@@ -201,7 +208,7 @@ public class GlobalValue : MonoBehaviour {
         gameSave.everSave = true;
 
         SaveLoadData.SaveData(gameSave);
-    }
+    }//存檔
     public void LoadAllData()
     {
         gameSave = SaveLoadData.LoadData();
@@ -224,7 +231,13 @@ public class GlobalValue : MonoBehaviour {
                 gameSave.item_id[i] = ItemHolder.instance.globleItems[i].id;
                 gameSave.item_Use[i] = ItemHolder.instance.globleItems[i].itemUse;
                 gameSave.item_amount[i] = ItemHolder.instance.globleItems[i].amount;
+                gameSave.itemOrder[i] = ItemHolder.instance.globleItems[i].order;
             }
+            for (int i = 0; i < QuestHolder.instance.quest.Count; i++)
+            {
+                gameSave.quest_complete[i] = QuestHolder.instance.quest[i].isComplete;
+                gameSave.quest_id[i] = QuestHolder.instance.quest[i].id;
+            }//存現在任務資料
         }
         for (int i = 0; i < catHolder.Length; i++)
         {
@@ -263,12 +276,19 @@ public class GlobalValue : MonoBehaviour {
             ItemHolder.instance.globleItems[i].id = gameSave.item_id[i];
             ItemHolder.instance.globleItems[i].itemUse = gameSave.item_Use[i];
             ItemHolder.instance.globleItems[i].amount = gameSave.item_amount[i];
+            ItemHolder.instance.globleItems[i].order = gameSave.itemOrder[i];
         }
+        for (int i = 0; i < QuestHolder.instance.quest.Count; i++)
+        {
+            QuestHolder.instance.quest[i].isComplete = gameSave.quest_complete[i];
+            QuestHolder.instance.quest[i].id = gameSave.quest_id[i];
+        }//讀取現在任務資料
+        ItemHolder.instance.amount = gameSave.item_all;
         gold = gameSave.gold;
         exp = gameSave.exp;
         enegy = gameSave.enegy;
         everTeach = gameSave.everTeach;
-    }
+    }//讀檔
 }
 
 public class CatList

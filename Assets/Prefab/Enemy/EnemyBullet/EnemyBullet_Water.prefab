@@ -171,8 +171,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.89, y: 1.51}
+    pivot: {x: 0.50595236, y: 0.5}
+    oldSize: {x: 0.84, y: 1.51}
     newSize: {x: 0.25, y: 0.26}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eff_star: {fileID: 1048598463021896, guid: 424779415fd4ddb458405ebb18205099, type: 2}
+  enemy: {fileID: 0}
   boss: 0
   bulletLive: 0
   dmg: 0
@@ -10418,7 +10419,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: d3cdb9faaac44f643a2d2ca3dcfe9e3e, type: 3}
+  m_Sprite: {fileID: 21300016, guid: 1eaa337eb9fc06040a0049cb61e9e0b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

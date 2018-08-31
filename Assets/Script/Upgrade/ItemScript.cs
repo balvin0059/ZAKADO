@@ -25,6 +25,7 @@ public class ItemScript : MonoBehaviour {
     public GameObject itemEquiepmentShow;
     public GameObject itemInfoPanel;
     public GameObject[] itemUse;
+    public GameObject[] itemList;
     public Image itemImage;
     public Text itemNameText;
     public Text itemInfoText;
@@ -33,26 +34,19 @@ public class ItemScript : MonoBehaviour {
     public int itemID;
     public int lastTimeItemID;
 
+
+
     public void ItemPanelOpen()
     {
         itemPanel.SetActive(true);
         gameObject.GetComponent<UpgradeScene>().itemSelect = true;
         catID = gameObject.GetComponent<UpgradeScene>().indexCat;
-        for (int i = 0; i < itemUse.Length; i++)
-        {
-            itemUse[i].SetActive(ItemHolder.instance.globleItems[i].itemUse);
-            if (GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem_id == ItemHolder.instance.globleItems[i].id)
-            {
-                lastTimecatID = GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem_id - 1000;
-                itemImage.sprite = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.icon;
-                itemNameText.text = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.itemName;
-                itemInfoText.text = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.itemInfo;
-                itemInfoPanel.SetActive(true);
-                itemImage.gameObject.SetActive(true);
-            }
-        }
+        OrderCheck();
+        UseCheck();
     }
-	public void CloseItemPanel(GameObject g)
+
+    #region 面板控制
+    public void CloseItemPanel(GameObject g)
     {
         GlobalValue.instance.SaveAllData();
         itemInfoPanel.SetActive(false);
@@ -99,6 +93,10 @@ public class ItemScript : MonoBehaviour {
             }
         }
     }
+    #endregion
+
+    #region 控制方法
+    //實現效果方法
     public void AttributesEffect(ItemAttribute.ItemType itemType, int getItemID, bool itemSelect)
     {
         Debug.Log("進入物品判定");
@@ -173,4 +171,40 @@ public class ItemScript : MonoBehaviour {
             }
         }
     }
+    //簡化步驟巢狀迴圈 功能:判定先加入的道具順序 依照順序擺放
+    void OrderCheck()
+    {
+        for (int i = 0; i < ItemHolder.instance.amount; i++)
+        {
+            for (int j = 0; j < itemList.Length; j++)
+            {
+                for (int k = 0; k < ItemHolder.instance.globleItems.Count; k++)
+                {
+                    if (ItemHolder.instance.globleItems[k].order == j + 1)
+                    {
+                        itemList[k].SetActive(true);
+                        itemList[k].transform.localPosition = new Vector3((85f + 180 * j), -92.5f, 0.0f);
+                    }
+                }
+            }
+        }
+    }
+    //簡化步驟迴圈 功能:被使用過的將不能再使用
+    void UseCheck()
+    {
+        for (int i = 0; i < itemUse.Length; i++)
+        {
+            itemUse[i].SetActive(ItemHolder.instance.globleItems[i].itemUse);
+            if (GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem_id == ItemHolder.instance.globleItems[i].id)
+            {
+                lastTimecatID = GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem_id - 1000;
+                itemImage.sprite = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.icon;
+                itemNameText.text = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.itemName;
+                itemInfoText.text = ItemHolder.instance.globleItems[lastTimecatID].itemAttribute.itemInfo;
+                itemInfoPanel.SetActive(true);
+                itemImage.gameObject.SetActive(true);
+            }
+        }
+    }
+    #endregion
 }

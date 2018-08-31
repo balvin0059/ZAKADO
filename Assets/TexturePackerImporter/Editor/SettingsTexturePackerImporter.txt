@@ -1,0 +1,30 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Image/Cat/Cat_Back/Cat_back.tpsheet
+- Assets/Image/Cat/Cat_Battle/Cat_Battle.tpsheet
+- Assets/Image/Cat/Cat_Front/Cat_Front.tpsheet
+- Assets/Image/Enemy/EnemyStuff.tpsheet
+- Assets/Image/Item/ItemStuff.tpsheet
+- Assets/Image/UI_Button/MyUIButton.tpsheet
+- Assets/Image/UI_Panel/MyUIPanelAndButton.tpsheet
+textureFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Image/Cat/Cat_Back/Cat_back.png
+- Assets/Image/Cat/Cat_Battle/Cat_Battle.png
+- Assets/Image/Cat/Cat_Front/Cat_Front.png
+- Assets/Image/Enemy/EnemyStuff.png
+- Assets/Image/Item/ItemStuff.png
+- Assets/Image/UI_Button/MyUIButton.png
+- Assets/Image/UI_Panel/MyUIPanelAndButton.png
+normalmapFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+enableDebugOutput: 0
