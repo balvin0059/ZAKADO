@@ -99,24 +99,27 @@ public class CoreMove : MonoBehaviour
         move = false;
     }
     #endregion
-
     void Hook()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GlobalValue.instance.everTeach[0])
         {
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_1);
+            if (Input.GetMouseButtonDown(0))
+            {
+                ResetGun();
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_1);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_2);
+            }
+            directionVector = mousePos_1 - mousePos_2;
+            distance = directionVector.magnitude * 1.7f;
+            distance = distance > 10 ? 10 : distance;
+            z = GetAngle(mousePos_1, mousePos_2);
+            z = z > 80 ? 80 : z;
+            z = z < -80 ? -80 : z;
+            transform.localRotation = Quaternion.Euler(0, 0, z);
         }
-        if (Input.GetMouseButton(0))
-        {
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_2);
-        }
-        directionVector = mousePos_1 - mousePos_2;
-        distance = directionVector.magnitude * 1.7f;
-        distance = distance > 10 ? 10 : distance;
-        z = GetAngle(mousePos_1, mousePos_2);
-        z = z > 80 ? 80 : z;
-        z = z < -80 ? 80 : z;
-        transform.localRotation = Quaternion.Euler(0, 0, z);
     }
 
     #region 角度計算器

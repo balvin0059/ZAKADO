@@ -39,7 +39,7 @@ public class GlobalValue : MonoBehaviour {
     public int[] catNum;
     public int nowLevel;
     public int nowMission = 0;
-    public bool everTeach;
+    public bool[] everTeach = new bool[3];
     public bool[] catBuyYet = new bool[10];
     public int nowUnlockCat;
     public DateTime nowTime;
@@ -199,12 +199,16 @@ public class GlobalValue : MonoBehaviour {
             gameSave.quest_complete[i] = QuestHolder.instance.quest[i].isComplete;
             gameSave.quest_id[i] = QuestHolder.instance.quest[i].id;
         }//存現在任務資料
+        for (int i = 0; i < everTeach.Length; i++)
+        {
+            gameSave.everTeach[i] = everTeach[i];
+        }//存是否教學過
         gameSave.item_all = ItemHolder.instance.amount;
         gameSave.gold = gold;
         gameSave.exp = exp;
         gameSave.recordTime = DateTime.Now;
         gameSave.enegy = enegy;
-        gameSave.everTeach = everTeach;
+
         gameSave.everSave = true;
 
         SaveLoadData.SaveData(gameSave);
@@ -238,6 +242,10 @@ public class GlobalValue : MonoBehaviour {
                 gameSave.quest_complete[i] = QuestHolder.instance.quest[i].isComplete;
                 gameSave.quest_id[i] = QuestHolder.instance.quest[i].id;
             }//存現在任務資料
+            for (int i = 0; i < everTeach.Length; i++)
+            {
+                gameSave.everTeach[i] = everTeach[i];
+            }//存是否教學過
         }
         for (int i = 0; i < catHolder.Length; i++)
         {
@@ -283,11 +291,15 @@ public class GlobalValue : MonoBehaviour {
             QuestHolder.instance.quest[i].isComplete = gameSave.quest_complete[i];
             QuestHolder.instance.quest[i].id = gameSave.quest_id[i];
         }//讀取現在任務資料
+        for (int i = 0; i < everTeach.Length; i++)
+        {
+            everTeach[i] = gameSave.everTeach[i];
+        }//存是否教學過
         ItemHolder.instance.amount = gameSave.item_all;
         gold = gameSave.gold;
         exp = gameSave.exp;
         enegy = gameSave.enegy;
-        everTeach = gameSave.everTeach;
+        
     }//讀檔
 }
 

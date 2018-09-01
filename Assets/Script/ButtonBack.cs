@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonBack : MonoBehaviour {
-
+    public GameObject loading;
     public void OnBack()
     {
         GlobalValue.instance.gameSave = SaveLoadData.LoadData();
@@ -14,7 +14,8 @@ public class ButtonBack : MonoBehaviour {
             GlobalValue.instance.catNum[i] = GlobalValue.instance.gameSave.catNum[i];
         }
         GlobalValue.instance.SaveAllData();
-        SceneManager.LoadScene("MainScene");
+        loading.SetActive(true);
+        loading.GetComponent<Loading>().GotoScene("MainScene");
     }
     void Update()
     {

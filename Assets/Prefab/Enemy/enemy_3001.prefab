@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224597568198772334}
   - component: {fileID: 222980628369245702}
   - component: {fileID: 114873268844136512}
-  - component: {fileID: 114384591273358570}
   m_Layer: 0
   m_Name: Hp
   m_TagString: Untagged
@@ -40,6 +39,7 @@ GameObject:
   - component: {fileID: 222319114741628824}
   - component: {fileID: 114290284807469546}
   - component: {fileID: 114274683622870348}
+  - component: {fileID: 114451159230698138}
   m_Layer: 0
   m_Name: hpBar
   m_TagString: Untagged
@@ -231,20 +231,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
---- !u!114 &114384591273358570
+--- !u!114 &114451159230698138
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1090289291436198}
+  m_GameObject: {fileID: 1141154896991278}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: 5}
-  m_UseGraphicAlpha: 0
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114815556251364660
 MonoBehaviour:
   m_ObjectHideFlags: 1

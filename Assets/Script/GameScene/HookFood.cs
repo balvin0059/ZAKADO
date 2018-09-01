@@ -6,7 +6,7 @@ public class HookFood : MonoBehaviour {
 
     public Vector3 dir = Vector3.up;
     public float speed;
-    public float backSpeed = 80;
+    public float backSpeed = 1;
     public RectTransform gameObjectRect;
     public bool takeBake = false;
     public List<Vector3> transRecord;
@@ -36,32 +36,33 @@ public class HookFood : MonoBehaviour {
 
             takeBake = true;
             speed = 0;
-            if (backSpeed < 120)
+            if (backSpeed < 3.5f)
             {
-                backSpeed += Time.deltaTime * 5f;
+                backSpeed += Time.deltaTime * 0.5f;
             }
             else
             {
-                backSpeed = 120;
+                backSpeed = 3.5f;
             }
             if (gameObjectRect.position.y != -4)
             {
                 if (transRecord.Count > 0)
                 {
-                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, transRecord[transRecord.Count - 1], 10 * Time.deltaTime);
+                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, transRecord[transRecord.Count - 1], 4 * backSpeed * Time.deltaTime);
                     if (gameObjectRect.position == transRecord[transRecord.Count - 1])
                     {
                         transRecord.Remove(transRecord[transRecord.Count - 1]);
                     }
                 }
                 else
-                {
-                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, new Vector2(0, -4f), 10 * Time.deltaTime);
+                {                    
+                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, new Vector2(0, -4f), 4 * backSpeed * Time.deltaTime);
                 }
             }
             else
             {
                 TurnControll.instance.turnState = TurnControll.TurnState.turnAttack;
+                Time.timeScale = 1;
                 Destroy(gameObject);
             }
         }

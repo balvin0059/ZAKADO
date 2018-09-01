@@ -17,6 +17,7 @@ public class CutScene : MonoBehaviour
 
     void Start()
     {
+        rawImage = GetComponent<RawImage>();
     }
 
     void Update()

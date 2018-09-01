@@ -67,7 +67,7 @@ public class TurnControll : MonoBehaviour {
     public GameObject gaveWinPanel;
     public GameObject SkillPanel;
     public GameObject SkillnoEpPanel;
-    public GameObject TeachPanel;
+    public GameObject[] TeachPanel;
     public Image PanelTopBg;
     public Image PanelBotBg;
     public Image PanelBg;
@@ -104,16 +104,30 @@ public class TurnControll : MonoBehaviour {
         SpawnFood();
         playerTurnPanel.SetActive(true);
         BaseSet();
-        if (GlobalValue.instance.everTeach)
+        TeachEvent();
+    }
+    void TeachEvent()
+    {
+        if (TeachPanel[0] != null)
         {
-            Destroy(TeachPanel.gameObject);
+            if (!GlobalValue.instance.everTeach[0])
+            {
+                GameObject g = GameObject.Find("RawImage");
+                while (g == null)
+                {
+                    Time.timeScale = 0;
+                }
+                TeachPanel[0].SetActive(true);
+            }
         }
-        else
+        for (int i = 0; i < GlobalValue.instance.everTeach.Length; i++)
         {
-            TeachPanel.SetActive(true);
+            if (GlobalValue.instance.everTeach[i])
+            {
+                Destroy(TeachPanel[i].gameObject);
+            }
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -133,8 +147,8 @@ public class TurnControll : MonoBehaviour {
             }
         }
         if (turnState == TurnState.turnEnemyAttack)
-        {
-            if(enemy.enemyGameobject.GetComponent<EnemyAttr>().limit <= 0)
+        {            
+            if (enemy.enemyGameobject.GetComponent<EnemyAttr>().limit <= 0)
             {
                 enemy.enemyGameobject.SendMessage("TurnEnemyAttackEnd");
                 enemy.enemyGameobject.GetComponent<EnemyAttr>().limit = 0;
@@ -201,6 +215,25 @@ public class TurnControll : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
         if (onlyOneTime)
         {
+            if (GlobalValue.instance.nowLevel == 5)
+            {
+                if (TeachPanel[2] != null)
+                {
+                    if (!GlobalValue.instance.everTeach[2])
+                    {
+                        Time.timeScale = 0;
+                        TeachPanel[2].SetActive(true);
+                    }
+                }
+            }
+            else if (!GlobalValue.instance.everTeach[1])
+            {
+                if (TeachPanel[1] != null)
+                {
+                    Time.timeScale = 0;
+                    TeachPanel[1].SetActive(true);
+                }
+            }
             enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
             onlyOneTime = false;
             turnState = TurnState.turnEnemyAttack;
@@ -235,7 +268,7 @@ public class TurnControll : MonoBehaviour {
 
     public void SkillUse(int id)
     {
-        if (GlobalValue.instance.everTeach)
+        if (GlobalValue.instance.everTeach[0])
         {
             SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
             skillUseIng = true;
@@ -337,26 +370,31 @@ public class TurnControll : MonoBehaviour {
         }
     }
     #endregion
-
+    bool playOneTime = false;
     IEnumerator GameFinish(TurnResult t)
     {
-        yield return new WaitForSeconds(2.0f);
-        Time.timeScale = 0f;
+        yield return new WaitForSeconds(1.5f);
         if(t == TurnResult.turnLose)
         {
-            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youLose);
+            if (!playOneTime)
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youLose);
+                playOneTime = true;
+            }
             gaveLosePanel.SetActive(true);
         }
-        if(t == TurnResult.turnWin)
+        if (t == TurnResult.turnWin)
         {
-            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youWin);
+            if (!playOneTime)
+            {
+                SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youWin);
+                playOneTime = true;
+            }
             expText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp.ToString();
-            GlobalValue.instance.exp += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp;
             goldText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
-            GlobalValue.instance.gold += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold;
             gaveWinPanel.SetActive(true);
             GlobalValue.instance.level[GlobalValue.instance.nowLevel] = true;
-            if(GlobalValue.instance.nowLevel == 5)
+            if (GlobalValue.instance.nowLevel == 5)
             {
                 GlobalValue.instance.mission[GlobalValue.instance.nowMission] = true;
                 GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
@@ -364,9 +402,11 @@ public class TurnControll : MonoBehaviour {
             GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
             CheckQuest();
             GlobalValue.instance.SaveAllData();
-            
         }
+        yield return new WaitForSeconds(1.5f);
+        Time.timeScale = 0;
     }
+    public GameObject loading;
     public void OnOver()
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
@@ -374,19 +414,23 @@ public class TurnControll : MonoBehaviour {
         {
             GlobalValue.instance.GetTypePower[i] = 0;
         }
+        GlobalValue.instance.gold += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold;
+        GlobalValue.instance.exp += enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.exp;
         GlobalValue.instance.gameSave.gold = GlobalValue.instance.gold;
         GlobalValue.instance.gameSave.exp = GlobalValue.instance.exp;
         GlobalValue.instance.SaveAllData();
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
         turnResult = TurnResult.None;
         turnState = TurnState.None;
-        SceneManager.LoadScene("MapScene");
+        loading.SetActive(true);
+        loading.GetComponent<Loading>().GotoScene("MapScene");
     }
-    public void OnTeachPanel(GameObject g)
+    public void OnTeachPanel(int d)
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
-        GlobalValue.instance.everTeach = true;
-        Destroy(g.gameObject);
+        GlobalValue.instance.everTeach[d] = true;
+        Time.timeScale = 1;
+        Destroy(TeachPanel[d].gameObject);
     }
 
     public void ComboGet(int a)

@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 224116153017171140}
   - component: {fileID: 222069396969280648}
   - component: {fileID: 114158543765893002}
-  - component: {fileID: 114147416126178356}
   m_Layer: 0
   m_Name: Hp
   m_TagString: Untagged
@@ -106,6 +105,7 @@ GameObject:
   - component: {fileID: 222992803011614482}
   - component: {fileID: 114059369693819734}
   - component: {fileID: 114051921362216880}
+  - component: {fileID: 114812992898914244}
   m_Layer: 0
   m_Name: hpBar
   m_TagString: Untagged
@@ -169,20 +169,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114147416126178356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1530595096070222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: 5}
-  m_UseGraphicAlpha: 0
 --- !u!114 &114158543765893002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114731712428890182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114761762937472832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114807708702673414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,9 +321,23 @@ MonoBehaviour:
   hpBar: {fileID: 114158543765893002}
   maxHp: 0
   c: {r: 1, g: 1, b: 1, a: 1}
-  limitMax: 10
-  limit: 10
+  limitMax: 12
+  limit: 12
   bulletend: 0
+--- !u!114 &114812992898914244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1627569206115740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!222 &222069396969280648
 CanvasRenderer:
   m_ObjectHideFlags: 1

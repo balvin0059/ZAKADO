@@ -30,7 +30,7 @@ public class HookShoot : MonoBehaviour {
         {
             if (!TurnControll.instance.skillUseIng)
             {
-                if (GlobalValue.instance.everTeach)
+                if (GlobalValue.instance.everTeach[0])
                 {
                     if (coreBase.transform.GetComponent<CoreMove>().distance > 2.0f)
                     {

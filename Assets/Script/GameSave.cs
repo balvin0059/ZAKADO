@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 public class GameSave
 {
     public bool everSave;
-    public bool everTeach;
+    public bool[] everTeach = new bool[3];
     public bool[] catBuyYet = new bool[10];
     public int nowUnlockCat;
     public CatAttr.Statestuff[] stateSave = new CatAttr.Statestuff[10];

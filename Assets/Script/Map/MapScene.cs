@@ -19,6 +19,7 @@ public class MapScene : MonoBehaviour {
     public bool LevelChosing = false;
     void Start()
     {
+        Time.timeScale = 1;
         Bg.sprite = bgCange[GlobalValue.instance.nowMission];
         for(int k = 0; k < missionHolder.Length; k++)
         {
@@ -84,13 +85,15 @@ public class MapScene : MonoBehaviour {
             }
         }
     }
+    public GameObject loading;
     public void OnConfirmPanel()
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         GlobalValue.instance.enegy -= 5;
         GlobalValue.instance.dateTime_next = GlobalValue.instance.dateTime_next.AddMinutes(25);
         LevelChosing = false;
-        SceneManager.LoadScene("GameScene");
+        loading.SetActive(true);
+        loading.GetComponent<Loading>().GotoScene("GameScene");
     }
     public void OnNoEnegyPanel()
     {

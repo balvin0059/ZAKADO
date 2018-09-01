@@ -28,7 +28,17 @@ public class EnemyBulletAttr : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Skill();
+        if (GlobalValue.instance.nowLevel == 5)
+        {
+            if (GlobalValue.instance.everTeach[2])
+            {
+                Skill();
+            }
+        }
+        else if (GlobalValue.instance.everTeach[1])
+        {
+            Skill();
+        }
     }
     void Skill()
     {

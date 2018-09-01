@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222862849143789362}
   - component: {fileID: 114713442203103450}
   - component: {fileID: 114028302905454604}
+  - component: {fileID: 114972377393558988}
   m_Layer: 0
   m_Name: hpBar
   m_TagString: Untagged
@@ -57,7 +58,6 @@ GameObject:
   - component: {fileID: 224770714748199956}
   - component: {fileID: 222371422580948614}
   - component: {fileID: 114349913519235216}
-  - component: {fileID: 114960356660406212}
   m_Layer: 0
   m_Name: Hp
   m_TagString: Untagged
@@ -177,8 +177,8 @@ MonoBehaviour:
   hpBar: {fileID: 114349913519235216}
   maxHp: 0
   c: {r: 1, g: 1, b: 1, a: 1}
-  limitMax: 10
-  limit: 10
+  limitMax: 15
+  limit: 15
   bulletend: 0
 --- !u!114 &114302101990050868
 MonoBehaviour:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114349913519235216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114620408327117142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee03db327a8d2439bc0a5888609b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1412676005519318, guid: b985a41d18f63304e924f0d2e018b229, type: 2}
+  bullet: {fileID: 0}
 --- !u!114 &114713442203103450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,20 +324,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114960356660406212
+--- !u!114 &114972377393558988
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1106885524928200}
+  m_GameObject: {fileID: 1001695118295634}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: 5}
-  m_UseGraphicAlpha: 0
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!222 &222331820927038628
 CanvasRenderer:
   m_ObjectHideFlags: 1

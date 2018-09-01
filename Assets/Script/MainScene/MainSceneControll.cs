@@ -52,6 +52,7 @@ public class MainSceneControll : MonoBehaviour {
     }
 
     #region 按鈕
+    public GameObject loadingPanel;
     public void ToggleEvent()//音樂控制關閉
     {
         SoundControll.instance.SwitchMuteState(SoundControll.instance.toggle.isOn);
@@ -64,7 +65,8 @@ public class MainSceneControll : MonoBehaviour {
             if (!OnPaneling)
             {
                 GetLevelSchedule(GlobalValue.instance.gameSave.level);
-                SceneManager.LoadScene("MapScene");
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("MapScene");
             }
         }
     }
@@ -75,7 +77,8 @@ public class MainSceneControll : MonoBehaviour {
         {
             if (!OnPaneling)
             {
-                SceneManager.LoadScene("TeamScene");
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("TeamScene");
             }
         }
     }
@@ -86,7 +89,8 @@ public class MainSceneControll : MonoBehaviour {
         {
             if (!OnPaneling)
             {
-                SceneManager.LoadScene("UpgradeScene");
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("UpgradeScene");
             }
         }
     }//強化按鈕
@@ -105,8 +109,8 @@ public class MainSceneControll : MonoBehaviour {
         {
             if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
             {
-
-                SceneManager.LoadScene("ShopScene");
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("ShopScene");
             }
             else
             {
