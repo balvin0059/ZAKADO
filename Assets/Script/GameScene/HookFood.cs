@@ -7,6 +7,7 @@ public class HookFood : MonoBehaviour {
     public Vector3 dir = Vector3.up;
     public float speed;
     public float backSpeed = 1;
+    public float shootSpeed = 1f;
     public RectTransform gameObjectRect;
     public bool takeBake = false;
     public List<Vector3> transRecord;
@@ -20,29 +21,36 @@ public class HookFood : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (speed < 1)
+        if (speed * shootSpeed  < 1)
         {
             CancelInvoke("Creatdot");
-        }
-        if (speed > 0)
+        }//停止
+        if (speed * shootSpeed * Time.deltaTime > 0)
         {
-
+            if (shootSpeed > 0f)
+            {
+                shootSpeed -= Time.deltaTime * 0.8f;
+            }
+            else
+            {
+                shootSpeed = 0;
+            }
             speed -= Time.deltaTime * 1.5f;
-            transform.Translate(dir * speed * Time.deltaTime);
+            transform.Translate(dir * speed * shootSpeed * Time.deltaTime);
 
-        }
+        }//射出
         else
         {
 
             takeBake = true;
             speed = 0;
-            if (backSpeed < 3.5f)
+            if (backSpeed < 3.6f)
             {
-                backSpeed += Time.deltaTime * 0.5f;
+                backSpeed += Time.deltaTime * 1.8f;
             }
             else
             {
-                backSpeed = 3.5f;
+                backSpeed = 3.6f;
             }
             if (gameObjectRect.position.y != -4)
             {
@@ -65,7 +73,7 @@ public class HookFood : MonoBehaviour {
                 Time.timeScale = 1;
                 Destroy(gameObject);
             }
-        }
+        }//收回
 
     }
     float angle = 0;

@@ -6,7 +6,7 @@ public class DotScript : MonoBehaviour {
     public int order;
     private void Update()
     {
-        if(TurnControll.instance.turnState == TurnControll.TurnState.turnEnemy)
+        if(TurnControll.instance.turnState == TurnControll.TurnState.turnAttack)
         {
             Destroy(gameObject);
         }

@@ -205,7 +205,7 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
-6c262580e458ec9d725f0cc179822c63 Assembly-CSharp.dll:.HookFood
+01d56dfe06dfb25e67bedbc62b03e484 Assembly-CSharp.dll:.HookFood
 cc341d056f474a21bf21f7f3b89c59ff Assembly-CSharp.dll:.ItemAttribute
 dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.Ef_AutoRotate
 6c22b5a48dcdc31bdbee30297b474adb Assembly-CSharp.dll:.MissionSystem
