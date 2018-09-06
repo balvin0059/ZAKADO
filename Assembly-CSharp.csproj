@@ -54,6 +54,7 @@
      <Compile Include="Assets\Script\AdsScript.cs" />
      <Compile Include="Assets\Script\ButtonBack.cs" />
      <Compile Include="Assets\Script\CutScene.cs" />
+     <Compile Include="Assets\Script\FirstScene.cs" />
      <Compile Include="Assets\Script\GameSave.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />

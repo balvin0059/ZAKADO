@@ -2,6 +2,7 @@ Android
 PlayerPath?
 C:/Users/tim/Desktop/Zakado.apk
 SceneListBegin?
+Assets/Scene/FirstScene.unity
 Assets/Scene/MainScene.unity
 Assets/Scene/MapScene.unity
 Assets/Scene/TeamScene.unity
@@ -330,3 +331,4 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 772b7e8c8b66061294505392b15c1071 Assembly-CSharp.dll:.MainSceneControll
+4866235bbc70a185fb2f57ce1fdd9948 Assembly-CSharp.dll:.FirstScene
