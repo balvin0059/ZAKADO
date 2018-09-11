@@ -11,7 +11,8 @@ public class Teammate : MonoBehaviour {
     public bool[] catSelect;
     public List<CatList> catLists = new List<CatList>();
     public bool dontSave = false;
-
+    public GameObject loading;
+    public RectTransform context;
     void Start()
     {
         for (int i = 0; i < GlobalValue.instance.catBuyYet.Length; i++)
@@ -53,6 +54,11 @@ public class Teammate : MonoBehaviour {
             {
                 break;
             }
+        }
+
+        if (GlobalValue.instance.nowUnlockCat > 9)
+        {
+            context.sizeDelta += new Vector2(0, 150);
         }
     }
 
@@ -133,6 +139,8 @@ public class Teammate : MonoBehaviour {
                 GlobalValue.instance.gameSave.catNum[i] = GlobalValue.instance.catNum[i];
             }
             GlobalValue.instance.SaveAllData();
+            loading.SetActive(true);
+            loading.GetComponent<Loading>().GotoScene("MainScene");
         }
         SetPanel.SetActive(false);
     }

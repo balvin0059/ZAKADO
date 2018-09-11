@@ -38,6 +38,15 @@ public class CatSkill{
             case 8:
                 TurnControll.instance.ChangeFoodColor(intEtype);
                 break;
+            case 9:
+                TurnControll.instance.SpawnSpecialFood(4);
+                break;
+            case 10:
+                TurnControll.instance.SpawnSpecialFood(3);
+                break;
+            case 11:
+                TurnControll.instance.SpawnSpecialFood();
+                break;
         }
     }
 }

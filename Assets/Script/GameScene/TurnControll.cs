@@ -98,8 +98,7 @@ public class TurnControll : MonoBehaviour {
     public int clearAmount;
     public GameObject clearPanel;
     // Use this for initialization
-    void Start () {
-        SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_02);
+    void Start () {        
         turnState = TurnState.turnPlayer;
         SpawnFood();
         playerTurnPanel.SetActive(true);
@@ -316,12 +315,13 @@ public class TurnControll : MonoBehaviour {
         clearAmount = 0;
         int rForFood = UnityEngine.Random.Range(15, 20);
         int rForSFood = UnityEngine.Random.Range(1, 3);
+        int rForBFood = UnityEngine.Random.Range(2, 6);
         int index = UnityEngine.Random.Range(0, 3);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
         float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
         for (int i = 0; i < rForSFood + GlobalValue.instance.itemSBubbleBufferAmount; i++)
         {
-            index = UnityEngine.Random.Range(0, 3);
+            index = UnityEngine.Random.Range(0, 5);
             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
             area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
             Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
@@ -330,6 +330,15 @@ public class TurnControll : MonoBehaviour {
         for (int i = 0; i < rForFood + GlobalValue.instance.itemNBubbleBufferAmount; i++)
         {
             index = UnityEngine.Random.Range(0, 3);
+            area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
+            area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
+            clearAmount += 1;
+            Instantiate(food[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
+        }
+
+        for (int i = 0; i < rForBFood; i++)
+        {
+            index = UnityEngine.Random.Range(3, 6);
             area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
             area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
             clearAmount += 1;
@@ -348,7 +357,7 @@ public class TurnControll : MonoBehaviour {
     }
     public void SpawnSpecialFood()
     {
-        int index = UnityEngine.Random.Range(0, 3);
+        int index = UnityEngine.Random.Range(0, 5);
         float area_h = UnityEngine.Random.Range(-2.5f, 2.5f);
         float area_w = UnityEngine.Random.Range(-4.0f, -0.5f);
         Instantiate(food_special[index], new Vector3(area_h, area_w, 0.0f), Quaternion.identity, foodHolder.transform);
@@ -374,13 +383,14 @@ public class TurnControll : MonoBehaviour {
     IEnumerator GameFinish(TurnResult t)
     {
         yield return new WaitForSeconds(1.5f);
-        if(t == TurnResult.turnLose)
+        if (t == TurnResult.turnLose)
         {
             if (!playOneTime)
             {
                 SoundControll.Instance.PlayEffecSound(SoundControll.Instance.youLose);
                 playOneTime = true;
             }
+            Time.timeScale = 0;
             gaveLosePanel.SetActive(true);
         }
         if (t == TurnResult.turnWin)
@@ -394,17 +404,10 @@ public class TurnControll : MonoBehaviour {
             goldText.text = enemy.enemyGameobject.GetComponent<EnemyAttr>().enemy.gold.ToString();
             gaveWinPanel.SetActive(true);
             GlobalValue.instance.level[GlobalValue.instance.nowLevel] = true;
-            if (GlobalValue.instance.nowLevel == 5)
-            {
-                GlobalValue.instance.mission[GlobalValue.instance.nowMission] = true;
-                GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
-            }
             GlobalValue.instance.gameSave.level[GlobalValue.instance.nowLevel] = GlobalValue.instance.level[GlobalValue.instance.nowLevel];
             CheckQuest();
             GlobalValue.instance.SaveAllData();
         }
-        yield return new WaitForSeconds(1.5f);
-        Time.timeScale = 0;
     }
     public GameObject loading;
     public void OnOver()
@@ -422,8 +425,29 @@ public class TurnControll : MonoBehaviour {
         Time.timeScale = 1;
         turnResult = TurnResult.None;
         turnState = TurnState.None;
-        loading.SetActive(true);
-        loading.GetComponent<Loading>().GotoScene("MapScene");
+        if (!GlobalValue.instance.mission[GlobalValue.instance.nowMission])
+        {
+            if (GlobalValue.instance.nowLevel == 5 || GlobalValue.instance.nowLevel == 11 || GlobalValue.instance.nowLevel == 17)
+            {
+                GlobalValue.instance.mission[GlobalValue.instance.nowMission] = true;
+                GlobalValue.instance.missionEndStory = true;
+                GlobalValue.instance.gameSave.mission[GlobalValue.instance.nowMission] = GlobalValue.instance.mission[GlobalValue.instance.nowMission];
+                GlobalValue.instance.SaveAllData();
+                loading.SetActive(true);
+                loading.GetComponent<Loading>().GotoScene("StoryScene");
+                Time.timeScale = 1;
+            }
+            else
+            {
+                loading.SetActive(true);
+                loading.GetComponent<Loading>().GotoScene("MapScene");
+            }
+        }
+        else
+        {
+            loading.SetActive(true);
+            loading.GetComponent<Loading>().GotoScene("MapScene");
+        }
     }
     public void OnTeachPanel(int d)
     {
@@ -457,23 +481,27 @@ public class TurnControll : MonoBehaviour {
     {
         if(cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Fire &&  cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Fire &&  cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Fire)
         {
-            QuestHolder.instance.quest[0].questAttr.isComplete = true;
+            QuestHolder.instance.quest[0].isComplete = true;
         }
         if (cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Water && cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Water && cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Water)
         {
-            QuestHolder.instance.quest[1].questAttr.isComplete = true;
+            QuestHolder.instance.quest[1].isComplete = true;
         }
         if (cat.cat_leader.GetComponent<CatControll>().state.type == ElementType.Element.Lighting && cat.cat_teammate_0.GetComponent<CatControll>().state.type == ElementType.Element.Lighting && cat.cat_teammate_1.GetComponent<CatControll>().state.type == ElementType.Element.Lighting)
         {
-            QuestHolder.instance.quest[2].questAttr.isComplete = true;
+            QuestHolder.instance.quest[2].isComplete = true;
         }
         if(GlobalValue.instance.nowLevel == 5)
         {
-            QuestHolder.instance.quest[3].questAttr.isComplete = true;
+            QuestHolder.instance.quest[3].isComplete = true;
         }
         if (GlobalValue.instance.nowLevel == 11)
         {
-            QuestHolder.instance.quest[4].questAttr.isComplete = true;
+            QuestHolder.instance.quest[4].isComplete = true;
+        }
+        if (GlobalValue.instance.nowLevel == 17)
+        {
+            QuestHolder.instance.quest[5].isComplete = true;
         }
     }
     #region 初始化

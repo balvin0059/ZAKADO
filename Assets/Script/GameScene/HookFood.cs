@@ -12,9 +12,12 @@ public class HookFood : MonoBehaviour {
     public bool takeBake = false;
     public List<Vector3> transRecord;
     public GameObject dot;
+    public int index = 0;
     // Use this for initialization
     void Start()
     {
+        Vector3 record = gameObjectRect.position;
+        transRecord.Add(record);
         InvokeRepeating("Creatdot", 0, 0.1f);
     }
 
@@ -52,25 +55,25 @@ public class HookFood : MonoBehaviour {
             {
                 backSpeed = 3.6f;
             }
-            if (gameObjectRect.position.y != -4)
+            if (transRecord.Count > 0)
             {
-                if (transRecord.Count > 0)
+                gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, transRecord[transRecord.Count - 1], 4 * backSpeed * Time.deltaTime);
+                if (gameObjectRect.position == transRecord[transRecord.Count - 1])
                 {
-                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, transRecord[transRecord.Count - 1], 4 * backSpeed * Time.deltaTime);
-                    if (gameObjectRect.position == transRecord[transRecord.Count - 1])
-                    {
-                        transRecord.Remove(transRecord[transRecord.Count - 1]);
-                    }
+                    transRecord.Remove(transRecord[transRecord.Count - 1]);
                 }
-                else
-                {                    
-                    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, new Vector2(0, -4f), 4 * backSpeed * Time.deltaTime);
-                }
+
+                //else
+                //{                    
+                //    gameObjectRect.position = Vector3.MoveTowards(gameObjectRect.position, new Vector2(0, -4f), 4 * backSpeed * Time.deltaTime);
+                //}
             }
-            else
+            else if (transRecord.Count <= 0)
             {
-                TurnControll.instance.turnState = TurnControll.TurnState.turnAttack;
-                Time.timeScale = 1;
+                if (index == 0)
+                {
+                    TurnControll.instance.turnState = TurnControll.TurnState.turnAttack;
+                }
                 Destroy(gameObject);
             }
         }//收回
@@ -127,7 +130,8 @@ public class HookFood : MonoBehaviour {
         {
             SoundControll.Instance.PlayEffecSound(SoundControll.Instance.eatBubbleClip);
             n.GetComponent<WebBubble>().isEat = true;
-            if(n.GetComponent<WebBubble>().special_Type == 2)
+            n.GetComponent<WebBubble>().hook = gameObject;
+            if (n.GetComponent<WebBubble>().special_Type == 2 || n.GetComponent<WebBubble>().special_Type == 4)
             {
                 Vector3 record = gameObjectRect.position;
                 transRecord.Add(record);
@@ -152,5 +156,9 @@ public class HookFood : MonoBehaviour {
         GameObject d = Instantiate(dot, gameObject.transform.position, Quaternion.identity, gameObject.transform.parent);
         d.GetComponent<DotScript>().order = transRecord.Count;
         d.transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+    public void ClearVector()
+    {
+        transRecord.Clear();
     }
 }

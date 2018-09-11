@@ -126,6 +126,7 @@ public class MainSceneControll : MonoBehaviour {
         OnPaneling = false;
         OnQuestIng = false;
     }//關閉面板事件
+
     public void OnQuest()//任務按鈕
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
@@ -141,7 +142,7 @@ public class MainSceneControll : MonoBehaviour {
         ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].order = ItemHolder.instance.amount;
         ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].amount += 1;
         QuestHolder.instance.quest[id].isComplete = true;
-        QuestHolder.instance.quest[id].questAttr.isReward = true;
+        QuestHolder.instance.quest[id].isReward = true;
         questRewardActive[id].SetActive(false);
         questClearActive[id].SetActive(true);
 
@@ -154,16 +155,13 @@ public class MainSceneControll : MonoBehaviour {
     {
         for(int i = 0; i < QuestHolder.instance.quest.Count; i++)
         {
-            if(QuestHolder.instance.quest[i].questAttr.isComplete)
+            if(QuestHolder.instance.quest[i].isComplete)
             {
-                if(QuestHolder.instance.quest[i].questAttr.isReward)
+                if (QuestHolder.instance.quest[i].isReward)
                 {
-                    if (QuestHolder.instance.quest[i].isComplete)
-                    {
-                        questClearActive[i].SetActive(true);
-                    }
+                    questClearActive[i].SetActive(true);
                 }
-                else if (!QuestHolder.instance.quest[i].questAttr.isReward)
+                else if (!QuestHolder.instance.quest[i].isReward)
                 {
                     questRewardActive[i].SetActive(true);
                 }

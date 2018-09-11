@@ -17,21 +17,22 @@ public class MapScene : MonoBehaviour {
     public GameObject[] levelHolder;
     public GameObject[] clearArea;
     public bool LevelChosing = false;
+    public Text missionText;
     void Start()
     {
+        MissionBgMusic();
         Time.timeScale = 1;
+
+        missionText.text = GetMission();
         Bg.sprite = bgCange[GlobalValue.instance.nowMission];
+
         for(int k = 0; k < missionHolder.Length; k++)
         {
             missionHolder[k].SetActive(false);
         }
         missionHolder[GlobalValue.instance.nowMission].SetActive(true);
-
-        //GlobalValue.instance.nowMission = 0;
-
         clearArea[0].SetActive(GlobalValue.instance.level[0]);
-
-        if (GlobalValue.instance.nowMission == 1)
+        if (GlobalValue.instance.nowMission == GlobalValue.instance.mission.Length - 1)
         {
             nextButton.SetActive(false);
             backButton.SetActive(true);
@@ -40,18 +41,33 @@ public class MapScene : MonoBehaviour {
         {
             if (GlobalValue.instance.mission[GlobalValue.instance.nowMission])
             {
-                nextButton.SetActive(true);
+                if (GlobalValue.instance.nowMission == 0)
+                {
+                    nextButton.SetActive(true);
+                    backButton.SetActive(false);
+                }
+                else
+                {
+                    nextButton.SetActive(true);
+                    backButton.SetActive(true);
+                }
             }
             else
             {
-                nextButton.SetActive(false);
-            }
-            backButton.SetActive(false);
+                if (GlobalValue.instance.nowMission == 0)
+                {
+                    nextButton.SetActive(false);
+                    backButton.SetActive(false);
+                }
+                else
+                {
+                    nextButton.SetActive(false);
+                    backButton.SetActive(true);
+                }
+            }   
         }
-
         for (int i = 1; i < GlobalValue.instance.level.Length; i++)
         {
-            //i = i + GlobalValue.instance.nowMission * 5;
             if (GlobalValue.instance.level[i - 1])
             {
                 levelHolder[i].SetActive(GlobalValue.instance.level[i - 1]);
@@ -62,14 +78,13 @@ public class MapScene : MonoBehaviour {
                 break;
             }
         }
-
     }
 	public void OnLevel(int l)
     {
         if (!LevelChosing)
         {
             LevelChosing = true;
-            l = l + GlobalValue.instance.nowMission * 5;
+            l = l + GlobalValue.instance.nowMission * 6;
             if (GlobalValue.instance.enegy - 5 < 0)
             {
                 SoundControll.Instance.PlayEffecSound(SoundControll.Instance.cantdoClip);
@@ -92,9 +107,17 @@ public class MapScene : MonoBehaviour {
         GlobalValue.instance.enegy -= 5;
         GlobalValue.instance.dateTime_next = GlobalValue.instance.dateTime_next.AddMinutes(25);
         LevelChosing = false;
-        loading.SetActive(true);
-        loading.GetComponent<Loading>().GotoScene("GameScene");
-    }
+        if (!GlobalValue.instance.level[GlobalValue.instance.nowLevel])
+        {
+            loading.SetActive(true);
+            loading.GetComponent<Loading>().GotoScene("StoryScene");
+        }
+        else
+        {
+            loading.SetActive(true);
+            loading.GetComponent<Loading>().GotoScene("GameScene");
+        }
+}
     public void OnNoEnegyPanel()
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
@@ -112,16 +135,33 @@ public class MapScene : MonoBehaviour {
     public void OnNextMission()
     {
         if (!LevelChosing)
-        {
+        {            
             SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
             missionHolder[GlobalValue.instance.nowMission].SetActive(false);
             GlobalValue.instance.nowMission += 1;
             Bg.sprite = bgCange[GlobalValue.instance.nowMission];
             missionHolder[GlobalValue.instance.nowMission].SetActive(true);
+            missionText.text = GetMission();
             backButton.SetActive(true);
-            if (GlobalValue.instance.nowMission == 1)
+            MissionBgMusic();
+            if (GlobalValue.instance.mission[GlobalValue.instance.nowMission])
+            {
+                nextButton.SetActive(true);
+            }
+            else
             {
                 nextButton.SetActive(false);
+            }
+            if (GlobalValue.instance.nowMission == GlobalValue.instance.mission.Length-1)
+            {
+                nextButton.SetActive(false);
+            }
+            if(GlobalValue.instance.nowStory < GlobalValue.instance.nowMission)
+            {
+                GlobalValue.instance.missionStartStory = true;
+                loading.SetActive(true);
+                loading.GetComponent<Loading>().GotoScene("StoryScene");
+                GlobalValue.instance.nowStory++;
             }
         }
     }
@@ -134,7 +174,9 @@ public class MapScene : MonoBehaviour {
             GlobalValue.instance.nowMission -= 1;
             Bg.sprite = bgCange[GlobalValue.instance.nowMission];
             missionHolder[GlobalValue.instance.nowMission].SetActive(true);
+            missionText.text = GetMission();
             nextButton.SetActive(true);
+            MissionBgMusic();
             if (GlobalValue.instance.nowMission == 0)
             {
                 backButton.SetActive(false);
@@ -146,5 +188,46 @@ public class MapScene : MonoBehaviour {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         LevelChosing = false;
         g.SetActive(false);
+    }
+    string GetMission()
+    {
+
+        switch (GlobalValue.instance.nowMission)
+        {
+            case 0:
+                return "第一章";
+                break;
+            case 1:
+                return "第二章";
+                break;
+            case 2:
+                return "第三章";
+                break;
+        }
+        return "";
+    }
+    void MissionBgMusic()
+    {
+        switch (GlobalValue.instance.nowMission)
+        {
+            case 0:
+                if (SoundControll.instance.bgmAudioSource.clip != SoundControll.Instance.Bg_02)
+                {
+                    SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_02);
+                }
+                break;
+            case 1:
+                if (SoundControll.instance.bgmAudioSource.clip != SoundControll.Instance.Bg_03)
+                {
+                    SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_03);
+                }
+                break;
+            case 2:
+                if (SoundControll.instance.bgmAudioSource.clip != SoundControll.Instance.Bg_04)
+                {
+                    SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_04);
+                }
+                break;
+        }
     }
 }

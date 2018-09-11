@@ -8,6 +8,7 @@ public class WebBubble : MonoBehaviour {
     public GameObject bubble;
     public bool isEat = false;
     public Vector3 myTransform;
+    public GameObject hook;
     void Start()
     {
         myTransform = gameObject.transform.position;
@@ -37,7 +38,10 @@ public class WebBubble : MonoBehaviour {
                 Turn_Bubble();
                 break;
             case 3:
-                Turn_Bubble();
+                Big_Bubble();
+                break;
+            case 4:
+                Fork_Bubble();
                 break;
             default:
                 break;
@@ -84,9 +88,31 @@ public class WebBubble : MonoBehaviour {
         if (isEat)
         {
             gameObject.GetComponent<Ef_AutoRotate>().speed = 0;
-            GameObject h = GameObject.FindWithTag("hook");
-            h.transform.GetComponent<HookFood>().speed += 3.0f;
-            h.transform.rotation = gameObject.transform.rotation;
+            hook.transform.GetComponent<HookFood>().speed += 3.0f;
+            hook.transform.rotation = gameObject.transform.rotation;
+            Destroy(gameObject);
+        }
+    }
+    public void Big_Bubble()
+    {
+        if (isEat)
+        {
+                hook.transform.localScale = new Vector3(1.8f, 1.8f, 0);
+                Destroy(gameObject);
+        }
+    }
+    public void Fork_Bubble()
+    {
+        if (isEat)
+        {
+            GameObject b = Instantiate(hook);
+            b.transform.SetParent(hook.transform.parent, false);
+            b.transform.rotation = Quaternion.Euler(0, 0, hook.transform.rotation.z - 45);
+            b.transform.GetComponent<HookFood>().speed = hook.GetComponent<HookFood>().speed;
+            b.transform.localScale = hook.transform.localScale;
+            b.GetComponent<HookFood>().ClearVector();
+            b.GetComponent<HookFood>().index++;
+            hook.transform.rotation = Quaternion.Euler(0, 0, hook.transform.rotation.z + 45);
             Destroy(gameObject);
         }
     }

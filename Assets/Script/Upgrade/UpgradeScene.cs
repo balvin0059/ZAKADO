@@ -21,6 +21,7 @@ public class UpgradeScene : MonoBehaviour {
     public bool skillUseIng = false;
     public bool itemSelect = false;
     public GameObject SkillPanel;
+    public RectTransform context;
 
     void Start()
     {
@@ -34,6 +35,10 @@ public class UpgradeScene : MonoBehaviour {
             {
                 break;
             }
+        }
+        if(GlobalValue.instance.nowUnlockCat > 9)
+        {
+            context.sizeDelta += new Vector2(0, 150);
         }
     }
     #region 按鈕
