@@ -5583,10 +5583,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -19.18384, y: 94.65324}
+  scrollPos: {x: 15.867703, y: 32.79757}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 200
+  blockViewHeight: 359
   zoom: 0.9700001
   scrollViewRect:
     serializedVersion: 2
@@ -5595,9 +5595,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 2141492983}
+  - {fileID: 2141492950}
   selectedCommands:
-  - {fileID: 2141493147}
+  - {fileID: 2141492947}
   variables: []
   description: 
   stepPause: 0
@@ -6870,7 +6870,7 @@ MonoBehaviour:
   waitForClick: 1
   stopVoiceover: 1
   waitForVO: 0
-  setSayDialog: {fileID: 1793380614}
+  setSayDialog: {fileID: 1984697912}
 --- !u!114 &2141492801
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -10745,7 +10745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 75
   indentLevel: 0
-  storyText: "\u539F\u4F86\u5982\u6B64\uFF01"
+  storyText: "\u597D\uFF5E"
   description: 
   character: {fileID: 1663602595}
   portrait: {fileID: 21300002, guid: 749d356a134a8154bb2ddc73143a601b, type: 3}

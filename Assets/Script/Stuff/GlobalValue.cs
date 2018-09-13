@@ -213,7 +213,7 @@ public class GlobalValue : MonoBehaviour {
         gameSave.recordTime = DateTime.Now;
         gameSave.enegy = enegy;
         gameSave.nowStory = nowStory;
-
+        gameSave.nowUnlockCat = nowUnlockCat;
         gameSave.everSave = true;
 
         SaveLoadData.SaveData(gameSave);
@@ -307,6 +307,7 @@ public class GlobalValue : MonoBehaviour {
         exp = gameSave.exp;
         enegy = gameSave.enegy;
         nowStory = gameSave.nowStory;
+        nowUnlockCat = gameSave.nowUnlockCat;
     }//讀檔
 }
 
