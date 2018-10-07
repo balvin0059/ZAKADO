@@ -572,6 +572,9 @@
      <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrCacheSurrogate.cs" />
      <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrParams.cs" />
      <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Scripts\SfxrSynth.cs" />
+     <Compile Include="Assets\Script\DailyFunc\Scripts\BonusItem.cs" />
+     <Compile Include="Assets\Script\DailyFunc\Scripts\DailyBonusController.cs" />
+     <Compile Include="Assets\Script\DailyFunc\Scripts\ProbabilityController.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyBulletAttr.cs" />

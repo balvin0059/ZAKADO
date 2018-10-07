@@ -20,6 +20,8 @@ public class MainSceneControll : MonoBehaviour {
     public Image indexCat;
     public GameObject enegyPanelMax;
     public GameObject enegyPanelCount;
+    public GameObject daliybonus;
+    //ItemAPI itemAPI;
     void Start()
     {
         indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
@@ -28,6 +30,7 @@ public class MainSceneControll : MonoBehaviour {
         {
             SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_01);
         }
+        daliybonus.SetActive(!GlobalValue.instance.daliyBonus);
     }
 
     void Update()
@@ -138,11 +141,7 @@ public class MainSceneControll : MonoBehaviour {
     public void OnReward(int id)//帶入MissionID
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.questComplete);
-        ItemHolder.instance.amount += 1;
-        ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].order = ItemHolder.instance.amount;
-        ItemHolder.instance.globleItems[QuestHolder.instance.quest[id].questAttr.missionRewardID - 1000].amount += 1;
-        QuestHolder.instance.quest[id].isComplete = true;
-        QuestHolder.instance.quest[id].isReward = true;
+        ItemAPI.RewardItem(id);
         questRewardActive[id].SetActive(false);
         questClearActive[id].SetActive(true);
 

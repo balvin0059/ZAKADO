@@ -205,7 +205,7 @@ dc331af9157ad5cae49bb898fea934c8 Assembly-CSharp.dll:Fungus.AddTorque2D
 89a36b9f4bc9736fc891182f4fe3037d Assembly-CSharp.dll:Fungus.SetInteractable
 6f2fdb7a2e0627836688d47a45a31608 Assembly-CSharp.dll:.TurnControll
 b497cd6cb84c2199c071bc81e08e7906 Assembly-CSharp.dll:Fungus.StopTweens
-c38e23d4471333cbbc45e9daca86feb6 Assembly-CSharp.dll:.GlobalValue
+7cfa355dbfa3f14394a01804cdeeb7f9 Assembly-CSharp.dll:.GlobalValue
 3053a1d3d09c04317f1d8f0299bb66a2 Assembly-CSharp.dll:Fungus.WriterAudio
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -432,6 +432,7 @@ d2f4ed54c841602ee8aa52c9c6299495 Assembly-CSharp.dll:Fungus.SetAnimInteger
 58b7f6a921673dcfd93d1ca6e8408606 Assembly-CSharp.dll:Fungus.FadeSprite
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 de4a94ad4aa2c891d3ef95628a0f2057 Assembly-CSharp.dll:Fungus.LuaEnvironment
+9e9e2ab767665e52977c02632be9e2c7 Assembly-CSharp.dll:.DailyBonusController
 4d856d9b5bbca35c058a752c72efb65e Assembly-CSharp.dll:Fungus.PunchPosition
 ee89b1b5b5f65cb74289075021dc8085 Assembly-CSharp.dll:Fungus.FloatVariable
 6e2cddf4af006b829b105cc2f49ca8e6 Assembly-CSharp.dll:Fungus.LuaScript
@@ -552,5 +553,5 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Fungus.LuaStore
-772b7e8c8b66061294505392b15c1071 Assembly-CSharp.dll:.MainSceneControll
+7154102df24b3888e6f575cd06cb2946 Assembly-CSharp.dll:.MainSceneControll
 fd160bb264b468cfb1957ebeb7c17190 Assembly-CSharp.dll:Fungus.MoveLean

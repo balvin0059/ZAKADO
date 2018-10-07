@@ -46,6 +46,7 @@ public class GlobalValue : MonoBehaviour {
     public bool[] catBuyYet = new bool[10];
     public int nowUnlockCat;
     public DateTime nowTime;
+    public bool daliyBonus;
     [Header("物件預載素質區")]
     public GameObject[] catHolder;
     public GameObject[] enemyHolder;
@@ -215,7 +216,7 @@ public class GlobalValue : MonoBehaviour {
         gameSave.nowStory = nowStory;
         gameSave.nowUnlockCat = nowUnlockCat;
         gameSave.everSave = true;
-
+        gameSave.daliybonus = daliyBonus;
         SaveLoadData.SaveData(gameSave);
     }//存檔
     public void LoadAllData()
@@ -308,7 +309,36 @@ public class GlobalValue : MonoBehaviour {
         enegy = gameSave.enegy;
         nowStory = gameSave.nowStory;
         nowUnlockCat = gameSave.nowUnlockCat;
+        if (gameSave.recordTime.DayOfYear != LeapYear())
+        {
+            if (DateTime.Now.DayOfYear > gameSave.recordTime.DayOfYear)
+            {
+                daliyBonus = false;
+            }
+            else
+            {
+                daliyBonus = gameSave.daliybonus;
+            }
+        }
+        else
+        {
+            if (DateTime.Now.DayOfYear < gameSave.recordTime.DayOfYear)
+            {
+                daliyBonus = false;
+            }
+            else
+            {
+                daliyBonus = gameSave.daliybonus;
+            }
+        }
     }//讀檔
+    int LeapYear()// 閏年計算
+    {
+        bool c;
+        c = DateTime.Now.Year % 400 == 0 || (DateTime.Now.Year % 4 == 0 && DateTime.Now.Year % 100 != 0) ;
+        Debug.Log(c ? 366 : 365);
+        return c ? 366:365;
+    }
 }
 
 public class CatList
