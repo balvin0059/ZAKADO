@@ -602,6 +602,7 @@
      <Compile Include="Assets\Script\Item\GlobleItem.cs" />
      <Compile Include="Assets\Script\Item\ItemAttribute.cs" />
      <Compile Include="Assets\Script\Item\ItemHolder.cs" />
+     <Compile Include="Assets\Script\MainScene\ConnectDesigner.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
      <Compile Include="Assets\Script\Map\MapScene.cs" />
      <Compile Include="Assets\Script\Quest\QuestAttr.cs" />

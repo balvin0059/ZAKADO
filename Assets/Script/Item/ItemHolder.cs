@@ -45,9 +45,13 @@ public class ItemAPI
     }
     public static void AddItem(int id)
     {
-        ItemHolder.instance.amount += 1;
-        ItemHolder.instance.globleItems[id].order = ItemHolder.instance.amount;
-        ItemHolder.instance.globleItems[id].amount += 1;
+        Debug.Log("GetItemID = " + id);
+        if (ItemHolder.instance.globleItems[id - 1000].amount < 1)
+        {
+            ItemHolder.instance.amount += 1;
+            ItemHolder.instance.globleItems[id - 1000].order = ItemHolder.instance.amount;
+        }
+        ItemHolder.instance.globleItems[id - 1000].amount += 1;
     }
 
 }

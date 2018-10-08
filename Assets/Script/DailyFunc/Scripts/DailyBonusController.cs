@@ -13,9 +13,10 @@ public class DailyBonusController : MonoBehaviour
     public GameObject ComfirmPanel;
     public Text itemName;
     public int listIndex;
+    bool ontime;
 	// Use this for initialization
 	void Start () {
-	
+        ontime = false;
 	}
 	
 	// Update is called once per frame
@@ -79,20 +80,24 @@ public class DailyBonusController : MonoBehaviour
     }
     void Reward(int id)
     {
-        ComfirmPanel.SetActive(true);
-        GlobalValue.instance.daliyBonus = true;
+        if (!ontime)
+        {
+            ontime = true;
+            ComfirmPanel.SetActive(true);
+            GlobalValue.instance.daliyBonus = true;
 
-        if(BonusItems[id].rewardType == 2)
-        {
-            ItemAPI.AddItem(BonusItems[id].itemNumber);
-        }
-        else if (BonusItems[id].rewardType == 1)
-        {
-            GlobalValue.instance.exp += BonusItems[id].itemNumber;
-        }
-        else if (BonusItems[id].rewardType == 0)
-        {
-            GlobalValue.instance.gold += BonusItems[id].itemNumber;
+            if (BonusItems[id].rewardType == 2)
+            {
+                ItemAPI.AddItem(BonusItems[id].itemNumber);
+            }
+            else if (BonusItems[id].rewardType == 1)
+            {
+                GlobalValue.instance.exp += BonusItems[id].itemNumber;
+            }
+            else if (BonusItems[id].rewardType == 0)
+            {
+                GlobalValue.instance.gold += BonusItems[id].itemNumber;
+            }
         }
     }
 }

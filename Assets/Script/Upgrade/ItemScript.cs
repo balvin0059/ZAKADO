@@ -33,12 +33,19 @@ public class ItemScript : MonoBehaviour {
     public int lastTimecatID;
     public int itemID;
     public int lastTimeItemID;
-
+    public RectTransform context;
+    public Text lvText;
+    public Text hpText;
+    public Text atkText;
 
 
     public void ItemPanelOpen()
     {
         itemPanel.SetActive(true);
+        if (ItemHolder.instance.amount > 3)
+        {
+            context.sizeDelta += new Vector2(180 * (ItemHolder.instance.amount - 3), 0);
+        }
         gameObject.GetComponent<UpgradeScene>().itemSelect = true;
         catID = gameObject.GetComponent<UpgradeScene>().indexCat;
         OrderCheck();
@@ -76,6 +83,9 @@ public class ItemScript : MonoBehaviour {
                 itemUse[itemID].SetActive(true);
                 itemInfoPanel.SetActive(true);
                 itemImage.gameObject.SetActive(true);
+                lvText.text = "Lv:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.lv.ToString("00");
+                hpText.text = "HP:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp.ToString();
+                atkText.text = "攻擊:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack.ToString();
             }
         }
         else if (GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem)
@@ -90,6 +100,9 @@ public class ItemScript : MonoBehaviour {
                 GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem = false;
                 GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.equiepItem_id = 0;
                 ItemHolder.instance.globleItems[itemID].itemUse = false;
+                lvText.text = "Lv:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.lv.ToString("00");
+                hpText.text = "HP:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp.ToString();
+                atkText.text = "攻擊:" + GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack.ToString();
             }
         }
     }
@@ -105,39 +118,39 @@ public class ItemScript : MonoBehaviour {
         //此為素質物品區
         if (itemType == ItemAttribute.ItemType.AttributesEffect)
         {
-            if(getItemID == 1000)
+            if(getItemID == 1000||getItemID == 1008||getItemID == 1011)
             {
                 if (!itemSelect)
                 {
-                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack += 10;
+                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack += ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
                 else
                 {
-                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack -= 10;
+                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.attack -= ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
-            }
-            if (getItemID == 1001)
+            }// 攻擊增減
+            if (getItemID == 1001 || getItemID == 1009 || getItemID == 1012)
             {
                 if (!itemSelect)
                 {
-                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp += 100;
+                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp += ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
                 else
                 {
-                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp -= 100;
+                    GlobalValue.instance.catHolder[catID].GetComponent<CatControll>().state.hp -= ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
-            }
-            if (getItemID == 1002)
+            }// hp 增減
+            if (getItemID == 1002 || getItemID == 1010)
             {
                 if (!itemSelect)
                 {
-                    GlobalValue.instance.playerEnegyPower += 5;
+                    GlobalValue.instance.playerEnegyPower += ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
                 else
                 {
-                    GlobalValue.instance.playerEnegyPower -= 5;
+                    GlobalValue.instance.playerEnegyPower -= ItemHolder.instance.globleItems[itemID].itemAttribute.itemBuffer;
                 }
-            }
+            }// 能量 增減
         }
         if (itemType == ItemAttribute.ItemType.FoodBubble)
         {
@@ -157,7 +170,7 @@ public class ItemScript : MonoBehaviour {
             }
             else
             {
-                if (getItemID == 1007)
+                if (getItemID == 1007 || getItemID == 1013)
                 {
                     if (!itemSelect)
                     {

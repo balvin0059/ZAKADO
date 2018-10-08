@@ -24,8 +24,7 @@ public class MainSceneControll : MonoBehaviour {
     //ItemAPI itemAPI;
     void Start()
     {
-        indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];
-        SoundControll.instance.toggle = GameObject.Find("soundOnOff").GetComponent<Toggle>();
+        indexCat.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.catNum[0] - 1000];        
         if (SoundControll.instance.bgmAudioSource.clip != SoundControll.Instance.Bg_01)
         {
             SoundControll.Instance.ChangeBgSound(SoundControll.Instance.Bg_01);
@@ -176,6 +175,10 @@ public class MainSceneControll : MonoBehaviour {
         PlayerPrefs.DeleteAll();
         GlobalValue.instance.LoadAllData();
         Debug.Log(GlobalValue.instance.gameSave.everSave);
+    }
+    public void AddItem()
+    {
+        ItemAPI.AddItem(1000);
     }
     #endregion
 }
