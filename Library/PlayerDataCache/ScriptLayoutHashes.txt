@@ -355,7 +355,7 @@ b6e122c05bcffdd7df830d9e1a631003 Assembly-CSharp.dll:Fungus.SetToggleState
 85f1dd18b3aa8d94fbf0519373cb90d4 Assembly-CSharp.dll:Fungus.InvLerp
 5e6d45a991f8b0a32a316d0a266ae47b Assembly-CSharp.dll:Fungus.Neg
 a2df2af1def9f50f97d6e5028966c9f4 Assembly-CSharp.dll:Fungus.SetMenuDialog
-f925e5f53bb425c306e44e2deaaffbc2 Assembly-CSharp.dll:.ItemScript
+e166ef973dbea9202344f215b4ba3868 Assembly-CSharp.dll:.ItemScript
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -511,6 +511,7 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 0793b323244ebf72eb54e938665afc07 Assembly-CSharp.dll:.FoodBubble
 144f1a11d3a0586c587d4b4ca0edd8da Assembly-CSharp.dll:Fungus.ControlAudio
 6884501df86b64ee537771b3172066db Assembly-CSharp.dll:Fungus.AnimatorState
+71948706d49fc13f3d8e4ef48fdb7664 Assembly-CSharp.dll:.ConnectDesigner
 4866235bbc70a185fb2f57ce1fdd9948 Assembly-CSharp.dll:.ButtonBack
 a421f21e520fcf48744c8ad1fb1bdb00 Assembly-CSharp.dll:Fungus.StopTweensLean
 9b10f1948e3e25a573202bd3ebf3b9f5 Assembly-CSharp.dll:Fungus.MinMax

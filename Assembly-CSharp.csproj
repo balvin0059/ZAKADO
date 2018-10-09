@@ -575,6 +575,12 @@
      <Compile Include="Assets\Script\DailyFunc\Scripts\BonusItem.cs" />
      <Compile Include="Assets\Script\DailyFunc\Scripts\DailyBonusController.cs" />
      <Compile Include="Assets\Script\DailyFunc\Scripts\ProbabilityController.cs" />
+     <Compile Include="Assets\Script\FisH\DotAdd.cs" />
+     <Compile Include="Assets\Script\FisH\FishControll.cs" />
+     <Compile Include="Assets\Script\FisH\FishHolder.cs" />
+     <Compile Include="Assets\Script\FisH\FishProbabilityController.cs" />
+     <Compile Include="Assets\Script\FisH\FishSet.cs" />
+     <Compile Include="Assets\Script\FisH\FishState.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyBulletAttr.cs" />

@@ -63,8 +63,27 @@ public class GlobalValue : MonoBehaviour {
     public int playerEnegyPower;
     public int itemNBubbleBufferAmount;
     public int itemSBubbleBufferAmount;
+    [Header("釣魚相關")]
+    public TimeSpan FishtimeSpan;
+    public RodQuality rodQuality;
+    public BaitQuality baitQuality;
+    public enum RodQuality
+    {
+        none = 0,
+        normal,
+        rare,
+        unique
+    }
+    public enum BaitQuality
+    {
+        none = 0,
+        normal,
+        rare,
+        unique
+    }
 
     #region 體力系統
+    [Header("體力系統時間")]
     public DateTime dateTime;
     public DateTime dateTime_next;
     public TimeSpan timeSpan;

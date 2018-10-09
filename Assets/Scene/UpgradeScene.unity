@@ -8636,7 +8636,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1010713656159818, guid: 843700a8dad2ebe47b224ce8b3b63bb7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 843700a8dad2ebe47b224ce8b3b63bb7, type: 2}
@@ -13654,6 +13654,9 @@ MonoBehaviour:
   itemID: 0
   lastTimeItemID: 0
   context: {fileID: 2121667450}
+  lvText: {fileID: 0}
+  hpText: {fileID: 0}
+  atkText: {fileID: 0}
 --- !u!1 &1957565337
 GameObject:
   m_ObjectHideFlags: 0

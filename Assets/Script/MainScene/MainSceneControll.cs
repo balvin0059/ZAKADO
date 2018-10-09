@@ -128,7 +128,18 @@ public class MainSceneControll : MonoBehaviour {
         OnPaneling = false;
         OnQuestIng = false;
     }//關閉面板事件
-
+    public void OnFishing()
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+        if (!OnQuestIng)
+        {
+            if (!OnPaneling)
+            {
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("Fishing");
+            }
+        }
+    }
     public void OnQuest()//任務按鈕
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);

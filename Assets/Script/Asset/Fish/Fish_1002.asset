@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f1eb43a308bd74cbaeb505fd6ea8b7, type: 3}
+  m_Name: Fish_1002
+  m_EditorClassIdentifier: 
+  ID: 1002
+  fishName: "\u5927\u9B5A"
+  fishType: 3
+  fishValue: 1500
+  fishHealth: 200
+  fishPercent:
+  - Name: "\u521D\u7D1A\u98FC\u6599"
+    ProbabilityPercent: 5
+    bUsed: 0
+  - Name: "\u4E2D\u7D1A\u98FC\u6599"
+    ProbabilityPercent: 10
+    bUsed: 0
+  - Name: "\u9AD8\u7D1A\u98FC\u6599"
+    ProbabilityPercent: 20
+    bUsed: 0

@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 21611114}
   - component: {fileID: 21611115}
   - component: {fileID: 21611116}
+  - component: {fileID: 21611117}
   m_Layer: 0
   m_Name: DontDestroyObj
   m_TagString: God
@@ -373,6 +374,8 @@ MonoBehaviour:
   playerEnegyPower: 0
   itemNBubbleBufferAmount: 0
   itemSBubbleBufferAmount: 0
+  rodQuality: 1
+  baitQuality: 1
   deltaEnegy: 0
   recoverEg: 0
   geSw: 0
@@ -588,6 +591,34 @@ MonoBehaviour:
     id: 5
     isComplete: 0
     isReward: 0
+--- !u!114 &21611117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 21611109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15022b85fdfe8fb42a2936570a75f4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishIndex:
+  - Name: "\u5C0F\u9B5A"
+    fishState: {fileID: 11400000, guid: c4066269a06fc0448bcb720c10b1a2c1, type: 2}
+    id: 1000
+    amount: 0
+    order: 0
+  - Name: "\u4E2D\u9B5A"
+    fishState: {fileID: 11400000, guid: 38c0124cfea18eb429db902e28be29b8, type: 2}
+    id: 1001
+    amount: 0
+    order: 0
+  - Name: "\u5927\u9B5A"
+    fishState: {fileID: 11400000, guid: 0f7249d44319afd46b522a5770850ca6, type: 2}
+    id: 1002
+    amount: 0
+    order: 0
+  amount: 0
 --- !u!1 &60693608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1748,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F5C\u8005\u540D\u7A31:\nCalvin\n\nEmail:\nwwwcomtw82\n@hotmail.com"
+  m_Text: "\u4F5C\u8005\u540D\u7A31:\nCalvin\n\nEmail:\nzakado0059@gmail.com"
 --- !u!114 &199099882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5457,7 +5488,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 756251794}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 477466701}
+        m_MethodName: OnFishing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &756251794
@@ -5981,7 +6023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &858282367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7578,7 +7620,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1010713656159818, guid: 843700a8dad2ebe47b224ce8b3b63bb7, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114970157202123724, guid: 843700a8dad2ebe47b224ce8b3b63bb7,
         type: 2}
