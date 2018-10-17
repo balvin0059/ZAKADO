@@ -13,6 +13,7 @@ public class Loading : MonoBehaviour {
     public void GotoScene(string sceneName)
     {
         StartCoroutine(DisPlayLoadingScreen(sceneName));
+        
     }
     private IEnumerator DisPlayLoadingScreen(string sceneName)
     {
@@ -46,7 +47,10 @@ public class Loading : MonoBehaviour {
             setLoading(disPlayProgress);
             yield return new WaitForEndOfFrame();
         }
+
         async.allowSceneActivation = true;
+        string n_sceneName = SceneManager.GetActiveScene().name;
+        System.GC.Collect();
     }
 
     private void setLoading(float percent)

@@ -19,7 +19,7 @@ public class GlobalValue : MonoBehaviour {
     {
         if (instance == null)
         {
-            instance = this;            
+            instance = this;
             DontDestroyOnLoad(this);
         }
         else if (this != instance)
@@ -30,6 +30,7 @@ public class GlobalValue : MonoBehaviour {
     #endregion
     public GameSave gameSave = new GameSave();
     [Header("主介面素質區")]
+    #region 主介面素質區
     public int gold = 0;
     public int exp = 0;
     public int maxEnegy = 50;
@@ -47,40 +48,29 @@ public class GlobalValue : MonoBehaviour {
     public int nowUnlockCat;
     public DateTime nowTime;
     public bool daliyBonus;
+    #endregion
     [Header("物件預載素質區")]
+    #region 物件預載素質區
     public GameObject[] catHolder;
     public GameObject[] enemyHolder;
     public GameObject[] effectHolder;
+    #endregion
     [Header("圖片預載素質區")]
+    #region 圖片預載素質區
     public Sprite[] catSpritHolder;
     public Sprite[] catBattleSpritHolder;
     public Sprite[] elementHolder; // 1 = fire, 2 = water,3 = lighting
     public Sprite[] missionTopBg;
     public Sprite[] missionBotBg;
     public Sprite[] missionMainBg;
+    #endregion
     [Header("遊戲內需要素質")]
+    #region 遊戲內需要素質
     public int[] GetTypePower; // 0 = fire, 1 = water,2 = lighting
     public int playerEnegyPower;
     public int itemNBubbleBufferAmount;
     public int itemSBubbleBufferAmount;
-    [Header("釣魚相關")]
-    public TimeSpan FishtimeSpan;
-    public RodQuality rodQuality;
-    public BaitQuality baitQuality;
-    public enum RodQuality
-    {
-        none = 0,
-        normal,
-        rare,
-        unique
-    }
-    public enum BaitQuality
-    {
-        none = 0,
-        normal,
-        rare,
-        unique
-    }
+    #endregion
 
     #region 體力系統
     [Header("體力系統時間")]
@@ -109,7 +99,7 @@ public class GlobalValue : MonoBehaviour {
             {
                 gameSave.catNum[i] = catNum[i];
             }
-            for(int i = 0; i < catBuyYet.Length; i++)
+            for (int i = 0; i < catBuyYet.Length; i++)
             {
                 gameSave.catBuyYet[i] = catBuyYet[i];
             }
@@ -117,11 +107,15 @@ public class GlobalValue : MonoBehaviour {
         }
         nowTime = DateTime.Now;
         timeSpan_f = nowTime.Subtract(gameSave.recordTime);
-        Debug.Log(timeSpan_f.TotalSeconds+"秒");
+        Debug.Log(timeSpan_f.TotalSeconds + "秒");
         int deltaenegy = (int)timeSpan_f.TotalSeconds / 300;
         LoadAllData();
         enegy = (enegy + deltaenegy > 50) ? 50 : enegy + deltaenegy;
-        timeSpan_d = timeSpan_f.Add(new TimeSpan(0, 0, -deltaenegy*300));
+        if (enegy < 0)
+        {
+            enegy = 0;
+        }
+        timeSpan_d = timeSpan_f.Add(new TimeSpan(0, 0, -deltaenegy * 300));
     }
 
     private void Update()
@@ -144,7 +138,7 @@ public class GlobalValue : MonoBehaviour {
             {
                 Debug.Log("已呼叫GETENEGY");
                 enegy += 1;
-                if(enegy >= 50)
+                if (enegy >= 50)
                 {
                     enegy = 50;
                     geSw = false;
@@ -176,7 +170,7 @@ public class GlobalValue : MonoBehaviour {
         if (timeSpan > timeSpan_f)
         {
             timeSpan -= timeSpan_f;
-        }else if(timeSpan > timeSpan_d)
+        } else if (timeSpan > timeSpan_d)
         {
             timeSpan -= timeSpan_d;
         }
@@ -185,6 +179,7 @@ public class GlobalValue : MonoBehaviour {
     {
         SaveAllData();
         ge.Abort();
+
     }
     #endregion
 
@@ -217,7 +212,7 @@ public class GlobalValue : MonoBehaviour {
             gameSave.item_amount[i] = ItemHolder.instance.globleItems[i].amount;
             gameSave.itemOrder[i] = ItemHolder.instance.globleItems[i].order;
         }//存現有道具資料
-        for(int i = 0; i < QuestHolder.instance.quest.Count; i++)
+        for (int i = 0; i < QuestHolder.instance.quest.Count; i++)
         {
             gameSave.quest_complete[i] = QuestHolder.instance.quest[i].isComplete;
             gameSave.quest_reward[i] = QuestHolder.instance.quest[i].isReward;
@@ -236,6 +231,20 @@ public class GlobalValue : MonoBehaviour {
         gameSave.nowUnlockCat = nowUnlockCat;
         gameSave.everSave = true;
         gameSave.daliybonus = daliyBonus;
+
+        gameSave.FishAuto = FishHolder.instance.fishValue.AutoisOn;
+        gameSave.recordFishingTime = FishHolder.instance.fishValue.fishDate;
+        for (int i = 0; i < FishHolder.instance.fishValue.fishAmount.Length; i++)
+        {
+            gameSave.fishAmount[i] = FishHolder.instance.fishValue.fishAmount[i];
+        }
+        for (int i = 0; i < FishHolder.instance.fishValue.fishBaitAmount.Length; i++)
+        {
+            gameSave.fishBaitAmount[i] = FishHolder.instance.fishValue.fishBaitAmount[i];
+        }
+        gameSave.rodQuality = FishHolder.instance.fishValue.rodQuality;
+        gameSave.baitQuality = FishHolder.instance.fishValue.baitQuality;
+
         SaveLoadData.SaveData(gameSave);
     }//存檔
     public void LoadAllData()
@@ -272,6 +281,16 @@ public class GlobalValue : MonoBehaviour {
             {
                 gameSave.everTeach[i] = everTeach[i];
             }//存是否教學過
+            for (int i = 0; i < FishHolder.instance.fishValue.fishAmount.Length; i++)
+            {
+                gameSave.fishAmount[i] = FishHolder.instance.fishValue.fishAmount[i];
+            }
+            for (int i = 0; i < FishHolder.instance.fishValue.fishBaitAmount.Length; i++)
+            {
+                gameSave.fishBaitAmount[i] = FishHolder.instance.fishValue.fishBaitAmount[i];
+            }
+            gameSave.rodQuality = FishHolder.instance.fishValue.rodQuality;
+            gameSave.baitQuality = FishHolder.instance.fishValue.baitQuality;
         }
         for (int i = 0; i < catHolder.Length; i++)
         {
@@ -328,6 +347,19 @@ public class GlobalValue : MonoBehaviour {
         enegy = gameSave.enegy;
         nowStory = gameSave.nowStory;
         nowUnlockCat = gameSave.nowUnlockCat;
+        FishHolder.instance.fishValue.AutoisOn = gameSave.FishAuto;
+        FishHolder.instance.fishValue.fishDate = gameSave.recordFishingTime;
+        for (int i = 0; i < FishHolder.instance.fishValue.fishAmount.Length; i++)
+        {
+            FishHolder.instance.fishValue.fishAmount[i] = gameSave.fishAmount[i];
+        }
+        for (int i = 0; i < FishHolder.instance.fishValue.fishBaitAmount.Length; i++)
+        {
+            FishHolder.instance.fishValue.fishBaitAmount[i] = gameSave.fishBaitAmount[i];
+        }
+        FishHolder.instance.fishValue.rodQuality = gameSave.rodQuality;
+        FishHolder.instance.fishValue.baitQuality = gameSave.baitQuality;
+
         if (gameSave.recordTime.DayOfYear != LeapYear())
         {
             if (DateTime.Now.DayOfYear > gameSave.recordTime.DayOfYear)

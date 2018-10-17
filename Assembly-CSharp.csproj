@@ -575,6 +575,7 @@
      <Compile Include="Assets\Script\DailyFunc\Scripts\BonusItem.cs" />
      <Compile Include="Assets\Script\DailyFunc\Scripts\DailyBonusController.cs" />
      <Compile Include="Assets\Script\DailyFunc\Scripts\ProbabilityController.cs" />
+     <Compile Include="Assets\Script\FisH\DestroySelf.cs" />
      <Compile Include="Assets\Script\FisH\DotAdd.cs" />
      <Compile Include="Assets\Script\FisH\FishControll.cs" />
      <Compile Include="Assets\Script\FisH\FishHolder.cs" />
@@ -610,6 +611,7 @@
      <Compile Include="Assets\Script\Item\ItemHolder.cs" />
      <Compile Include="Assets\Script\MainScene\ConnectDesigner.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
+     <Compile Include="Assets\Script\MainScene\MainSceneLockScript.cs" />
      <Compile Include="Assets\Script\Map\MapScene.cs" />
      <Compile Include="Assets\Script\Quest\QuestAttr.cs" />
      <Compile Include="Assets\Script\Quest\QuestHolder.cs" />
@@ -637,7 +639,6 @@
      <None Include="Assets\Fungus\Integrations\Playmaker\ReadMe.txt" />
      <None Include="Assets\Fungus\Scripts\link.xml" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\README.txt" />
-     <None Include="Assets\Effect\MagicEffectsPackFree\ReadMe.txt" />
      <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Types\FungusTypes.txt" />
      <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Types\UnityTypes.txt" />
      <None Include="Assets\Fungus\Integrations\Spine\Readme.txt" />
@@ -646,6 +647,7 @@
      <None Include="Assets\Fungus\Textures\Attribution.txt" />
      <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Lua\inspect.txt" />
      <None Include="Assets\TexturePackerImporter\Readme.txt" />
+     <None Include="Assets\Script\Shader\BlurEffect.shader" />
      <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Lua\fungus.txt" />
      <None Include="Assets\Fungus\Docs\CHANGELOG.txt" />
  <Reference Include="Vuforia.UnityExtensions">

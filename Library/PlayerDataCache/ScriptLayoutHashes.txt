@@ -10,6 +10,7 @@ Assets/Scene/TeamScene.unity
 Assets/Scene/UpgradeScene.unity
 Assets/Scene/GameScene.unity
 Assets/Scene/ShopScene.unity
+Assets/Scene/Fishing.unity
 SceneListEnd?
 b497cd6cb84c2199c071bc81e08e7906 Assembly-CSharp.dll:Fungus.Stop
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SfxrCacheSurrogate
@@ -17,6 +18,7 @@ b497cd6cb84c2199c071bc81e08e7906 Assembly-CSharp.dll:Fungus.Stop
 fd0f43a3b3758d704d6ddaee31a24a8b Assembly-CSharp.dll:Fungus.FlowchartEnabled
 e3ea99699c3e3c6d4457355e3ca5af67 Assembly-CSharp.dll:Fungus.RotateFrom
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Fungus.SaveManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DotAdd
 381d804adff3ba161f944343def3fe1a Assembly-CSharp.dll:Fungus.GetToggleState
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ShovelPower
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -36,6 +38,7 @@ b20f7948f03b6dc491cc69efe57bc8c1 Assembly-CSharp.dll:Fungus.CharacterControllerC
 3d4501935c82b1ad586cc7811d1f8ed2 Assembly-CSharp.dll:Fungus.Collision2D
 d4bcb0964e9fd65eead7c3cbc27a70e2 Assembly-CSharp.dll:Fungus.Vector3Fields
 507638d4a41cb9131848b0d6b4fcb60b Assembly-CSharp.dll:Fungus.PunchScale
+1d2cfa35f3ec30d5e422c8e5d716839d Assembly-CSharp.dll:.FishControll
 67a085132ec2c865fdc9fc0613db613a Assembly-CSharp.dll:Fungus.LoadScene
 b497cd6cb84c2199c071bc81e08e7906 Assembly-CSharp.dll:Fungus.Else
 826755378fe639384e13690344ada0d6 Assembly-CSharp.dll:Fungus.Clickable2D
@@ -139,6 +142,7 @@ c6f8879c5be2aa1779658f46fa00d126 Assembly-CSharp.dll:Fungus.RandomFloat
 071ee27dd15a1f4a4794a4298eaae6af Assembly-CSharp.dll:Fungus.SetLanguage
 b8cc663a36e2da57925e944db922b3b9 Assembly-CSharp.dll:Fungus.Flowchart
 3d4501935c82b1ad586cc7811d1f8ed2 Assembly-CSharp.dll:Fungus.Trigger2D
+c02faa051e61ca67cfc731db835a7bea Assembly-CSharp.dll:.FishState
 8ab06b47f26219a42c39d0a3eba66acd Assembly-CSharp.dll:.QuestHolder
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 dbc29a6f2739d277c10da432d73adb6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -178,6 +182,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 a82cd5d9080954546599555f26ac548d Assembly-CSharp.dll:Fungus.Vector3ToVector2
 dc9cf8260c6e08a09200ac6ed4cb9f68 Assembly-CSharp.dll:Fungus.View
 a088df77dc5c3608d027e8891db421bf Assembly-CSharp.dll:Fungus.FadeUI
+0786740c31bfa660259159e2f5c67de6 Assembly-CSharp.dll:.MainSceneLockScript
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 2116ce0c9bbe0018bf219d0d8896533f Assembly-CSharp.dll:Fungus.SetAnimTrigger
 c57a56bf07ca7d2afd1842c355294ac1 Assembly-CSharp.dll:Fungus.ShakePosition
@@ -257,6 +262,7 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
+2a5e695ddea1e747c2a5fb164bbc22ea Assembly-CSharp.dll:.FishHolder
 5a0297c2b694cd33b47095944e6ef994 Assembly-CSharp.dll:Fungus.RotateAdd
 ea1c52d4393344169a79b180c8b85521 Assembly-CSharp.dll:Fungus.ButtonClicked
 128ce770b8d72da7c05552704fff4a4e Assembly-CSharp.dll:Fungus.Map
@@ -387,6 +393,7 @@ c6af39c84922e55c0784ffce0da27ec7 Assembly-CSharp.dll:Fungus.ScaleLean
 ab7a115f5e74f7e0ac5dde4d30b1adb9 Assembly-CSharp.dll:Fungus.PlayUsfxrSound
 b4fb7839933fb1618b34a814dd2ec866 Assembly-CSharp.dll:Fungus.Pow
 0711fa5e359f38141961317dedaf6a23 Assembly-CSharp.dll:Fungus.GetText
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DestroySelf
 c26c68112d9139e39a8e9fc5b14b5918 Assembly-CSharp.dll:Fungus.Lerp
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CorePower
 b497cd6cb84c2199c071bc81e08e7906 Assembly-CSharp.dll:Fungus.StopMusic

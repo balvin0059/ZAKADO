@@ -31,4 +31,11 @@ public class GameSave
     public bool[] quest_reward = new bool[6];
 
     public bool daliybonus;
+
+    public bool FishAuto;
+    public DateTime recordFishingTime;
+    public int[] fishAmount = new int[3];
+    public int[] fishBaitAmount = new int[3];
+    public FishHolder.FishValue.RodQuality rodQuality;
+    public FishHolder.FishValue.BaitQuality baitQuality;
 }

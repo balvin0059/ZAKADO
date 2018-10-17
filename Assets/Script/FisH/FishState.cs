@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Creat GameStuff/ Fish Attribute")]
 public class FishState : ScriptableObject

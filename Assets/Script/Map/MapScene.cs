@@ -196,13 +196,10 @@ public class MapScene : MonoBehaviour {
         {
             case 0:
                 return "第一章";
-                break;
             case 1:
                 return "第二章";
-                break;
             case 2:
                 return "第三章";
-                break;
         }
         return "";
     }
