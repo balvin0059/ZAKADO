@@ -16,7 +16,7 @@ public class HookShoot : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer)
+        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerWaiting)
         {
             if (!TurnControll.instance.skillUseIng)
             {

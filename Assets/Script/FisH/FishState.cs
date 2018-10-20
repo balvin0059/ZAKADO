@@ -12,6 +12,7 @@ public class FishState : ScriptableObject
     [Range(0, 200)]
     public float fishHealth;    
     public FishPercent[] fishPercent;
+    public Sprite fishSprite;
 
     //public float Percent
     //{

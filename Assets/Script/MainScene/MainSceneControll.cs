@@ -21,6 +21,7 @@ public class MainSceneControll : MonoBehaviour {
     public GameObject enegyPanelMax;
     public GameObject enegyPanelCount;
     public GameObject daliybonus;
+    public GameObject lockSprite;
     //ItemAPI itemAPI;
     void Start()
     {
@@ -50,7 +51,7 @@ public class MainSceneControll : MonoBehaviour {
             enegyPanelCount.gameObject.SetActive(false);
             enegyPanelMax.gameObject.SetActive(true);
         }
-        
+        lockSprite.SetActive(!GlobalValue.instance.mission[0]);
     }
 
     #region 按鈕

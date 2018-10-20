@@ -97,7 +97,7 @@ public class WebBubble : MonoBehaviour {
     {
         if (isEat)
         {
-                hook.transform.localScale = new Vector3(1.8f, 1.8f, 0);
+                hook.transform.localScale += new Vector3(0.8f, 0.8f, 0);
                 Destroy(gameObject);
         }
     }

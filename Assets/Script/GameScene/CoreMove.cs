@@ -25,13 +25,28 @@ public class CoreMove : MonoBehaviour
     public float z;//角度存入器
     #endregion
 
+    bool press
+    {
+        get
+        {
+            return Input.GetMouseButton(0);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer)
         {
-            tipLine.transform.localPosition = new Vector3(0, 20*distance, 0);
-            tipLine.transform.localScale = new Vector3(1.2f, 1.5f*distance, 1);
+            coreImage.sprite = foodPlate;
+            if (!press)
+            {
+                TurnControll.instance.turnState = TurnControll.TurnState.turnPlayerWaiting;
+            }
+        }
+        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerWaiting)
+        {
+            tipLine.transform.localPosition = new Vector3(0, 20 * distance, 0);
+            tipLine.transform.localScale = new Vector3(1.2f, 1.5f * distance, 1);
             coreImage.sprite = foodPlate;
             Hook();
         }
@@ -101,6 +116,7 @@ public class CoreMove : MonoBehaviour
     #endregion
     void Hook()
     {
+
         if (GlobalValue.instance.everTeach[0])
         {
             if (Input.GetMouseButtonDown(0))

@@ -26,3 +26,4 @@ MonoBehaviour:
   - Name: "\u9AD8\u7D1A\u98FC\u6599"
     ProbabilityPercent: 20
     bUsed: 0
+  fishSprite: {fileID: 21300000, guid: 5b9bfec8f4f17284b9431a08d2035dbf, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class DotAdd : MonoBehaviour {
-    int dotAmount = 1;
+    int dotAmount = 0;
     Text text;
 
     void Start()

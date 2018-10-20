@@ -13654,9 +13654,9 @@ MonoBehaviour:
   itemID: 0
   lastTimeItemID: 0
   context: {fileID: 2121667450}
-  lvText: {fileID: 0}
-  hpText: {fileID: 0}
-  atkText: {fileID: 0}
+  lvText: {fileID: 1736399594}
+  hpText: {fileID: 482036744}
+  atkText: {fileID: 709719136}
 --- !u!1 &1957565337
 GameObject:
   m_ObjectHideFlags: 0

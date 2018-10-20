@@ -577,11 +577,14 @@
      <Compile Include="Assets\Script\DailyFunc\Scripts\ProbabilityController.cs" />
      <Compile Include="Assets\Script\FisH\DestroySelf.cs" />
      <Compile Include="Assets\Script\FisH\DotAdd.cs" />
+     <Compile Include="Assets\Script\FisH\FishBasket.cs" />
      <Compile Include="Assets\Script\FisH\FishControll.cs" />
      <Compile Include="Assets\Script\FisH\FishHolder.cs" />
      <Compile Include="Assets\Script\FisH\FishProbabilityController.cs" />
+     <Compile Include="Assets\Script\FisH\FishRod.cs" />
      <Compile Include="Assets\Script\FisH\FishSet.cs" />
      <Compile Include="Assets\Script\FisH\FishState.cs" />
+     <Compile Include="Assets\Script\GameScene\Afterimage.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\CatAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyAttr.cs" />
      <Compile Include="Assets\Script\GameScene\Attr\EnemyBulletAttr.cs" />
@@ -609,6 +612,8 @@
      <Compile Include="Assets\Script\Item\GlobleItem.cs" />
      <Compile Include="Assets\Script\Item\ItemAttribute.cs" />
      <Compile Include="Assets\Script\Item\ItemHolder.cs" />
+     <Compile Include="Assets\Script\ItemShop\ItemAdd.cs" />
+     <Compile Include="Assets\Script\ItemShop\ItemShopControll.cs" />
      <Compile Include="Assets\Script\MainScene\ConnectDesigner.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneControll.cs" />
      <Compile Include="Assets\Script\MainScene\MainSceneLockScript.cs" />

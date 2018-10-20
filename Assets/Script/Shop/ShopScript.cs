@@ -19,17 +19,13 @@ public class ShopScript : MonoBehaviour {
     public bool locking = false;
     public GameObject buyButton;
     public GameObject buyedText;
+    public GameObject cost;
 	// Use this for initialization
 	void Start () {
-        //if (GlobalValue.instance.nowUnlockCat < GlobalValue.instance.catHolder.Length)
-        //{
-        //    catName.text = GlobalValue.instance.catHolder[GlobalValue.instance.nowUnlockCat].GetComponent<CatControll>().state.name;
-        //    catSprite.sprite = GlobalValue.instance.catSpritHolder[GlobalValue.instance.nowUnlockCat];
-        //    catCost.text = (GlobalValue.instance.nowUnlockCat * 1000).ToString();
-        //}
     }
     void Update()
     {
+        GetMove();
         catName.text = GlobalValue.instance.catHolder[gameObject.GetComponent<ScrollScript>().index+3].GetComponent<CatControll>().state.name;
         catCost.text = ((gameObject.GetComponent<ScrollScript>().index+1) * 3000).ToString();
         buyButton.SetActive(!GlobalValue.instance.catBuyYet[gameObject.GetComponent<ScrollScript>().index + 3]);
@@ -103,5 +99,46 @@ public class ShopScript : MonoBehaviour {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         noCatPanel.SetActive(false);
         SceneManager.LoadScene("MainScene");
+    }
+    #region 需要變數
+    public RectTransform UGUICanvas;//宣告一個canvas
+    public Camera miancamera;//宣告一個camera
+    public Vector3 mousePos_1;//紀錄按下去的POS
+    public Vector3 mousePos_2;//紀錄移動中的POS
+    public Vector2 directionVector;//計算角度DELTA POS
+    public float distance;//計算距離
+    #endregion
+    void GetMove()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_1);
+        }
+        if (Input.GetMouseButton(0))
+        {
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(UGUICanvas, new Vector2(Input.mousePosition.x, Input.mousePosition.y), miancamera, out mousePos_2);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            cost.SetActive(true);
+            Reset();
+        }
+        directionVector = mousePos_1 - mousePos_2;
+        distance = directionVector.magnitude * 1.7f;
+        if(distance > 5)
+        {
+            cost.SetActive(false);
+        }
+        else
+        {
+            cost.SetActive(true);
+        }
+    }
+    void Reset()
+    {
+        mousePos_1 = new Vector3();
+        mousePos_2 = new Vector3();
+        directionVector = new Vector2();
+        distance = new float(); ;
     }
 }

@@ -40,6 +40,7 @@ public class TurnControll : MonoBehaviour {
     {
         None = 0,
         turnPlayer,
+        turnPlayerWaiting,
         turnPlayerShoot,
         turnAttack,
         turnAttacking,
@@ -183,7 +184,7 @@ public class TurnControll : MonoBehaviour {
             PanelTopBg.gameObject.SetActive(false);
             rect.position = Vector3.MoveTowards(rect.position, top.position, 80 * Time.deltaTime);
         }
-        if (turnState == TurnState.turnPlayer|| turnState == TurnState.turnPlayerShoot || turnState == TurnState.turnAttack || turnState == TurnState.turnAttacking || turnState == TurnState.turnEnd)
+        if (turnState == TurnState.turnPlayerWaiting || turnState == TurnState.turnPlayer|| turnState == TurnState.turnPlayerShoot || turnState == TurnState.turnAttack || turnState == TurnState.turnAttacking || turnState == TurnState.turnEnd)
         {
             if (rect.position == new Vector3(0f, 0f, 0f))
             { PanelTopBg.gameObject.SetActive(true); }
@@ -220,7 +221,7 @@ public class TurnControll : MonoBehaviour {
                 {
                     if (!GlobalValue.instance.everTeach[2])
                     {
-                        Time.timeScale = 0;
+                        //Time.timeScale = 0;
                         TeachPanel[2].SetActive(true);
                     }
                 }
@@ -229,13 +230,16 @@ public class TurnControll : MonoBehaviour {
             {
                 if (TeachPanel[1] != null)
                 {
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
                     TeachPanel[1].SetActive(true);
                 }
             }
-            enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
-            onlyOneTime = false;
-            turnState = TurnState.turnEnemyAttack;
+            else
+            {
+                enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
+                onlyOneTime = false;
+                turnState = TurnState.turnEnemyAttack;
+            }
         }
     }
     IEnumerator TurnEnd()

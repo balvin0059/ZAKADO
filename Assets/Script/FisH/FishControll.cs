@@ -56,6 +56,7 @@ public class FishControll : MonoBehaviour {
         public Image changeBaitPanel;
         public Image changeBaitSprite;
         public GameObject noFishBaitTip;
+        public Image getFishTypeSprite;
         [Header("釣魚值面板預載")]
         public GameObject UItapScreen; // 觸控範圍
         public GameObject UIFishingBar; // 釣魚值物件
@@ -70,6 +71,7 @@ public class FishControll : MonoBehaviour {
         public GameObject loading; // 讀取畫面
         [Header("升級魚餌面板預載")]
         public GameObject FishBaitPanel; // 魚餌面板
+        public Sprite[] fishbaitQ;       
         [Header("升級釣竿面板預載")]
         public GameObject FishRodPanel; // 釣竿面板
         public Image fishRod_bg; // 釣竿背景(普通 精良 史詩)
@@ -307,6 +309,7 @@ public class FishControll : MonoBehaviour {
         fishHealth = FishHolder.instance.fishIndex[fishSet[choice].ID - 1000].fishState.fishHealth;
         preloadText.fishingName.text = FishHolder.instance.fishIndex[fishSet[choice].ID - 1000].fishState.fishName;
         preloadText.fishingValue.text = FishHolder.instance.fishIndex[fishSet[choice].ID - 1000].fishState.fishValue.ToString();
+        preloadObject.getFishTypeSprite.sprite = FishHolder.instance.fishIndex[fishSet[choice].ID - 1000].fishState.fishSprite;
     }//取3隻魚其中一隻
     void SetPercent()
     {
@@ -326,7 +329,7 @@ public class FishControll : MonoBehaviour {
         preloadText.fishText.text = GlobalValue.instance.gold.ToString();
         preloadText.baitAmount_os.text = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality-1].ToString();
         preloadObject.changeBaitPanel.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.baitQuality - 1];
-        preloadObject.changeBaitSprite.color = baitspritecol();
+        preloadObject.changeBaitSprite.sprite = preloadObject.fishbaitQ[(int)FishHolder.instance.fishValue.baitQuality - 1];
     }//顯示魚飼料同步現有魚飼料
     #region 自動釣魚
     bool GetFish = false;
@@ -400,6 +403,7 @@ public class FishControll : MonoBehaviour {
         preloadObject.loading.GetComponent<Loading>().GotoScene("MainScene");
     }
     #endregion
+
     void GetFishFunc()
     {
         FishHolder.instance.fishIndex[whichFish].amount += 1;
@@ -415,13 +419,11 @@ public class FishControll : MonoBehaviour {
     {
         if (!startFishbool)
         {
-            preloadObject.fishRod_bg.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.rodQuality - 1];
             preloadObject.fishRod.sprite = preloadObject.fishRodq[(int)FishHolder.instance.fishValue.rodQuality - 1];
             preloadText.fishRodName.text = rodName();
             preloadText.fishRodName.color = rodnameColor();
             if (FishHolder.instance.fishValue.rodQuality > 0 && (int)FishHolder.instance.fishValue.rodQuality < 3)
             {
-                preloadObject.fishRod_bg.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.rodQuality - 1];
                 preloadObject.fishRod.sprite = preloadObject.fishRodq[(int)FishHolder.instance.fishValue.rodQuality - 1];
                 preloadText.fishRodName.text = rodName();
                 preloadText.RodUpgradevalue.text = rodUpgrade().ToString();
@@ -489,7 +491,6 @@ public class FishControll : MonoBehaviour {
                 preloadObject.effholder_os[(int)FishHolder.instance.fishValue.rodQuality - 1].SetActive(false);
                 GlobalValue.instance.gold -= rodUpgrade();
                 FishHolder.instance.fishValue.rodQuality++;
-                preloadObject.fishRod_bg.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.rodQuality-1];
                 preloadObject.fishRod.sprite = preloadObject.fishRodq[(int)FishHolder.instance.fishValue.rodQuality - 1];
                 preloadText.fishRodName.text = rodName();
                 preloadText.fishRodName.color = rodnameColor();
@@ -557,33 +558,20 @@ public class FishControll : MonoBehaviour {
                 FishHolder.instance.fishValue.baitQuality++;
                 preloadText.baitAmount_os.text = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1].ToString();
                 preloadObject.changeBaitPanel.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.baitQuality - 1];
-                preloadObject.changeBaitSprite.color = baitspritecol();
+                preloadObject.changeBaitSprite.sprite = preloadObject.fishbaitQ[(int)FishHolder.instance.fishValue.baitQuality-1];
             }
             else
             {
                 FishHolder.instance.fishValue.baitQuality = FishHolder.FishValue.BaitQuality.normal;
                 preloadText.baitAmount_os.text = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1].ToString();
                 preloadObject.changeBaitPanel.sprite = preloadObject.fishRodqpanel[(int)FishHolder.instance.fishValue.baitQuality - 1];
-                preloadObject.changeBaitSprite.color = baitspritecol();
+                preloadObject.changeBaitSprite.sprite = preloadObject.fishbaitQ[(int)FishHolder.instance.fishValue.baitQuality-1];
             }
         }
     }
-    Color baitspritecol()
-    {
-        switch ((int)FishHolder.instance.fishValue.baitQuality)
-        {
-            case 0:
-                break;
-            case 1:
-                return Color.green;
-            case 2:
-                return Color.yellow;
-            case 3:
-                return Color.red;
-        }
-        return Color.green;
-    } // 取魚餌顏色
     #endregion
+
+    #region 魚簍
     public void OnFishBasket()
     {
         if (!startFishbool)
@@ -602,8 +590,10 @@ public class FishControll : MonoBehaviour {
         for (int i = 0; i < preloadText.fishGetText.Length; i++)
         {
             FishHolder.instance.fishValue.fishAmount[i] = 0;
+            FishHolder.instance.fishIndex[i].amount = 0;
             preloadText.fishGetText[i].text = FishHolder.instance.fishValue.fishAmount[i].ToString();
         }
+        FishHolder.instance.amount = 0;
     }
     int valueSum()
     {
@@ -614,5 +604,7 @@ public class FishControll : MonoBehaviour {
         }
         return valueSum;
     }
+    #endregion
+
     #endregion
 }

@@ -122,7 +122,7 @@ public class CatControll : MonoBehaviour {
     }
     public void Skill(int id)
     {
-        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayer)
+        if (TurnControll.instance.turnState == TurnControll.TurnState.turnPlayerWaiting)
         {
             if (!TurnControll.instance.skillUseIng)
             {
