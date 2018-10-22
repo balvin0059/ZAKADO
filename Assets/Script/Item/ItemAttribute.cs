@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu (menuName = "Creat GameStuff/ Item Attribute")]
 public class ItemAttribute : ScriptableObject
 {
+    public int itemID;
     public string Desciption;
 
     public string itemName;
@@ -13,7 +14,7 @@ public class ItemAttribute : ScriptableObject
     public Sprite icon;
 
     public int itemBuffer;
-
+    public int SellValue;
     public ItemType itemType;
 
     public enum ItemType

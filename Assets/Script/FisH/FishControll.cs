@@ -50,6 +50,7 @@ public class FishControll : MonoBehaviour {
         public GameObject shock;//釣到魚了 "!!"
         public GameObject autoText;//自動釣魚中 "auto"
         [Header("UI介面預載")]
+        public GameObject TipFinger;
         public GameObject FishingButton; // 開始釣魚按鈕
         public GameObject FishEscapePanel; // 魚跑走 面板
         public GameObject FishGetPanel; // 取得魚 面板
@@ -107,23 +108,17 @@ public class FishControll : MonoBehaviour {
     public FishSet[] fishSet;
     #endregion
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         autoToggle.isOn = FishHolder.instance.fishValue.AutoisOn;
         preloadObject.effholder_os[(int)FishHolder.instance.fishValue.rodQuality - 1].SetActive(true);
         if (Auto)
         {
             Debug.Log(FishHolder.instance.CalculTimeSpan());
             AccmuFish();
-            if (FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1] > 0)
-            {
-                StartCoroutine(AutoFishingThread());
-                preloadObject.FishingButton.gameObject.SetActive(false);
-                preloadObject.StopAutoBtn.SetActive(true);
-                preloadObject.talkBox.SetActive(true);
-                preloadObject.autoText.SetActive(true);
-            }
         }
-    }	
+    }
+
 	// Update is called once per frame
 	void Update () {
 
@@ -134,10 +129,16 @@ public class FishControll : MonoBehaviour {
     void AccmuFish()
     {
         int fishingtime = 0;
-        fishingtime = (int)FishHolder.instance.CalculTimeSpan()/(RodQuality()/1000);
+        fishingtime = (int)FishHolder.instance.CalculTimeSpan()/(RodQuality());
         Debug.Log(fishingtime);
         if(fishingtime < FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1])
         {
+            startFishbool = true;
+            StartCoroutine(AutoFishingThread());
+            preloadObject.FishingButton.gameObject.SetActive(false);
+            preloadObject.StopAutoBtn.SetActive(true);
+            preloadObject.talkBox.SetActive(true);
+            preloadObject.autoText.SetActive(true);
             Debug.Log(fishingtime);
         }
         else
@@ -145,13 +146,6 @@ public class FishControll : MonoBehaviour {
             fishingtime = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1];
             autoToggle.isOn = false;
         }
-        fishingtime = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1];
-        Debug.Log(fishingtime);
-        //if (fishingtime < 0)
-        //{
-        //    fishingtime = FishHolder.instance.fishValue.fishBaitAmount[(int)FishHolder.instance.fishValue.baitQuality - 1];
-        //    autoToggle.isOn = false;
-        //}
         Debug.Log(fishingtime + "次");
         for(int i = 0; i < fishingtime; i++)
         {
@@ -207,7 +201,6 @@ public class FishControll : MonoBehaviour {
         float r = Random.Range(3, 11);
         yield return new WaitForSeconds(r);
         FishHooking();
-        HookFishing();
     }//等待魚上鉤
     void FishHooking()
     {
@@ -215,6 +208,8 @@ public class FishControll : MonoBehaviour {
         Hooking = true;
         preloadObject.dot.SetActive(false);
         preloadObject.shock.SetActive(true);
+        preloadObject.UItapScreen.SetActive(true);
+        preloadObject.TipFinger.SetActive(true);
         StartCoroutine(WaitingForHookup());
     }//有魚上鉤
     IEnumerator WaitingForHookup()
@@ -223,6 +218,7 @@ public class FishControll : MonoBehaviour {
         if(!Fishing)
         {
             preloadObject.FishEscapePanel.SetActive(true);
+            FishingEnd();
         }
     }//等待確定要拉竿
     public void HookHookFish()
@@ -241,6 +237,7 @@ public class FishControll : MonoBehaviour {
                 else
                 {
                     Fishing = true;
+                    StopCoroutine(WaitingForHookup());
                     ChoiceRandom();
                 }
             }
@@ -283,7 +280,9 @@ public class FishControll : MonoBehaviour {
         preloadObject.talkBox.SetActive(false);
         preloadObject.dot.SetActive(false);
         preloadObject.shock.SetActive(false);
-        preloadObject.FishingButton.gameObject.SetActive(true);        
+        preloadObject.FishingButton.gameObject.SetActive(true);
+        preloadObject.UItapScreen.SetActive(false);
+        preloadObject.TipFinger.SetActive(false);
     }//釣魚結束初始化
     float RodDamage()
     {
@@ -322,7 +321,7 @@ public class FishControll : MonoBehaviour {
     public void ClosePanel(GameObject go)
     {
         go.SetActive(false);
-        FishingEnd();
+        //FishingEnd();
     }//關閉面板
     void ShowFish()
     {
@@ -335,7 +334,7 @@ public class FishControll : MonoBehaviour {
     bool GetFish = false;
     IEnumerator AutoFishingThread()
     {
-        Debug.Log("開始自動釣魚"+ RodQuality()/1000+"秒一次");
+        Debug.Log("開始自動釣魚"+ RodQuality()+"秒一次");
         while (Auto)
         {
             yield return new WaitForSeconds(RodQuality());
@@ -348,15 +347,15 @@ public class FishControll : MonoBehaviour {
         switch ((int)FishHolder.instance.fishValue.rodQuality)
         {
             case 0:
-                return 30000;
+                return 30;
             case 1:
-                return 30000;
+                return 30;
             case 2:
-                return 25000;
+                return 25;
             case 3:
-                return 20000;
+                return 20;
         }
-        return 30000;
+        return 30;
     }
     void AutoFishing()
     {
@@ -591,8 +590,9 @@ public class FishControll : MonoBehaviour {
         {
             FishHolder.instance.fishValue.fishAmount[i] = 0;
             FishHolder.instance.fishIndex[i].amount = 0;
-            preloadText.fishGetText[i].text = FishHolder.instance.fishValue.fishAmount[i].ToString();
+            preloadText.fishGetText[i].text = FishHolder.instance.fishValue.fishAmount[i].ToString();            
         }
+        preloadText.ValueAmount.text = valueSum().ToString();
         FishHolder.instance.amount = 0;
     }
     int valueSum()
@@ -607,4 +607,9 @@ public class FishControll : MonoBehaviour {
     #endregion
 
     #endregion
+
+    public void PlaySFX()
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+    }
 }

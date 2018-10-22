@@ -38,4 +38,6 @@ public class GameSave
     public int[] fishBaitAmount = new int[3];
     public FishHolder.FishValue.RodQuality rodQuality;
     public FishHolder.FishValue.BaitQuality baitQuality;
+
+    public bool[] storeCount = new bool[4];
 }

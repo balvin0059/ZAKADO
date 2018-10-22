@@ -222,6 +222,10 @@ public class GlobalValue : MonoBehaviour {
         {
             gameSave.everTeach[i] = everTeach[i];
         }//存是否教學過
+        for (int i = 0; i < ItemHolder.instance.storeCount.Length; i++)
+        {
+            gameSave.storeCount[i] = ItemHolder.instance.storeCount[i];
+        }//存是否買過
         gameSave.item_all = ItemHolder.instance.amount;
         gameSave.gold = gold;
         gameSave.exp = exp;
@@ -289,6 +293,10 @@ public class GlobalValue : MonoBehaviour {
             {
                 gameSave.fishBaitAmount[i] = FishHolder.instance.fishValue.fishBaitAmount[i];
             }
+            for (int i = 0; i < ItemHolder.instance.storeCount.Length; i++)
+            {
+                gameSave.storeCount[i] = ItemHolder.instance.storeCount[i];
+            }//存是否買過
             gameSave.rodQuality = FishHolder.instance.fishValue.rodQuality;
             gameSave.baitQuality = FishHolder.instance.fishValue.baitQuality;
         }
@@ -341,6 +349,10 @@ public class GlobalValue : MonoBehaviour {
         {
             everTeach[i] = gameSave.everTeach[i];
         }//存是否教學過
+        for (int i = 0; i < ItemHolder.instance.storeCount.Length; i++)
+        {
+            ItemHolder.instance.storeCount[i] = gameSave.storeCount[i];
+        }//存是否買過
         ItemHolder.instance.amount = gameSave.item_all;
         gold = gameSave.gold;
         exp = gameSave.exp;

@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class MainSceneControll : MonoBehaviour {
     public bool OnPaneling;
+    public GameObject StorePanel;
     public GameObject noCatPanel;
+    public GameObject noItemPanel;
     public bool OnQuestIng;
     public GameObject questPanel;
     public Text goldText;
@@ -56,8 +58,13 @@ public class MainSceneControll : MonoBehaviour {
 
     #region 按鈕
     public GameObject loadingPanel;
+    public void FindToggle()
+    {
+        SoundControll.instance.toggle = GameObject.Find("soundOnOff").GetComponent<Toggle>();
+    }
     public void ToggleEvent()//音樂控制關閉
     {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         SoundControll.instance.SwitchMuteState(SoundControll.instance.toggle.isOn);
     }
     public void OnAdventure()//冒險按鈕
@@ -117,11 +124,51 @@ public class MainSceneControll : MonoBehaviour {
             }
             else
             {
+                StorePanel.SetActive(false);
                 noCatPanel.SetActive(true);
                 OnPaneling = true;
             }
         }
-    }//商店按鈕
+    }//貓咪商店按鈕
+    public void OnItemShop()
+    {
+        SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
+        if (!OnQuestIng)
+        {
+            if (AllItemSold())
+            {
+                loadingPanel.SetActive(true);
+                loadingPanel.GetComponent<Loading>().GotoScene("ItemShop");
+            }
+            else
+            {
+                StorePanel.SetActive(false);
+                noItemPanel.SetActive(true);
+                OnPaneling = true;
+            }
+        }
+    }//道具商店按鈕
+    bool AllItemSold()
+    {
+        int a = 0;
+        bool b;
+        for(int i = 0; i < ItemHolder.instance.storeCount.Length; i++)
+        {
+            if (ItemHolder.instance.storeCount[i])
+            {
+                a++;
+            }
+        }
+        if(a >= 4)
+        {
+            b = false;
+        }
+        else
+        {
+            b = true;
+        }
+        return b;
+    }
     public void OnClose(GameObject g)
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);

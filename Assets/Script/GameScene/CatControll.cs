@@ -34,6 +34,18 @@ public class CatControll : MonoBehaviour {
             isItem = false;
         }
     }
+    public GameObject skillActive;
+    void Update()
+    {
+        if(PlayerControll.instance.playerNowEP >= state.actives_cost)
+        {
+            skillActive.SetActive(true);
+        }
+        else
+        {
+            skillActive.SetActive(false);
+        }
+    }
 	//吃到飼料創造愛
     public void CreatHeart()
     {
@@ -118,7 +130,7 @@ public class CatControll : MonoBehaviour {
         GameSave gameSave = new GameSave();
         gameSave = SaveLoadData.LoadData();
 
-        state = gameSave.stateSave[state.uid-1000];        
+        state = gameSave.stateSave[state.uid-1000];
     }
     public void Skill(int id)
     {

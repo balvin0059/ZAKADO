@@ -10,11 +10,12 @@ public class FishRod : MonoBehaviour {
 	void Start () {
         image = gameObject.GetComponent<Image>();
         ChangeWave();
-
     }
-	
-	// Update is called once per frame
-	void Update () {   
+
+    // Update is called once per frame
+    void Update()
+    {
+        wave[(int)FishHolder.instance.fishValue.rodQuality - 1].GetComponent<Animator>().SetBool("Hooking", FishControll.instance.Hooking);
     }
     public void ChangeWave()
     {

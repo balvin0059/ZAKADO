@@ -221,7 +221,7 @@ MonoBehaviour:
     name: WaterSlime
     hp: 1200
     attack: 40
-    speed: 0.2
+    speed: 0.1
     attackDelay: 0.4
     type: 2
     exp: 300

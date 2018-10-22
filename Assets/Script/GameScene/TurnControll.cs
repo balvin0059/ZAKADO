@@ -83,7 +83,7 @@ public class TurnControll : MonoBehaviour {
 
     public TurnState turnState;
     public TurnResult turnResult;
-    bool onlyOneTime = true;
+    public bool onlyOneTime = true;
     public RectTransform rect;
     public float move = 0.0f;
     public RectTransform top;
@@ -225,6 +225,12 @@ public class TurnControll : MonoBehaviour {
                         TeachPanel[2].SetActive(true);
                     }
                 }
+                else
+                {
+                    enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
+                    onlyOneTime = false;
+                    turnState = TurnState.turnEnemyAttack;
+                }
             }
             else if (!GlobalValue.instance.everTeach[1])
             {
@@ -293,6 +299,7 @@ public class TurnControll : MonoBehaviour {
             SkillPanel.SetActive(false);
             skillIdUse = 0;
             skillUseIng = false;
+            SoundControll.Instance.PlayEffecSound(SoundControll.Instance.catSound);
         }
         else
         {
@@ -457,7 +464,12 @@ public class TurnControll : MonoBehaviour {
     {
         SoundControll.Instance.PlayEffecSound(SoundControll.Instance.buttonClip);
         GlobalValue.instance.everTeach[d] = true;
-        Time.timeScale = 1;
+        if(d > 0)
+        {
+            enemy.enemyGameobject.SendMessage("TurnEnemyAttack");
+            onlyOneTime = false;
+            turnState = TurnState.turnEnemyAttack;
+        }
         Destroy(TeachPanel[d].gameObject);
     }
 

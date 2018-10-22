@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680e89967c9a42f4d9b27d137ebbb1cd, type: 3}
   m_Name: item_1004
   m_EditorClassIdentifier: 
+  itemID: 1004
   Desciption: "\u5C6C\u6027\u500D\u73871.5\u500D"
   itemName: "\u5C6C\u6027\u7403(\u6C34)"
   itemInfo: "\u6C34\u5C6C\u6027\u500D\u73871.5\u500D"
   icon: {fileID: 21300000, guid: 28eb96b0289481841891605bc6adad7d, type: 3}
   itemBuffer: 150
+  SellValue: 50000
   itemType: 3

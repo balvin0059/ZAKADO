@@ -30,7 +30,7 @@ public class ItemHolder : MonoBehaviour {
     [Header("Item Holder")]
     public List<GlobleItem> globleItems = new List<GlobleItem>();
     public int amount;
-
+    public bool[] storeCount;
 }
 
 public class ItemAPI
@@ -53,5 +53,17 @@ public class ItemAPI
         }
         ItemHolder.instance.globleItems[id - 1000].amount += 1;
     }
-
+    public static void DelItem(int id)
+    {
+        Debug.Log("GetItemID = " + id);
+        if (ItemHolder.instance.globleItems[id - 1000].amount > 1)
+        {
+            if (ItemHolder.instance.amount > 0)
+            {
+                ItemHolder.instance.amount -= 1;
+            }
+            ItemHolder.instance.globleItems[id - 1000].order = 0;
+        }
+        ItemHolder.instance.globleItems[id - 1000].amount = 0;
+    }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   missionInfo: "\u901A\u95DC\u7B2C\u4E09\u7AE0BOSS"
   icon: {fileID: 21300088, guid: cf00ca07a8cc3e5498a68fa8f43250f5, type: 3}
   missionNum: 4
-  missionRewardID: 1001
+  missionRewardID: 1008
   isComplete: 0
   isReward: 0
   isFinish: 0

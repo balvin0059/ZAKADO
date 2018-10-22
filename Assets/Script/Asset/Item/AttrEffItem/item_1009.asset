@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680e89967c9a42f4d9b27d137ebbb1cd, type: 3}
   m_Name: item_1009
   m_EditorClassIdentifier: 
+  itemID: 1009
   Desciption: HP+200
   itemName: "\u597D\u5403\u7684\u8C93\u7F50\u982D"
   itemInfo: "\u88DD\u5099\u6642\u63D0\u5347200\u9EDE\u751F\u547D\u529B"
   icon: {fileID: 21300090, guid: cf00ca07a8cc3e5498a68fa8f43250f5, type: 3}
   itemBuffer: 200
+  SellValue: 4000
   itemType: 1

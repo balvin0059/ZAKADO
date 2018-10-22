@@ -46,6 +46,7 @@ public class SoundControll : MonoBehaviour {
     public AudioClip youLose;
     public AudioClip youWin;
     public AudioClip clearClip;
+    public AudioClip catSound;
 
     public AudioClip Bg_01;
     public AudioClip Bg_02;

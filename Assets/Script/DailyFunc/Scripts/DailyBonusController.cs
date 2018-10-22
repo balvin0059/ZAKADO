@@ -73,10 +73,10 @@ public class DailyBonusController : MonoBehaviour
 
 
     }
-    public void CloseAllDaliyPanel()
+    public void CloseAllDaliyPanel(GameObject g)
     {
         ComfirmPanel.SetActive(false);
-        gameObject.transform.parent.parent.parent.parent.gameObject.SetActive(false);
+        g.SetActive(false);
     }
     void Reward(int id)
     {

@@ -71,7 +71,7 @@ public class FishHolder : MonoBehaviour {
             }
         }else
         {
-            return 0;
+            return 0f;
         }
         Debug.Log("已累積了" + fishValue.SpanSecond + "秒");
         return fishValue.SpanSecond;

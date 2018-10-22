@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Fishing.unity
     guid: a6db7b3b7e62f334abcdff0b0885ae26
+  - enabled: 1
+    path: Assets/Scene/ItemShop.unity
+    guid: 1323b9f6b97d1db47839a64c0ac29a12

@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680e89967c9a42f4d9b27d137ebbb1cd, type: 3}
   m_Name: item_1000
   m_EditorClassIdentifier: 
+  itemID: 1000
   Desciption: ATK+10
   itemName: "\u8C93\u8349"
   itemInfo: "\u88DD\u5099\u6642\u589E\u52A010\u9EDE\u653B\u64CA\u529B"
   icon: {fileID: 21300100, guid: cf00ca07a8cc3e5498a68fa8f43250f5, type: 3}
   itemBuffer: 10
+  SellValue: 50000
   itemType: 1

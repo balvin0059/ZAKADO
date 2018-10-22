@@ -24,6 +24,11 @@ public class EnemyBulletAttr : MonoBehaviour {
             boss = true;
             bulletLive = 20;
         }
+        else if (sid == 3017)
+        {
+            boss = true;
+            bulletLive = 25;
+        }
     }
 	
 	// Update is called once per frame
@@ -49,35 +54,35 @@ public class EnemyBulletAttr : MonoBehaviour {
                 break;
             case 1:
                 gameObject.transform.Translate(0.0f, -speed, 0.0f);
-                if (gameObject.transform.localPosition.x >= 100f)
+                if (gameObject.transform.localPosition.x >= 50f)
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = -50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = -30;
                 }
                 else
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = 50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = 30;
                 }
                 break;
             case 2:
                 gameObject.transform.Translate(0.0f, -speed, 0.0f);
-                if (gameObject.transform.localPosition.x >= 100f)
+                if (gameObject.transform.localPosition.x >= 50f)
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = -50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = -30f;
                 }
                 else
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = 50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = 30f;
                 }
                 break;
             case 3:
                 gameObject.transform.Translate(0.0f, -speed, 0.0f);
-                if (gameObject.transform.localPosition.x >= 100f)
+                if (gameObject.transform.localPosition.x >= 50f)
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = -50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = -30f;
                 }
                 else
                 {
-                    gameObject.GetComponent<Ef_AutoRotate>().speed = 50f;
+                    gameObject.GetComponent<Ef_AutoRotate>().speed = 30f;
                 }
                 break;
             case 4:
@@ -89,6 +94,7 @@ public class EnemyBulletAttr : MonoBehaviour {
                 gameObject.transform.rotation = Quaternion.Euler(0f, 0f, rotate);
                 break;
             case 6:
+                gameObject.transform.Translate(0.0f, -speed, 0.0f);
                 break;
             default:
                 gameObject.transform.Translate(0.0f, -speed, 0.0f);

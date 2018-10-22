@@ -109,6 +109,8 @@
      <Compile Include="Assets\Fungus\Thirdparty\LineEndings\Editor\LineEndingsEditMenu.cs" />
      <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Editor\SfxrGenerator.cs" />
      <None Include="Assets\TexturePackerImporter\Editor\SettingsTexturePackerImporter.txt" />
+     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.88.0.txt" />
+     <None Include="Assets\GoogleMobileAds\Editor\GoogleMobileAdsDependencies.xml" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
  <Reference Include="Vuforia.UnityExtensions.Editor">
  <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Editor/Vuforia.UnityExtensions.Editor.dll</HintPath>
@@ -193,6 +195,18 @@
  </Reference>
  <Reference Include="Editor.ReorderableList">
  <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/Fungus/Thirdparty/Reorderable List Field/Editor/Editor.ReorderableList.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.IOSResolver_v1.2.88.0">
+ <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.88.0.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.JarResolver_v1.2.88.0">
+ <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.88.0.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.VersionHandler">
+ <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.VersionHandlerImpl_v1.2.88.0">
+ <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.88.0.dll</HintPath>
  </Reference>
  <Reference Include="TexturePackerImporter">
  <HintPath>E:/Users/tim/Documents/ZAKADO/Assets/TexturePackerImporter/Editor/TexturePackerImporter.dll</HintPath>
